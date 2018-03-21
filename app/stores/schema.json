@@ -12,8 +12,8 @@
   // send exchange reports and discover network seeds.
   "bridges":[
     {
-      "url": "https://api.storj.io",
-      "extendedKey": "xpub6AHweYHAxk1EhJSBctQD1nLWPog6Sy2eTpKQLExR1hfzTyyZQWvU4EYNXv1NJN7GpLYXnDLt4PzN874g6zSjAQdFCHZN7U7nbYKYVDUzD42"
+      "url": "http://13.57.32.83:6382",
+      "extendedKey": "xpub69v55m6WuXDqcBfJu1x9vAfQdkpjk6XRSiX4MALtDVqCtGe8X9WrTdbuETrDsL2ALT1K5hV8UhqunM2Qm1kizFmgnZdUmurBY4GuYyKc7wd"
     }
   ],
   // Known preferred seeds in form of a storj URI

@@ -39,24 +39,24 @@ module.exports = {
   created: function() {
     const view = this;
 
-    ipc.on('checkForUpdates', function() {
-      updater.checkForUpdates();
-      view.show = true;
-    });
+    // ipc.on('checkForUpdates', function() {
+    //   updater.checkForUpdates();
+    //   view.show = true;
+    // });
 
-    updater.checkForUpdates();
+    // updater.checkForUpdates();
 
-    updater.on('update_available', function(meta) {
-      view.update = true;
-      view.releaseTag = meta.releaseTag;
-      view.releaseURL = meta.releaseURL;
+    // updater.on('update_available', function(meta) {
+    //   view.update = true;
+    //   view.releaseTag = meta.releaseTag;
+    //   view.releaseURL = meta.releaseURL;
 
-      view.show = true;
-    });
+    //   view.show = true;
+    // });
 
-    updater.on('error', function(err) {
-      console.log(err);
-    });
+    // updater.on('error', function(err) {
+    //   console.log(err);
+    // });
   },
   template: `
 <modal v-bind:show="show">

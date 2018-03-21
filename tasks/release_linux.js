@@ -79,7 +79,7 @@ var packToDebFile = function () {
   var deferred = Q.defer();
 
   var arch = devuan.ARCH;
-  var debFileName = 'storjshare-gui.' + arch + '.deb';
+  var debFileName = 'xcore-gui.' + arch + '.deb';
   var debPath = releasesDir.path(debFileName);
 
   gulpUtil.log('Creating DEB package...');

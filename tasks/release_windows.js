@@ -85,7 +85,7 @@ var renameApp = function () {
 
 var createInstaller = function () {
   var deferred = Q.defer();
-  var finalPackageName = 'storjshare-gui.exe';
+  var finalPackageName = 'xcore-gui.exe';
   var installScript = projectDir.read('resources/windows/installer.nsi');
   installScript = utils.replace(installScript, {
     name: manifest.name,

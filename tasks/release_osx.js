@@ -100,7 +100,7 @@ var renameApp = function() {
 var packToDmgFile = function () {
   var deferred = Q.defer();
   var appdmg = require('appdmg');
-  var dmgName = 'storjshare-gui.osx64.dmg';
+  var dmgName = 'xcore-gui.osx64.dmg';
 
   // Prepare appdmg config
   var dmgManifest = projectDir.read('resources/osx/appdmg.json');
