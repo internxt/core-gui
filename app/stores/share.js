@@ -34,7 +34,7 @@ class Share {
       let nodeID = storj.KeyPair(this.config.networkPrivateKey).getNodeID();
       let sharePath = path.join(
         homedir(),
-        '.config/storjshare/shares'
+        '.config/xcore/shares'
       );
 
       if(this.config.storagePath === undefined || this.config.storagePath === '') {
@@ -54,12 +54,12 @@ class Share {
 
       let logPath = path.join(
         homedir(),
-        '.config/storjshare/logs'
+        '.config/xcore/logs'
       );
 
       let configPath = path.join(
         homedir(),
-        '.config/storjshare/configs'
+        '.config/xcore/configs'
       );
 
       try {

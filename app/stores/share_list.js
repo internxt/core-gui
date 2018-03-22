@@ -15,7 +15,7 @@ const configMigrate = require('../lib/config-migrate');
 const async = require('async');
 
 const mkdirPSync = require('../lib/mkdirpsync');
-const BASE_PATH = path.join(homedir(), '.config/storjshare');
+const BASE_PATH = path.join(homedir(), '.config/xcore');
 const SNAPSHOT_PATH = path.join(BASE_PATH, 'gui.snapshot');
 const LOG_PATH = path.join(BASE_PATH, 'logs');
 const SHARE_PATH = path.join(BASE_PATH, 'shares');

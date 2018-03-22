@@ -56,9 +56,9 @@
   "loggerVerbosity": 3,
   // Path to write the log file to disk, leave empty to default to:
   // $HOME/.config/storjshare/logs/[nodeid].log
-  "loggerOutputFile": "",
+  "loggerOutputFile": "$HOME/.config/xcore/logs/[nodeid].log",
   // Directory path to store contracts and shards
-  "storagePath": "",
+  "storagePath": "$HOME/.config/xcore",
   // Amount of space to lease to the network, as human readable string
   // Valid units are B, KB, MB, GB, TB
   "storageAllocation": "2GB"
