@@ -2,7 +2,7 @@
   "name": "xcore",
   "productName": "X Core",
   "publisher": "Storj Labs Inc.",
-  "identifier": "com.storj.farmer",
+  "identifier": "com.xcore.farmer",
   "description": "X Core",
   "version": "0.0.1",
   "author": "Storj <alex@storj.io> <rforan@storj.io>",
