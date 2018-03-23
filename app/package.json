@@ -1,7 +1,7 @@
 {
   "name": "xcore",
   "productName": "X Core",
-  "publisher": "Storj Labs Inc.",
+  "publisher": "Internxt Universal Technologies SLU",
   "identifier": "com.xcore.farmer",
   "description": "X Core",
   "version": "0.0.1",
@@ -27,5 +27,5 @@
     "winreg": "0.0.15"
   },
   "license": "AGPL-3.0",
-  "repository": "https://github.com/storj/storjshare-gui"
+  "repository": "https://github.com/internxt/X-Core"
 }
