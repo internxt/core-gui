@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/external-anchor
- */
-
 'use strict';
 const {shell} = require('electron');
 

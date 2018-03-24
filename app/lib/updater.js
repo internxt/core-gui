@@ -1,7 +1,3 @@
-/**
- * @module drivshare-gui/updater
- */
-
 'use strict';
 
 const about = require('../package');
@@ -20,33 +16,6 @@ class Updater extends EventEmitter {
    * Fetches remote package metadata and determines if update is available
    */
   checkForUpdates() {
-    const self = this;
-    const options = {
-      url: 'https://api.github.com/repos/Storj/storjshare-gui/releases/latest',
-      headers: { 'User-Agent': 'storj/storjshare-gui' },
-      json: true
-    };
-
-    request(options, function(err, res, body) {
-      if (err || res.statusCode !== 200) {
-        return self.emit('error', err || new Error('Failed to check updates'));
-      }
-
-      try {
-        self._validateResponse(body);
-      } catch (err) {
-        return self.emit('error', new Error('Failed to parse update info'));
-      }
-
-      var meta = {
-        releaseTag: body.tag_name,
-        releaseURL: body.html_url
-      };
-
-      if (semver.lt(about.version, meta.releaseTag)) {
-        self.emit('update_available', meta);
-      }
-    });
   }
 
   /**

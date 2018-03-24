@@ -53,7 +53,7 @@ module.exports = {
   <section>
     <error class="error-stream alert alert-danger alert-dismissible" v-bind:notes="store.errors" v-on:erase="store.actions.clearErrors"></error>
     <div v-if="appState.isTestnet">
-      <span v-b-tooltip title="Install or Build the Application to Farm on the Production Storj network." style="position: fixed; bottom:0px; left:0px">Currently Running Storj on Test Network...</span>
+      <span v-b-tooltip title="Install or Build the Application to Farm on the Production X Core network." style="position: fixed; bottom:0px; left:0px">Currently Running X Core on Test Network...</span>
     </div>
     <overview-nav></overview-nav>
 
@@ -109,7 +109,7 @@ module.exports = {
 
                 <td><span>{{index}}</span></td>
 
-		<td><span v-b-tooltip title="The NodeID is the unique Storj identity of the node.">{{share.id}}</span></td>
+		<td><span v-b-tooltip title="The NodeID is the unique X Core identity of the node.">{{share.id}}</span></td>
 
                 <td>
                   <div v-if="share.isValid && share.isRunning"><span v-b-tooltip title="Online" class="node-status-on">ON</span></div>
@@ -118,7 +118,7 @@ module.exports = {
                   <!-- <div><span v-b-tooltip title="Warning Message" class="node-status-warning">Warning</span></div> -->
                   <!-- <div><span v-b-tooltip title="Error Message" class="node-status-error">Error</span></div> -->
                 </td>
-                <!-- <td class="storj">25,920 <span>STORJ</span></td> -->
+                <!-- <td class="storj">25,920 <span>X Core</span></td> -->
                 <td>{{share.config.storagePath}}</td>
                 <td><span v-if="share.isRunning">{{share.meta.uptimeReadable}}</span></td>
                 <td><span v-b-tooltip title="A node will often restart when you receive an error. Search the log for ECONNRESET if this happens frequently.">{{share.meta.numRestarts}}</span></td>
@@ -137,7 +137,7 @@ module.exports = {
                 <td v-else>
                   <span class="connection" v-if="share.meta.farmerState.ntpStatus && share.isRunning" v-bind:status="share.meta.farmerState.ntpStatus.status" v-b-tooltip title="This is your clock's precision.">{{share.meta.farmerState.ntpStatus.delta}}</span>
                 </td>
-                <td><span v-b-tooltip.html.left title="The port your node is listening on. Each node should be on a different port. Port status should be green. If your port status says UPnP, Tunneling, or is Red you should manually setup port forwarding. If your node status is black, you may need to configure port forwarding manually or you may have a loopback error. Please visit https://community.storj.io and join the channel #storjshare for further help." class="connection" v-if="share.meta.farmerState.portStatus && share.isRunning" v-bind:status="share.meta.farmerState.portStatus.connectionStatus">{{share.meta.farmerState.portStatus.listenPort}} {{share.meta.farmerState.portStatus.connectionType}}</span></td>
+                <td><span v-b-tooltip.html.left title="The port your node is listening on. Each node should be on a different port. Port status should be green. If your port status says UPnP, Tunneling, or is Red you should manually setup port forwarding. If your node status is black, you may need to configure port forwarding manually or you may have a loopback error. Please visit t.me/internxt_io for further help." class="connection" v-if="share.meta.farmerState.portStatus && share.isRunning" v-bind:status="share.meta.farmerState.portStatus.connectionStatus">{{share.meta.farmerState.portStatus.listenPort}} {{share.meta.farmerState.portStatus.connectionType}}</span></td>
                 <td class="text-right">
                   <b-dropdown :id="'dropdownMenuLink' + share.id">
                     <span slot="text">

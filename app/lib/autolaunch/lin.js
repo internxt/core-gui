@@ -1,7 +1,3 @@
-/**
- * @module storjshare/autolaunch/lin
- */
-
 'use strict';
 
 const fs = require('fs');

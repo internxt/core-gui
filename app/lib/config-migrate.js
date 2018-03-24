@@ -48,7 +48,7 @@ exports.convertLegacyConfig = function(filePath) {
         '0f02020202',
         '0f03020202'
       ],
-      bridgeUri: 'https://api.storj.io',
+      bridgeUri: 'https://api.internxt.io',
       seedList: [],
       rpcAddress: tabConf.network.hostname,
       rpcPort: tabConf.network.port,

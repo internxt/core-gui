@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/allocator
- */
-
 'use strict';
 
 const convert = require('bytes');

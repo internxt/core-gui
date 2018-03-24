@@ -40,25 +40,24 @@ module.exports = {
     </div>
     <div class="row">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">
       <div class="col-12">
         <h2>Step 1 - Payout Address</h2>
-        <p>Storj uses an ERC20 token. Please provide your STORJ address from a supported wallet to receive payments. Do NOT use an exchange deposit address, use an ERC20 wallet address of which you hold the private key yourself.</p>
+        <p>X Core uses an ERC20 token. X Core Alpha testing phase does not include INXT payments. Enter address only for testing purposes.</p>
         <p><ext-a href="https://parity.io/">Parity</ext-a> &middot; <ext-a href="https://github.com/ethereum/mist/releases">Mist</ext-a> &middot; <ext-a href="https://www.myetherwallet.com/">MyEtherWallet</ext-a></p>
       </div>
     </div>
     <div class="row text-center mb-4 mt-3">
       <div class="col-12">
-        <input v-model="config.paymentAddress" type="text" class="address" placeholder="0xSTORJ_ERC20_wallet_address">
+        <input v-model="config.paymentAddress" type="text" class="address" placeholder="0xERC20_wallet_address">
         <router-link :to="{path: '/share-wizard/wizard2'}" class="btn" :disabled="!checkEthereumAddress(config.paymentAddress)">Next</router-link>
       </div>
     </div>
     <div class="row text-center">
       <div class="col-12">
-        <small><ext-a href="https://docs.storj.io/docs/storj-share-gui#section--wallet-address-">How to create a wallet?</ext-a> &middot; <ext-a href="https://storj.io/share.html#faq-1-4">Where do I find the address?</ext-a></small>
       </div>
     </div>
   </div>

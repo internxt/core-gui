@@ -1,23 +1,8 @@
-Storj Share
+X Core
 ================
 
-[![Test Status](https://img.shields.io/travis/Storj/storjshare-gui/master.svg?label=tests&style=flat-square)](https://travis-ci.org/Storj/storjshare-gui)
-[![License](https://img.shields.io/badge/license-AGPLv3-blue.svg?label=license&style=flat-square)](https://github.com/Storj/storjshare-gui/blob/master/LICENSE)
-
-[Storj Share](https://storj.io/share.html) is a cross-platform desktop application enabling users to earn money
-by sharing their extra hard drive space on the [Storj](https://storj.io) network.
-
-Quick Start
------------
-
-If you wish only to run the application, download a pre-built release from our
-[releases page](https://github.com/Storj/storjshare-gui/releases) or use snapd to install storjshare-gui in seconds on [Ubuntu and other snap supported Linux distributions](https://snapcraft.io/docs/core/install) with:
-
-
-    snap download storjshare-gui --beta
-    snap install storjshare-gui --beta
-
-Installing a snap is very quick. Snaps are secure. They are isolated with all of their dependencies. Snaps also auto update when a new version is released.
+[X Core](http://internxt.io) is a cross-platform desktop application enabling users to earn money
+by sharing their extra hard drive space on the [Internxt](http://internxt.io) network.
 
 If you wish to build from source, follow the instructions below.
 
@@ -35,7 +20,7 @@ If you wish to build from source, follow the instructions below.
 Clone this repository and install dependencies with NPM.
 
 ```bash
-git clone https://github.com/Storj/storjshare-gui.git && cd storjshare-gui
+git clone https://github.com/internxt/x-core && cd x-core
 npm install
 ```
 
@@ -52,9 +37,6 @@ Unlike a traditional Node.js project, this one has 2 separate `package.json`
 files: `package.json` and `app/package.json`. The one in the root directory
 only contains dependencies for the [Electron](https://electronjs.org)-based
 build system. It is unlikely that you will need to modify this.
-
-The `app/package.json` contains all of the application's dependencies. For more
-information on contributing to Storj Share, see `CONTRIBUTING.md`.
 
 Building
 --------
@@ -84,8 +66,8 @@ machine for OSX.
 License
 -------
 ```
-storjshare-gui - Cross-platform desktop application fop sharing user's extra hard drive space.
-Copyright (c) 2017 Storj Labs Inc.
+X Core - Cross-platform desktop application fop sharing user's extra hard drive space.
+Copyright (c) 2017 Internxt.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

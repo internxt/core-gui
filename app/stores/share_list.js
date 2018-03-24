@@ -1,7 +1,3 @@
-/**
- * @module storjshare/store
- */
-
 'use strict';
 
 const fs = require('fs');

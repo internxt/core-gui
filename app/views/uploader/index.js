@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/uploader
- */
-
 'use strict';
 
 module.exports = {

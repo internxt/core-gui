@@ -37,13 +37,13 @@ module.exports = {
     </div>
     <div class="row">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">
       <div class="col-12">
         <h2>Ethereum Address Migration</h2>
-        <p>Storj has migrated to an Ethereum ERC20 token. Please provide your Ethereum address from a supported wallet to continue receiving payments.</p>
+        <p>X Core supports Ethereum ERC20 token. Please provide your Ethereum address from a supported wallet to continue receiving payments.</p>
         <p><ext-a href="https://parity.io/">Parity</ext-a> &middot; <ext-a href="https://github.com/ethereum/mist/releases">Mist</ext-a> &middot; <ext-a href="https://www.myetherwallet.com/">MyEtherWallet</ext-a></p>
       </div>
     </div>

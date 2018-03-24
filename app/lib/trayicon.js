@@ -59,7 +59,7 @@ class TrayIcon {
           // NOOP
       }
 
-      this.trayIcon.setToolTip('Storj Share');
+      this.trayIcon.setToolTip('X Core');
     }
   }
 

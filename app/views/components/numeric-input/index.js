@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/numeric-input
- */
-
 'use strict';
 
 module.exports = {

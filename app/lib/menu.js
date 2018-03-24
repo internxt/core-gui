@@ -116,13 +116,14 @@ class ApplicationMenu {
     let help = {
       label: 'Help',
       submenu: [
+        // {
+        //   label: 'Check for Updates',
+        //   click: function() {
+        //     self.getWindow().webContents.send('checkForUpdates');
+        //   }
+        // },
         {
-          label: 'Check for Updates',
-          click: function() {
-            self.getWindow().webContents.send('checkForUpdates');
-          }
-        },{
-          label: 'About Storj Share',
+          label: 'About X Core',
           click: function() {
             self.getWindow().webContents.send('showAboutDialog');
           }

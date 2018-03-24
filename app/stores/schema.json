@@ -1,8 +1,7 @@
 {
-  // Set the STORJ/ERC20 address for receiving contract payments
+  // Set the ERC20 address for receiving contract payments
   "paymentAddress": "",
   // Subscribes to the given contract topics
-  // See https://storj.github.io/core/tutorial-contract-topics.html
   "opcodeSubscriptions": [
     "0f01020202",
     "0f02020202",
@@ -16,15 +15,13 @@
       "extendedKey": "xpub69v55m6WuXDqcBfJu1x9vAfQdkpjk6XRSiX4MALtDVqCtGe8X9WrTdbuETrDsL2ALT1K5hV8UhqunM2Qm1kizFmgnZdUmurBY4GuYyKc7wd"
     }
   ],
-  // Known preferred seeds in form of a storj URI
-  // Example: "storj://[ip.or.hostname]:[port]/[nodeid]"
   "seedList": [],
   // Interface to bind RPC server, use 0.0.0.0 for all interfaces or if you
-  // have a public address, use that, else leave 127.0.0.1 and Storj Share
+  // have a public address, use that, else leave 127.0.0.1 and X Core
   // will try to determine your address
   "rpcAddress": "127.0.0.1",
   // Port to bind for RPC server, make sure this is forwarded if behind a
-  // NAT or firewall - otherwise Storj Share will try to punch out
+  // NAT or firewall - otherwise X Core will try to punch out
   "rpcPort": 4000,
   // Enables NAT traversal strategies, first UPnP, then reverse HTTP tunnel
   // if that fails. Disable if you are public or using dynamic DNS
@@ -54,8 +51,8 @@
   // Determines how much detail is shown in the log:
   // 4 - DEBUG | 3 - INFO | 2 - WARN | 1 - ERROR | 0 - SILENT
   "loggerVerbosity": 3,
-  // Path to write the log file to disk, leave empty to default to:
-  // $HOME/.config/storjshare/logs/[nodeid].log
+  // Path to write the log file to disk
+  // $HOME/.config/xcore/logs/[nodeid].log
   "loggerOutputFile": "$HOME/.config/xcore/logs/[nodeid].log",
   // Directory path to store contracts and shards
   "storagePath": "$HOME/.config/xcore",

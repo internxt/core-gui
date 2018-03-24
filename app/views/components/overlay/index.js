@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/component/
- */
-
 'use strict';
 
 module.exports = {

@@ -5,11 +5,8 @@ module.exports = {
   template: `
 <footer class="footer">
   <div class="container text-center">
-    <small class="mr-4"><ext-a href="https://storj.io/share.html">Website</ext-a></small>
-    <small class="mr-4"><ext-a href="https://github.com/Storj/storjshare-gui/">Source Code</ext-a></small>
-    <small class="mr-4"><ext-a href="https://github.com/Storj/storjshare-daemon">CLI</ext-a></small>
-    <small class="mr-4"><ext-a href="https://storj.io/community.html">Community</ext-a></small>
-    <small class="mr-4"><ext-a href="https://docs.storj.io/discuss">Need Help?</ext-a></small>
+    <small class="mr-4"><ext-a href="https://internxt.io">Website</ext-a></small>
+    <small class="mr-4"><ext-a href="t.me/internxt_io">Community</ext-a></small>
   </div>
 </footer>
   `

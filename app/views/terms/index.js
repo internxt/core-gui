@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/terms
- */
-
 'use strict';
 
 const {localStorage: _localStorage} = window;
@@ -26,9 +22,6 @@ module.exports = {
     }
   },
   created: function() {
-    if (!_localStorage.getItem(TERMS_KEY)) {
-      this.isVisible = true;
-    }
   },
   template: `
 <modal v-bind:show="isVisible" id="terms">

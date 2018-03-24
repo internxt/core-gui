@@ -55,7 +55,7 @@ module.exports = {
     </div>
     <div class="row">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">

@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/about
- */
-
 'use strict';
 
 const about = require('../../package');
@@ -15,10 +11,6 @@ module.exports = {
   },
   data: function() {
     return {
-      version: about.version,
-      core: storj.version.software,
-      protocol: storj.version.protocol,
-      daemon: daemonPackage.version,
       isVisible: false
     };
   },
@@ -35,14 +27,11 @@ module.exports = {
   template: `
 <modal v-bind:show="isVisible">
   <div slot="header">
-    <h4 class="modal-title">About Storj Share</h4>
+    <h4 class="modal-title">About X Core</h4>
   </div>
 
   <div slot="body">
-    <p>GUI {{version}}</p>
-    <p>Daemon {{daemon}}</p>
-    <p>Core {{core}}</p>
-    <p>Protocol {{protocol}}</p>
+   <a href="https://internxt.io/whitepaper.pdf">X Core section</a> 
   </div>
 
   <div slot="footer">

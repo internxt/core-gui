@@ -69,13 +69,13 @@ module.exports = {
     </div>
     <div class="row">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">
       <div class="col-12">
         <h2>Step 4 - Connection Settings</h2>
-        <p>Port to bind for RPC server, make sure this is forwarded if behind <br class="hidden-sm-down">a NAT or firewall - otherwise Storj Share will try to punch out.</p>
+        <p>Port to bind for RPC server, make sure this is forwarded if behind <br class="hidden-sm-down">a NAT or firewall - otherwise X Core will try to punch out.</p>
       </div>
     </div>
     <div class="row text-center mt-3">

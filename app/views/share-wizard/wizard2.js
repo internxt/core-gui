@@ -43,13 +43,13 @@ module.exports = {
     </div>
     <div class="row">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">
       <div class="col-12">
         <h2>Step 2 - Storage Location</h2>
-        <p>Storj Share uses the free space on your drive, <br class="hidden-sm-down">to save encrypted bits of files while you are online.</p>
+        <p>X Core uses the free space on your drive, <br class="hidden-sm-down">to save encrypted bits of files while you are online.</p>
       </div>
     </div>
     <div class="row text-center mt-3">

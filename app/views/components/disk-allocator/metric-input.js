@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/allocator
- */
-
 'use strict';
 
 const filters = require('../filters/metrics');

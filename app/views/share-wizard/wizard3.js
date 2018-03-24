@@ -34,13 +34,13 @@ module.exports = {
     </div>
     <div class="row">
       <div class="col">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">
       <div class="col">
         <h2>Step 3 - Storage Sharing</h2>
-        <p>Storj Share uses only the storage space you share. <br class="hidden-sm-down">The more storage you share, the more you can earn.</p>
+        <p>X Core uses only the storage space you share. <br class="hidden-sm-down">The more storage you share, the more you can earn.</p>
       </div>
     </div>
     <div class="row justify-content-center">

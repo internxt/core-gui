@@ -1,7 +1,3 @@
-/**
- * @module storjshare/views/updater
- */
-
 'use strict';
 
 const {app, shell, ipcRenderer: ipc} = require('electron');
@@ -27,7 +23,7 @@ module.exports = {
 
       this.close();
 
-      if (window.confirm('You must quit Storj Share to upgrade. Continue?')) {
+      if (window.confirm('You must quit X Core to upgrade. Continue?')) {
         shell.openExternal(this.releaseURL);
         app.quit();
       }
@@ -61,7 +57,7 @@ module.exports = {
   template: `
 <modal v-bind:show="show">
   <div slot="header">
-    <h4 v-if="update" class="modal-title">Update Storj Share</h4>
+    <h4 v-if="update" class="modal-title">Update X Core</h4>
     <h4 v-if="!update" class="modal-title">No Update Available</h4>
   </div>
 
@@ -70,7 +66,7 @@ module.exports = {
       <p>You are already using the latest version.</p>
     </div>
     <div v-if="update">
-      <p>Storj Share {{releaseTag}} is available!</p>
+      <p>X Core {{releaseTag}} is available!</p>
       <p>Would you like to download the update now?</p>
     </div>
   </div>

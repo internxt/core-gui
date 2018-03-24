@@ -9,7 +9,7 @@ module.exports = {
   <div class="container">
     <div class="row wizard-nav">
       <div class="col-6 text-left">
-        <ext-a href="https://storj.io/share.html"><small>Storj Share</small></ext-a>
+        <ext-a href="https://internxt.io/core"><small>X Core</small></ext-a>
       </div>
       <div class="col-6 text-right">
         <small>Setup Wizard</small>
@@ -17,13 +17,13 @@ module.exports = {
     </div>
     <div class="row text-center">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="Storj Share" class="logo">
+        <img src="imgs/logo.svg" alt="X Core" class="logo">
       </div>
     </div>
     <div class="row text-center">
       <div class="col-12">
-        <h2>Welcome to Storj Share!</h2>
-        <p>Using Storj Share, you can earn Storj's coin (STORJ) <br class="hidden-sm-down">by renting out your extra hard drive space.</p>
+        <h2>Welcome to X Core!</h2>
+        <p>Using X Core, you can earn INXT tokens <br class="hidden-sm-down">by renting out your extra hard drive space.</p>
         <router-link :to="{path: '/share-wizard/wizard1'}" class="btn mt-3">Start Setup</router-link>
         <div class="text-center mt-3">
           <small><router-link :to="{path: '/overview'}">I'm an experienced user, skip setup</router-link></small>

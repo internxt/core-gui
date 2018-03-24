@@ -1,7 +1,3 @@
-/**
- * @module storjshare/renderer
- */
-
 'use strict';
 
 const dnode = require('dnode');

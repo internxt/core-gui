@@ -1,7 +1,3 @@
-/**
- * @module storjshare/app
- */
-
 'use strict';
 const {homedir} = require('os');
 const VueRouter = require('vue-router');

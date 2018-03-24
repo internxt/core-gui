@@ -1,7 +1,3 @@
-/**
- * @module storjshare/main
- */
-
 'use strict';
 
 const {connect} = require('net');

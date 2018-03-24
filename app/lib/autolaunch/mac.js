@@ -11,7 +11,7 @@ function toAppleJSON(opts) {
   assert.ok(opts.appName, 'Invalid `appName`');
 
   var props = {
-    path: opts.appPath.split('/Contents/MacOS/StorjShare')[0],
+    path: opts.appPath.split('/Contents/MacOS/XCore')[0],
     hidden: opts.isHiddenOnLaunch,
     name: opts.appName
   };
