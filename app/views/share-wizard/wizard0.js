@@ -17,7 +17,7 @@ module.exports = {
     </div>
     <div class="row text-center">
       <div class="col-12">
-        <img src="imgs/logo.svg" alt="X Core" class="logo">
+        <img src="imgs/logo-inxt.png" alt="X Core" class="logo logo-wizard">
       </div>
     </div>
     <div class="row text-center">

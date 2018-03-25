@@ -22,7 +22,7 @@ module.exports = {
   <div class="container">
     <div class="row">
       <div class="col-3 text-left">
-        <ext-a href="https://internxt.io/core"><img src="imgs/logo-horizontal.svg" alt="X Core" class="logo-horizontal"></ext-a>
+        <ext-a href="https://internxt.io/core"><img src="imgs/logo-inxt.png" alt="X Core" class="logo-horizontal"></ext-a>
       </div>
       <div class="col-9 text-right">
 
