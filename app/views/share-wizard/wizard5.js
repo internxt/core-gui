@@ -5,9 +5,7 @@ module.exports = {
     return {
       newShare: window.Store.newShare,
       shareList: window.Store.shareList,
-      uiState: {
-        isCreating: false
-      }
+    
     };
   },
   components: {
@@ -27,11 +25,9 @@ module.exports = {
   },
   methods: {
     saveToDisk: function() {
-      this.uiState.isCreating = true;
       let configPath = this.newShare.actions.createShareConfig();
       if(configPath) {
         this.shareList.actions.import(configPath, (err) => {
-          this.uiState.isCreating = false;
           if(!err) {
             return this.$router.push({ path: '/share-wizard/wizard6' });
           }
@@ -69,7 +65,7 @@ module.exports = {
       <div class="col-12">
         <input v-model="newShare.config.rpcAddress" type="text" placeholder="127.0.0.1">
         <button v-on:click="saveToDisk()" class="btn" :disabled="!validAddress()">Next</button>
-        <img v-if="uiState.isCreating" class="loader"></img>
+
       </div>
     </div>
   </div>
