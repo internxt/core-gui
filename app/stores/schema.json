@@ -9,13 +9,16 @@
   ],
   // An array of bridges to connect and accept contracts,
   // send exchange reports and discover network seeds.
-  "bridges":[
-    {
-      "url": "http://13.57.32.83:6382",
-      "extendedKey": "xpub6AviLVdvLCqBSJqvcLq5PcbPXEjVb463RYLZFogVRxwntBN6cvwbdNZzhH81kAG5wyT4LdJoPdw7MGydSu1MMSjyMdHvo2xFXErZ23motwC"
-    }
+  "bridges": [{
+    "url": "http://13.57.32.83:6382",
+    "extendedKey": "xpub6AviLVdvLCqBSJqvcLq5PcbPXEjVb463RYLZFogVRxwntBN6cvwbdNZzhH81kAG5wyT4LdJoPdw7MGydSu1MMSjyMdHvo2xFXErZ23motwC"
+  }],
+  "seedList": [
+    "storj://13.57.32.83:4357/7aa41ce7a930f170168dc393c5ffc064b10a36c6",
+    "storj://13.57.32.83:4358/afdd2dafac7bcb281a3158097fdb8befcc550dab",
+    "storj://13.57.32.83:4359/ac7eebb7dfc02779f25e7f09480244d980bf3060",
+    "storj://13.57.32.83:4360/7f9adace303c0ffb954bdd8ab52ed1ed83ac9f7e"
   ],
-  "seedList": [],
   // Interface to bind RPC server, use 0.0.0.0 for all interfaces or if you
   // have a public address, use that, else leave 127.0.0.1 and X Core
   // will try to determine your address
