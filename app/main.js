@@ -3,7 +3,7 @@
 const {connect} = require('net');
 const path = require('path');
 const { fork } = require('child_process');
-const {app, BrowserWindow, ipcMain: ipc} = require('electron');
+const {app, BrowserWindow, ipcMain: ipc, Tray} = require('electron');
 //const isCommandLaunched = /(electron(\.exe|\.app)?)$/.test(app.getPath('exe'));
 const ApplicationMenu = require('./lib/menu');
 const TrayIcon = require('./lib/trayicon');
@@ -19,7 +19,9 @@ const autoLauncher = new AutoLauncher({
 });
 */
 let main;
+let xCoreUI;
 let tray;
+let xTray;
 let menu;
 let userData;
 
@@ -99,6 +101,19 @@ function initRPCServer(callback) {
   });
 }
 
+function getWindowPosition() {
+  let windowBounds = xCoreUI.getBounds();
+  let trayBounds = xTray.getBounds();
+
+  // Center window horizontally below the tray icon
+  let x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
+
+  // Position window 4 pixels vertically below the tray icon
+  let y = Math.round(trayBounds.y + trayBounds.height + 4);
+
+  return {x: x, y: y};
+}
+
 /**
  * Establishes the app window, menu, tray, and other components
  * Setup IPC listeners and handlers
@@ -111,7 +126,25 @@ function initRenderer() {
     show: false // NB: Always hidden, wait for renderer to signal show
   });
 
-  tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
+  xCoreUI = new BrowserWindow({
+    width: 400,
+    height: 700,
+    show: false
+  });
+
+  // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
+  xTray = new Tray(path.join(__dirname, 'imgs/osx/trayHighlight@2x.png'));
+  xTray.on('click', (event) => {
+    if (xCoreUI.isVisible()) {
+      xCoreUI.hide();
+    } else {
+      let position = getWindowPosition();
+      xCoreUI.setPosition(position.x, position.y);
+      xCoreUI.show();
+      xCoreUI.focus();
+    }
+  });
+
   main.on('close', (e) => minimizeToSystemTray(e));
   app.on('activate', () => main.show());
   ipc.on('appSettingsChanged', (event, data) => updateSettings(event, data));
@@ -121,7 +154,8 @@ function initRenderer() {
   maybeStartDaemon((/* err */) => {
     menu.render();
     main.loadURL('file://' + __dirname + '/index.html');
-    tray.render();
+    xCoreUI.loadURL('file://' + __dirname + '/xIndex.html')
+    // tray.render();
   });
 }
 
