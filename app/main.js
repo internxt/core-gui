@@ -129,7 +129,9 @@ function initRenderer() {
   xCoreUI = new BrowserWindow({
     width: 400,
     height: 700,
-    show: false
+    show: false,
+    frame: false,
+    skipTaskbar: true
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
