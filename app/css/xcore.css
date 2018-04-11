@@ -1,0 +1,43 @@
+body {
+    background: #18171f;
+    color: #e4e4eb;
+}
+
+#xApp {
+    margin: 19px 24px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.db-widget-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.db-widget {
+    width: 40%;
+    border-bottom: 2px solid #5b4ade;
+}
+
+.db-title {
+    color: #b7b6ba;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.db-data {
+    color: #e4e4eb;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+

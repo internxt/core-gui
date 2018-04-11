@@ -127,8 +127,8 @@ function initRenderer() {
   });
 
   xCoreUI = new BrowserWindow({
-    width: 400,
-    height: 700,
+    width: 389,
+    height: 600,
     show: false,
     frame: false,
     skipTaskbar: true
