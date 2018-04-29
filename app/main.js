@@ -107,10 +107,15 @@ function getWindowPosition() {
 
   // Center window horizontally below the tray icon
   let x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
-
   // Position window 4 pixels vertically below the tray icon
-  let y = Math.round(trayBounds.y + trayBounds.height + 4);
-
+  let y;
+  if (process.platform === 'win32') {
+    y = Math.round(trayBounds.y/2.5 + trayBounds.height);
+  } else if (process.platform === 'darwin') {
+    y = Math.round(trayBounds.y + trayBounds.height + 4); 
+  } else {
+    y = Math.round(trayBounds.y/2 + trayBounds.height); 
+  }
   return {x: x, y: y};
 }
 
