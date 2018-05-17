@@ -17,10 +17,10 @@ module.exports = {
             },
         };
     },
+    beforeCreated: function () {
+        this.newShare.actions.reset();        
+    },
     created: function () {
-        setTimeout(() => {
-            this.newShare.actions.reset();
-        }, 250);
         //Set tunnel options to 0 to prepare for removal of tunneling
         this.$set(this.newShare.config, 'maxTunnels', 0);
         this.$set(this.newShare.config, 'tunnelGatewayRange', {
