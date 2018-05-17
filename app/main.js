@@ -125,11 +125,11 @@ function getWindowPosition() {
  */
 function initRenderer() {
   menu = new ApplicationMenu();
-  main = new BrowserWindow({
-    width: 1448,
-    height: 600,
-    show: false // NB: Always hidden, wait for renderer to signal show
-  });
+  // main = new BrowserWindow({
+  //   width: 1448,
+  //   height: 600,
+  //   show: false // NB: Always hidden, wait for renderer to signal show
+  // });
 
   xCoreUI = new BrowserWindow({
     width: 389,
@@ -152,15 +152,15 @@ function initRenderer() {
     }
   });
 
-  main.on('close', (e) => minimizeToSystemTray(e));
-  app.on('activate', () => main.show());
+  // main.on('close', (e) => minimizeToSystemTray(e));
+  // app.on('activate', () => xCoreUI.show());
   ipc.on('appSettingsChanged', (event, data) => updateSettings(event, data));
-  ipc.on('showApplicationWindow', () => main.show());
+  // ipc.on('showApplicationWindow', () => xCoreUI.show());
 
   // NB: Start the daemon if not running, then render the application
   maybeStartDaemon((/* err */) => {
     menu.render();
-    main.loadURL('file://' + __dirname + '/index.html');
+    // main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL('file://' + __dirname + '/xIndex.html')
     // tray.render();
   });
