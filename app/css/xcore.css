@@ -1,6 +1,7 @@
 body {
     background: #18171f;
     color: #e4e4eb;
+    font-family: 'proxima-nova', sans-serif;
 }
 
 #xApp {
@@ -28,6 +29,11 @@ h1 {
     width: 40%;
     border-bottom: 2px solid #5b4ade;
 }
+
+.db-widget-small {
+        width: 25%;
+        border-bottom: 2px solid #5b4ade;
+    }
 
 .db-title {
     color: #b7b6ba;
