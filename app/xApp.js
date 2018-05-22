@@ -4,12 +4,17 @@ const VueRouter = require('vue-router');
 const router = new VueRouter(require('./xRoutes'));
 const utils = require('storjshare-daemon').utils;
 
-module.exports = {
+var vm = new Vue({
   router,
   el: '#xApp',
   data: window.Store.shareList,
   components: {
     'welcome': require('./views/xcore/welcome')
+  },
+  methods: {
+    changeView: function() {
+      router.replace({ path: 'settings' });            
+    }
   },
   created: function() {
     this.actions.load((err) => {
@@ -23,4 +28,8 @@ module.exports = {
       });
     });
   }
+});
+
+document.getElementById("ViewChange").onclick = function () {
+	vm.$refs.foo.changeView();
 };

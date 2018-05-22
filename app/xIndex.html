@@ -8,8 +8,18 @@
     <link href="css/xcore.css" rel="stylesheet">
 </head>
 <body>
+
     <section id="xApp">
-        <router-view></router-view>
+            <header>
+                 
+                    <img id="xIcon" src="imgs/xcore/xicon.svg">
+                    <label class="switch">
+                        <input id="ViewChange" type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </header>
+
+        <router-view ref="foo"></router-view>
     </section>
     <script defer src="xRenderer.js" type="text/javascript"></script>
 </body>
