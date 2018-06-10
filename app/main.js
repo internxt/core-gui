@@ -135,7 +135,7 @@ function initRenderer() {
     width: 389,
     height: 600,
     show: false,
-    frame: false,
+    // frame: false,
     skipTaskbar: true
   });
 
