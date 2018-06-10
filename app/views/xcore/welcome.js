@@ -105,32 +105,29 @@ module.exports = {
     },
     template: `
         <div>
-            <header>
-                <img id="xIcon" src="imgs/xcore/xicon.svg">
-            </header>
             <section>
                 <div class="db-widget-container">
                     <div class="db-widget-long">
                         <h3>Wallet Address</h3>
-                        <input v-model="newShare.config.paymentAddress" type="text" placeholder="Enter a ERC20 wallet address">
+                        <input v-model="newShare.config.paymentAddress" class="input-field" type="text" placeholder="Enter a ERC20 wallet address">
                     </div>
                 </div>
                 <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>File Storge Location</h3>
-                    <input v-on:change="handleFileInput" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
+                    <input v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
                 </div>
                 </div>
                 <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Server Connection</h3>
-                    <input v-model.number="newShare.config.rpcPort" type="text" placeholder="Enter your routers port number">
+                    <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
                 </div>
                 </div>
                 <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Hostname</h3>
-                    <input v-model="newShare.config.rpcAddress" type="text" placeholder="127.0.0.1">
+                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="127.0.0.1">
                 </div>
                 </div>
                 <div class="db-widget-container">

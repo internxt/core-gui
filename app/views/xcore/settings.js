@@ -1,11 +1,12 @@
 module.exports = {
     name: 'nodeSettings',
+    methods: {
+        changeView: function() {
+            this.$router.replace({ path: 'dashboard' });            
+        }
+    },
     template: `
     <div>
-    <header>
-        <img id="xIcon" src="imgs/xcore/xicon.svg">
-        <img id="xCircles" src="imgs/xcore/xcircles.svg">
-    </header>
     <h1>Node Settings</h1>
     <div class="db-widget-container">
         <div class="db-widget">
@@ -47,7 +48,6 @@ module.exports = {
         <div class="db-widget">
             <div class="db-title">Disk Space</div>
             <div class="db-data">170GB of 300GB</div>
-            <div class="slider">SLIDER MISSING</div>
             <div class="db-data-small"> 0.054646 INXT per month</div>
         </div>
     </div>

@@ -1,11 +1,12 @@
 module.exports = {
     name: 'dashboard',
+    methods: {
+        changeView: function() {
+            this.$router.replace({ path: 'settings' });            
+        }
+    },
     template: `
         <div>
-            <header>
-                <img id="xIcon" src="imgs/xcore/xicon.svg">
-                <img id="xCircles" src="imgs/xcore/xcircles.svg">
-            </header>
             <h1>Network Data</h1>
             <div class="db-widget-container">
                 <div class="db-widget">
