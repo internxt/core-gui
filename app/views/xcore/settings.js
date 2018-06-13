@@ -1,5 +1,13 @@
 module.exports = {
     name: 'nodeSettings',
+    data: function () {
+        return {
+            shareList: window.Store.shareList,
+        }
+    },
+    created: function () {
+        this.$parent.displaySlider = true;
+    },
     methods: {
         changeView: function() {
             this.$router.replace({ path: 'dashboard' });            
@@ -11,21 +19,21 @@ module.exports = {
     <div class="db-widget-container">
         <div class="db-widget">
             <div class="db-title">Wallet Address</div>
-            <div class="db-data">0x1237134981734jkl1l;k2j3lj132lkj3l;1</div>
+            <div class="db-data">{{shareList.shares[0].config.paymentAddress}}</div>
         </div>
     </div>
 
     <div class="db-widget-container">
         <div class="db-widget">
             <div class="db-title">Node Identity</div>
-            <div class="db-data">0x1237134981734jkl1l;k2j3lj132lkj3l;1</div>
+            <div class="db-data">{{shareList.shares[0].id}}</div>
         </div>
     </div>
 
     <div class="db-widget-container">
         <div class="db-widget">
             <div class="db-title">File Storage Location</div>
-            <div class="db-data">Users/Jordan/Desktop</div>
+            <div class="db-data">{{shareList.shares[0].config.storagePath}}</div>
         </div>
     </div>
 
@@ -40,7 +48,7 @@ module.exports = {
         </div>
         <div class="db-widget-small">
             <div class="db-title">Peer</div>
-            <div class="db-data">1</div>
+            <div class="db-data">{{shareList.shares[0].meta.farmerState.totalPeers}}</div>
         </div>
     </div>
 

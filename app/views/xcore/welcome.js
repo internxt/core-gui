@@ -4,6 +4,7 @@ module.exports = {
     name: 'welcome',
     data: function () {
         return {
+            displaySlider: false,
             newShare: window.Store.newShare,
             shareList: window.Store.shareList,
             MAXPORTNUM: 65536,

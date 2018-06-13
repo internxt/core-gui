@@ -1,5 +1,13 @@
 module.exports = {
     name: 'dashboard',
+    data: function () {
+        return {
+            shareList: window.Store.shareList,
+        }
+    },
+    created: function () {
+        this.$parent.displaySlider = true;
+    },
     methods: {
         changeView: function() {
             this.$router.replace({ path: 'settings' });            
@@ -11,11 +19,11 @@ module.exports = {
             <div class="db-widget-container">
                 <div class="db-widget">
                     <div class="db-title">Status</div>
-                    <div class="db-data">Connected</div>
+                    <div class="db-data">{{shareList.shares.length}}</div>
                 </div>
                 <div class="db-widget">
                     <div class="db-title">Uptime</div>
-                    <div class="db-data">20m 15s</div>
+                    <div class="db-data">{{shareList.shares[0].meta.uptimeReadable}}</div>
                 </div>
                 <div class="db-widget">
                     <div class="db-title">Upload Speed</div>

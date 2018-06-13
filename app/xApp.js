@@ -7,7 +7,8 @@ const utils = require('storjshare-daemon').utils;
 var vm = new Vue({
   router,
   el: '#xApp',
-  data: window.Store.shareList,
+
+  data: {shareList: window.Store.shareList, displaySlider : false},
   components: {
     'welcome': require('./views/xcore/welcome')
   },
@@ -17,10 +18,10 @@ var vm = new Vue({
     }
   },
   created: function() {
-    this.actions.load((err) => {
-      this.actions.status(() => {
+    this.shareList.actions.load((err) => {
+      this.shareList.actions.status(() => {
         //Check to see if any of the shares aren't using Ethereum addresses
-        if(this.shares.length === 0) {
+        if(this.shareList.shares.length === 0) {
           router.replace('welcome');
         } else {
           router.replace('dashboard');
