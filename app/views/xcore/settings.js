@@ -4,14 +4,24 @@ module.exports = {
         return {
             shareList: window.Store.shareList,
         }
+        console.log(shareList);
     },
     created: function () {
         this.$parent.displaySlider = true;
+        // if(!this.shareList.shares[0].storageAvailable) {
+        //     this.shareList.shares[0].errors.push(new Error('Invalid directory selected'));
+        //   }
+    },
+    components: {
+        'disk-allocator' : require('../components/disk-allocator')
     },
     methods: {
         changeView: function() {
             this.$router.replace({ path: 'dashboard' });            
-        }
+        },
+        validAllocation: function() {
+            return this.store.config.storageAllocation <= this.store.storageAvailable;
+          }
     },
     template: `
     <div>
@@ -40,7 +50,7 @@ module.exports = {
     <div class="db-widget-container">
         <div class="db-widget-small">
             <div class="db-title">Port</div>
-            <div class="db-data">45000</div>
+            <div class="db-data">{{shareList.shares[0].config.rpcPort}}</div>
         </div>
         <div class="db-widget-small">
             <div class="db-title">Seed</div>
@@ -51,12 +61,16 @@ module.exports = {
             <div class="db-data">{{shareList.shares[0].meta.farmerState.totalPeers}}</div>
         </div>
     </div>
-
+    <!--<disk-allocator
+        v-model="shareList.shares[0].config.storageAllocation"
+        v-bind:available="shareList.shares[0].storageAvailable">
+    </disk-allocator> -->
     <div class="db-widget-container">
         <div class="db-widget">
             <div class="db-title">Disk Space</div>
-            <div class="db-data">170GB of 300GB</div>
-            <div class="db-data-small"> 0.054646 INXT per month</div>
+           <!-- {{share.meta.farmerState.spaceUsed}} ({{share.meta.farmerState.percentUsed}}%) -->
+            <div class="db-data">{{(shareList.shares[0].meta.farmerState.spaceUsed) ? shareList.shares[0].meta.farmerState.spaceUsed : '0'}} of {{shareList.shares[0].config.storageAllocation}}</div>
+            <div class="db-data-small"> to be implemented INXT per month</div>
         </div>
     </div>
 </div>
