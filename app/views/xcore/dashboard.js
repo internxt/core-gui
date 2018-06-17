@@ -7,6 +7,9 @@ module.exports = {
     },
     created: function () {
         this.$parent.displaySlider = true;
+        this.shareList.actions.status(() => {
+            this.shareList.actions.poll().start();
+          });
     },
     methods: {
         changeView: function() {
@@ -20,7 +23,7 @@ module.exports = {
                 <div class="db-widget">
                     <div class="db-title">Status</div>
                     <!-- need to wait in order to be displayed properly -->
-                    <div class="db-data" v-if="!shareList.shares[0].isValid || (shareList.shares[0].isValid && !shareList.shares[0].isRunning) || shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 0">=Disconnected</div>
+                    <div class="db-data" v-if="!shareList.shares[0].isValid || (shareList.shares[0].isValid && !shareList.shares[0].isRunning) || shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 0">Disconnected</div>
                     <div class="db-data" v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 1">Connecting</div>
                     <div class="db-data" v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 2">Confirming</div>
                     <div class="db-data" v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 3">Connected</div>
