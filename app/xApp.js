@@ -10,7 +10,10 @@ var vm = new Vue({
 
   data: {shareList: window.Store.shareList, displaySlider : false},
   components: {
-    'welcome': require('./views/xcore/welcome')
+    'welcome': require('./views/xcore/welcome'),
+    'settings': require('./views/xcore/settings'),
+    'dashboard': require('./views/xcore/dashboard'),
+    'civic': require('./views/xcore/civic')
   },
   methods: {
     changeView: function() {
@@ -22,15 +25,16 @@ var vm = new Vue({
       this.shareList.actions.status(() => {
         //Check to see if any of the shares aren't using Ethereum addresses
         if(this.shareList.shares.length === 0) {
+          // civic
           router.replace('welcome');
         } else {
-          router.replace('dashboard');
+          router.replace('settings');
         }
       });
     });
   }
 });
 
-document.getElementById("ViewChange").onclick = function () {
-	vm.$refs.foo.changeView();
-};
+// document.getElementById("ViewChange").onclick = function () {
+// 	vm.$refs.foo.changeView();
+// };

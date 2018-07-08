@@ -13,6 +13,11 @@ header {
     justify-content: space-between;
 }
 
+#xIcon {
+    height: 40px;
+    width: 40px;
+}
+
 h1 {
     font-size: 25px;
     margin-top: 10px;
@@ -60,6 +65,7 @@ h3 {
     background: #18171f;
     color: white;
     border: none;
+    width: 100%;
 }
 
 .input-field:focus {
@@ -80,14 +86,18 @@ h3 {
 
 #uploadImg {
     position: absolute;
-    left: 300px;
+    left: 380px;
     top: 200px;
 }
 
 #connectionImg {
     position: absolute;
-    left: 300px;
+    left: 382px;
     top: 300px;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 /* 
@@ -148,4 +158,11 @@ h3 {
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  #fileInput {
+    background: url(../imgs/xcore/upload.png);
+    background-repeat: no-repeat;
+    height:40px;
+    width: 40px;
   }

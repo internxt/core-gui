@@ -98,7 +98,7 @@ module.exports = {
             if(configPath) {
               this.shareList.actions.import(configPath, (err) => {
                 if(!err) {
-                  return this.$router.push({ path: '/dashboard' });
+                  return this.$router.push({ path: '/settings' });
                 }
               });
             }
@@ -135,7 +135,7 @@ module.exports = {
                     <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
                 </div>
                 <img id="uploadImg" src="imgs/xcore/upload.png">
-                <img id="connectionImg" src="imgs/xcore/connection.png">
+                <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png">
             </section>
         </div>
     `

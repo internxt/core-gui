@@ -11,6 +11,11 @@ module.exports = {
             this.shareList.actions.poll().start();
           });
     },
+    beforeDestroy: function () {
+        this.shareList.actions.status(() => {
+            this.shareList.actions.poll().stop();
+          });
+    },
     methods: {
         changeView: function() {
             this.$router.replace({ path: 'settings' });            

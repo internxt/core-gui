@@ -8,9 +8,9 @@ module.exports = {
     },
     created: function () {
         this.$parent.displaySlider = true;
-        // if(!this.shareList.shares[0].storageAvailable) {
-        //     this.shareList.shares[0].errors.push(new Error('Invalid directory selected'));
-        //   }
+        this.shareList.actions.status(() => {
+            this.shareList.actions.poll().start();
+          });
     },
     components: {
         'disk-allocator' : require('../components/disk-allocator')
@@ -26,6 +26,20 @@ module.exports = {
     template: `
     <div>
     <h1>Node Settings</h1>
+    <div class="db-widget-container">
+        <div class="db-widget">
+            <div class="db-title">Status</div>
+            <!-- need to wait in order to be displayed properly -->
+            <div class="db-data" v-if="!shareList.shares[0].isValid || (shareList.shares[0].isValid && !shareList.shares[0].isRunning) || shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 0">Disconnected</div>
+            <div class="db-data" v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 1">Connecting</div>
+            <div class="db-data" v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 2">Confirming</div>
+            <div class="db-data" v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 3">Connected</div>
+        </div>
+        <div class="db-widget">
+            <div class="db-title">Uptime</div>
+            <div class="db-data">{{shareList.shares[0].meta.uptimeReadable}}</div>
+        </div>
+    </div>
     <div class="db-widget-container">
         <div class="db-widget">
             <div class="db-title">Wallet Address</div>
@@ -48,15 +62,11 @@ module.exports = {
     </div>
 
     <div class="db-widget-container">
-        <div class="db-widget-small">
+        <div class="db-widget">
             <div class="db-title">Port</div>
             <div class="db-data">{{shareList.shares[0].config.rpcPort}}</div>
         </div>
-        <div class="db-widget-small">
-            <div class="db-title">Seed</div>
-            <div class="db-data">3</div>
-        </div>
-        <div class="db-widget-small">
+        <div class="db-widget">
             <div class="db-title">Peer</div>
             <div class="db-data">{{shareList.shares[0].meta.farmerState.totalPeers}}</div>
         </div>
@@ -70,7 +80,7 @@ module.exports = {
             <div class="db-title">Disk Space</div>
            <!-- {{share.meta.farmerState.spaceUsed}} ({{share.meta.farmerState.percentUsed}}%) -->
             <div class="db-data">{{(shareList.shares[0].meta.farmerState.spaceUsed) ? shareList.shares[0].meta.farmerState.spaceUsed : '0'}} of {{shareList.shares[0].config.storageAllocation}}</div>
-            <div class="db-data-small"> to be implemented INXT per month</div>
+            <!-- <div class="db-data-small"> to be implemented INXT per month</div> -->
         </div>
     </div>
 </div>
