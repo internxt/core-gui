@@ -14,13 +14,12 @@ module.exports = {
         this.civicVerification();
     },
     methods: {
-
         civicVerification: function () {
+            var self = this;
             var timer = setInterval(function() {
                 if(document.getElementById("civicFrame").contentWindow.document.getElementById('token').innerText.length > 0) {
                     clearInterval(timer);
-                    return this.$router.push({ path: '/welcome' });
-                    // router.replace('welcome');
+                    return self.$router.push({ path: '/welcome' });
                 }
                
             }, 2000);
