@@ -36,7 +36,9 @@ module.exports = {
         if (!this.newShare.storageAvailable) {
             this.newShare.errors.push(new Error('Invalid directory selected'));
         }
-        console.table(this.newShare); // NOTE izbrisati liniju
+    },
+    mounted: function() {
+        this.bindUploadIcon();
     },
     methods: {
         checkEthereumAddress: function (address) {
@@ -103,6 +105,18 @@ module.exports = {
               });
             }
         },
+        bindUploadIcon: function() {
+            var self = this;
+            var imgBtn = document.getElementById('uploadImg');
+            var fileBtn = document.getElementById('fileStorage');
+            var storagePath = document.getElementById('storagePath');
+            imgBtn.addEventListener('click', function(e) {
+                document.getElementById('fileStorage').click();
+            });
+            fileBtn.addEventListener('change', function(e) {
+                storagePath.innerText = fileBtn.files[0].path;
+            })
+        }
     },
     template: `
         <div>
@@ -116,7 +130,8 @@ module.exports = {
                 <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>File Storge Location</h3>
-                    <input v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
+                    <input style="visibility:hidden" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
+                    <label id="storagePath"></label>
                 </div>
                 </div>
                 <div class="db-widget-container">
