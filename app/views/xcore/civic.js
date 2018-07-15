@@ -26,5 +26,16 @@ module.exports = {
         }
     },
     template: `
-    <iframe id="civicFrame" src="http://internxt.com/civic"  width="400" height="400" style="border:none;"></iframe>`
+    <iframe id="civicFrame" src="http://internxt.com/civic" style="position: fixed;
+    top: -35px;
+    left: -20px;
+    bottom: 0px;
+    right: 0px;
+    width: 109%;
+    height: 111.1%;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    z-index: 999999;"></iframe>`
 };

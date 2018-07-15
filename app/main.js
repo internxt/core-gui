@@ -106,11 +106,11 @@ function getWindowPosition() {
   let trayBounds = xTray.getBounds();
 
   // Center window horizontally below the tray icon
-  let x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
+  let x = Math.round(trayBounds.x + (trayBounds.width / 2.7) - (windowBounds.width / 2));
   // Position window 4 pixels vertically below the tray icon
   let y;
   if (process.platform === 'win32') {
-    y = Math.round(trayBounds.y/2.5 + trayBounds.height);
+    y = Math.round(trayBounds.y/2.7 + trayBounds.height);
   } else if (process.platform === 'darwin') {
     y = Math.round(trayBounds.y + trayBounds.height + 4); 
   } else {
@@ -135,7 +135,7 @@ function initRenderer() {
     width: 460,
     height: 630,
     show: false,
-    // frame: false,
+    frame: false,
     skipTaskbar: true
   });
 
@@ -162,6 +162,7 @@ function initRenderer() {
     menu.render();
     // main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL('file://' + __dirname + '/xIndex.html')
+    // xCoreUI.webContents.openDevTools();
     // tray.render();
   });
 }
