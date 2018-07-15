@@ -132,10 +132,10 @@ function initRenderer() {
   // });
 
   xCoreUI = new BrowserWindow({
-    width: 389,
-    height: 600,
+    width: 460,
+    height: 630,
     show: false,
-    frame: false,
+    // frame: false,
     skipTaskbar: true
   });
 

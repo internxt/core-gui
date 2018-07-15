@@ -11,6 +11,10 @@ module.exports = {
     {
       path: '/settings',
       component: require('./views/xcore/settings')
+    },
+    {
+      path: '/civic',
+      component: require('./views/xcore/civic')
     }
   ]
 };

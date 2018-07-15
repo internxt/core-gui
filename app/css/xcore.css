@@ -13,9 +13,18 @@ header {
     justify-content: space-between;
 }
 
+#xIcon {
+    height: 40px;
+    width: 40px;
+}
+
 h1 {
     font-size: 25px;
     margin-top: 10px;
+}
+
+h3 {
+    width: 400px;
 }
 
 .db-widget-container {
@@ -35,6 +44,11 @@ h1 {
         border-bottom: 2px solid #5b4ade;
     }
 
+.db-widget-long {
+    width: 100%;
+    border-bottom: 2px solid #5b4ade;
+}
+
 .db-title {
     color: #b7b6ba;
     font-size: 14px;
@@ -47,3 +61,108 @@ h1 {
     margin-bottom: 10px;
 }
 
+.input-field {
+    background: #18171f;
+    color: white;
+    border: none;
+    width: 100%;
+}
+
+.input-field:focus {
+    outline: none;
+}
+
+#createNode {
+    text-align: center;
+    justify-content: center;
+    background-color: #5b4ade;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    color: white;
+}
+
+#uploadImg {
+    position: absolute;
+    left: 380px;
+    top: 200px;
+}
+
+#connectionImg {
+    position: absolute;
+    left: 382px;
+    top: 300px;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+/* 
+    toggle button animation
+*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+  }
+  
+  .switch .sliderInput {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #5b4ade;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .sliderInput:checked + .slider {
+    background-color: #5b4ade;
+  }
+  
+  .sliderInput:focus + .slider {
+    box-shadow: 0 0 1px #5b4ade;
+  }
+  
+  .sliderInput:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  #fileInput {
+    background: url(../imgs/xcore/upload.png);
+    background-repeat: no-repeat;
+    height:40px;
+    width: 40px;
+  }

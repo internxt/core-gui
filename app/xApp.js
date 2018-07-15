@@ -4,23 +4,37 @@ const VueRouter = require('vue-router');
 const router = new VueRouter(require('./xRoutes'));
 const utils = require('storjshare-daemon').utils;
 
-module.exports = {
+var vm = new Vue({
   router,
   el: '#xApp',
-  data: window.Store.shareList,
+
+  data: {shareList: window.Store.shareList, displaySlider : false},
   components: {
-    'welcome': require('./views/xcore/welcome')
+    'welcome': require('./views/xcore/welcome'),
+    'settings': require('./views/xcore/settings'),
+    'dashboard': require('./views/xcore/dashboard'),
+    'civic': require('./views/xcore/civic')
+  },
+  methods: {
+    changeView: function() {
+      router.replace({ path: 'settings' });            
+    }
   },
   created: function() {
-    this.actions.load((err) => {
-      this.actions.status(() => {
+    this.shareList.actions.load((err) => {
+      this.shareList.actions.status(() => {
         //Check to see if any of the shares aren't using Ethereum addresses
-        if(this.shares.length === 0) {
+        if(this.shareList.shares.length === 0) {
+          // civic
           router.replace('welcome');
         } else {
-          router.replace('dashboard');
+          router.replace('settings');
         }
       });
     });
   }
-};
+});
+
+// document.getElementById("ViewChange").onclick = function () {
+// 	vm.$refs.foo.changeView();
+// };
