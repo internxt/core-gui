@@ -45,7 +45,7 @@ class Share {
           !this.config.storageAllocation.toString().match(
             /[0-9]+([Tt]|[Mm]|[Gg]|[Kk])?[Bb]/g
           )) {
-          this.config.storageAllocation = this.config.storageAllocation.toString() + 'B';
+          this.config.storageAllocation = this.config.storageAllocation.toString() + 'MB';
       }
 
       let logPath = path.join(

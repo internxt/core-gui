@@ -249,10 +249,6 @@ class ShareList {
       this.actions.invalidate(list);
 
       list.forEach((id) => {
-        if (!window.confirm(`Remove the share ${id}?`)) {
-          return;
-        }
-
         this.rpc.destroy(id, (err) => {
           if (err) {
             return this.errors.push(err);

@@ -4,7 +4,6 @@ module.exports = {
         return {
             shareList: window.Store.shareList,
         }
-        console.log(shareList);
     },
     created: function () {
         this.$parent.displaySlider = true;
@@ -12,8 +11,8 @@ module.exports = {
             this.shareList.actions.poll().start();
           });
     },
-    components: {
-        'disk-allocator' : require('../components/disk-allocator')
+    destroyed: function() {
+        this.store.actions.poll().stop();
     },
     methods: {
         changeView: function() {
@@ -21,7 +20,11 @@ module.exports = {
         },
         validAllocation: function() {
             return this.store.config.storageAllocation <= this.store.storageAvailable;
-          }
+          },
+        deleteNode: function() {
+            this.shareList.actions.destroy(this.shareList.shares[0].id);
+            this.$router.replace({ path: 'welcome' });  
+        }
     },
     template: `
     <div>
@@ -83,6 +86,10 @@ module.exports = {
             <!-- <div class="db-data-small"> to be implemented INXT per month</div> -->
         </div>
     </div>
+    <div class="db-widget-container">
+        <button id="createNode" v-on:click="deleteNode()">Delete node</button>
+    </div>
+
 </div>
     `
 };

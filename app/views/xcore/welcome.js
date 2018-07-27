@@ -1,4 +1,5 @@
 'use strict';
+const electron = require('electron');
 
 module.exports = {
     name: 'welcome',
@@ -28,7 +29,6 @@ module.exports = {
             min: 0,
             max: 0
         });
-        this.$set(this.newShare.config, 'storageAllocation', 100000000);
         //Pre-fill their first payment address if they already have a share
         if (window.Store.shareList.shares.length > 0) {
             this.$set(this.newShare.config, 'paymentAddress', window.Store.shareList.shares[0].config.paymentAddress);
@@ -48,6 +48,8 @@ module.exports = {
         handleFileInput: function (event) {
             this.$set(this.newShare.config, 'storagePath', event.target.files[0].path);
             this.newShare.actions.getFreeDiskSpace(this.newShare.config.storagePath, () => {});
+            document.getElementById('storagePath').style.color = "white";
+            document.getElementById('storagePath').style.fontSize = "13.3333px"
         },
         pathIsValid: function () {
             for (let i = 0; i < this.shareList.shares.length; i++) {
@@ -89,6 +91,9 @@ module.exports = {
                 }
             });
         },
+        openPortSetup: function() {
+            electron.shell.openExternal("https://internxt.com/portsetup");
+        },
         validAllocation: function() {
             return this.newShare.config.storageAllocation <= this.newShare.storageAvailable;
         },
@@ -128,23 +133,29 @@ module.exports = {
                     </div>
                 </div>
                 <div class="db-widget-container">
-                <div class="db-widget-long">
-                    <h3>File Storge Location</h3>
-                    <input style="visibility:hidden" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
-                    <label id="storagePath"></label>
-                </div>
-                </div>
-                <div class="db-widget-container">
-                <div class="db-widget-long">
-                    <h3>Server Connection</h3>
-                    <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
-                </div>
+                    <div class="db-widget-long">
+                        <h3>File Storage Location</h3>
+                        <input style="display:none" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
+                        <label id="storagePath">Select a location to store user files</label>
+                    </div>
                 </div>
                 <div class="db-widget-container">
-                <div class="db-widget-long">
-                    <h3>Hostname</h3>
-                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="127.0.0.1">
+                    <div class="db-widget-long">
+                        <h3>Storage Allocated</h3> 
+                        <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in MB(megabytes)">
+                    </div>
                 </div>
+                <div class="db-widget-container">
+                    <div class="db-widget-long">
+                        <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/connection.png">
+                        <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
+                    </div>
+                </div>
+                <div class="db-widget-container">
+                    <div class="db-widget-long">
+                        <h3>Hostname</h3>
+                        <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="127.0.0.1">
+                    </div>
                 </div>
                 <div class="db-widget-container">
                     <button id="createNode" v-on:click="saveToDisk()">Create your node</button>

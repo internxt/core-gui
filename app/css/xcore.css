@@ -93,7 +93,18 @@ h3 {
 #connectionImg {
     position: absolute;
     left: 382px;
-    top: 300px;
+    top: 400px;
+}
+
+#portSetup {
+    position: absolute;
+    left: 159px;
+    top: 376px;
+}
+
+#storagePath {
+    color: gray;
+    font-size: 13px;
 }
 
 .hide {
@@ -166,3 +177,7 @@ h3 {
     height:40px;
     width: 40px;
   }
+
+  /*button {*/
+    /*-webkit-app-region: no-drag;*/
+  /*}*/

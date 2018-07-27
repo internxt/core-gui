@@ -61,5 +61,5 @@
   "storagePath": "$HOME/.config/xcore",
   // Amount of space to lease to the network, as human readable string
   // Valid units are B, KB, MB, GB, TB
-  "storageAllocation": "2GB"
+  "storageAllocation": ""
 }
