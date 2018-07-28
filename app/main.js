@@ -137,7 +137,7 @@ function initRenderer() {
   xCoreUI = new BrowserWindow({
     width: 460,
     height: 630,
-    show: false,
+    show: true,
     frame: false,
     skipTaskbar: true
   });
@@ -171,7 +171,7 @@ function initRenderer() {
     menu.render();
     // main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL('file://' + __dirname + '/xIndex.html')
-    // xCoreUI.webContents.openDevTools();
+    xCoreUI.webContents.openDevTools();
     // tray.render();
   });
 }
