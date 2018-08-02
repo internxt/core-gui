@@ -39,6 +39,9 @@ if (isSecondAppInstance) {
   app.quit();
 }
 
+if (process.platform === 'darwin') {
+  app.dock.hide()
+}
 /**
  * Prevents application from exiting on close, instead hiding it
  */
