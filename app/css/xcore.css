@@ -99,7 +99,9 @@ h3 {
 #portSetup {
     position: absolute;
     left: 159px;
-    top: 376px;
+    top: 374px;
+    width: 25px;
+    height: 25px;
 }
 
 #storagePath {

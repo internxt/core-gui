@@ -147,7 +147,7 @@ module.exports = {
                 </div>
                 <div class="db-widget-container">
                     <div class="db-widget-long">
-                        <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/connection.png">
+                        <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/info-icon.png">
                         <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
                     </div>
                 </div>
