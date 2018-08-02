@@ -3,7 +3,7 @@
 const {connect} = require('net');
 const path = require('path');
 const { fork } = require('child_process');
-const {app, BrowserWindow, ipcMain: ipc, Tray} = require('electron');
+const {app, BrowserWindow, ipcMain: ipc, Tray, Menu} = require('electron');
 //const isCommandLaunched = /(electron(\.exe|\.app)?)$/.test(app.getPath('exe'));
 const ApplicationMenu = require('./lib/menu');
 const TrayIcon = require('./lib/trayicon');
@@ -144,7 +144,13 @@ function initRenderer() {
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
   xTray = new Tray(path.join(__dirname, 'imgs/osx/trayHighlight@2x.png'));
-  xTray.on('click', (event) => {
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Show XCore', click: showXCore},
+    {role: 'quit'}
+  ])
+  xTray.setToolTip('XCore')
+  xTray.setContextMenu(contextMenu)
+  function showXCore (item, window, event) {
     if (xCoreUI.isVisible()) {
       xCoreUI.hide();
     } else {
@@ -153,7 +159,7 @@ function initRenderer() {
       xCoreUI.show();
       xCoreUI.focus();
     }
-  });
+  }
 
   // main.on('close', (e) => minimizeToSystemTray(e));
   // app.on('activate', () => xCoreUI.show());
