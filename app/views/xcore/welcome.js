@@ -1,5 +1,6 @@
 'use strict';
 const electron = require('electron');
+var net = require('net');
 
 module.exports = {
     name: 'welcome',
@@ -36,6 +37,11 @@ module.exports = {
         if (!this.newShare.storageAvailable) {
             this.newShare.errors.push(new Error('Invalid directory selected'));
         }
+        // selecting random port
+        let self = this;
+        this.getFreePort(function (err, port) {
+            self.$set(self.newShare.config, 'rpcPort', port);
+        })
     },
     mounted: function() {
         this.bindUploadIcon();
@@ -66,8 +72,47 @@ module.exports = {
             this.buttonText = 'Select Location';
             return true;
         },
-        chooseRandomPort: function () {
-            this.$set(this.newShare.config, 'rpcPort', this.getRandomValidPort());
+        // chooseRandomPort: function () {
+        //     this.$set(this.newShare.config, 'rpcPort', this.getRandomValidPort());
+        // },
+        // chooseRandomPort: function () {
+        //     let self = this;
+        //     this.getFreePort(function (err, port) {
+        //         self.$set(self.newShare.config, 'rpcPort', port);
+        //         // console.log(port)
+        //         // if (err) throw err;
+        //         // return port;
+        //     })
+            
+        // },
+        getFreePort: function (fn) {
+            var server = net.createServer();
+            var calledFn = false;
+
+            server.on('error', function (err) {
+                server.close();
+
+                if (!calledFn) {
+                    calledFn = true;
+                    fn(err);
+                }
+
+            });
+
+            server.listen(0, function () {
+                var port = server.address().port;
+                server.close();
+
+                if (!calledFn) {
+                    calledFn = true;
+
+                    if (!port) {
+                        fn(new Error('Unable to get the server\'s given port'));
+                    } else {
+                        fn(null, port);
+                    }
+                }
+            });
         },
         getRandomValidPort: function () {
             return Math.floor(Math.random() * (this.MAXPORTNUM - this.MINPORTNUM)) + this.MINPORTNUM;
@@ -145,12 +190,12 @@ module.exports = {
                         <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in MB(megabytes)">
                     </div>
                 </div>
-                <div class="db-widget-container">
+               <!-- <div class="db-widget-container">
                     <div class="db-widget-long">
                         <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/info-icon.png">
                         <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
                     </div>
-                </div>
+                </div> -->
                 <div class="db-widget-container">
                     <div class="db-widget-long">
                         <h3>Hostname</h3>
@@ -161,7 +206,7 @@ module.exports = {
                     <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
                 </div>
                 <img id="uploadImg" src="imgs/xcore/upload.png">
-                <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png">
+                <!-- <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png"> -->
             </section>
         </div>
     `

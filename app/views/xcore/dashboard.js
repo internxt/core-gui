@@ -1,3 +1,6 @@
+const winston = require('winston');
+require('winston-logstash');
+
 module.exports = {
     name: 'dashboard',
     data: function () {
@@ -5,11 +8,19 @@ module.exports = {
             shareList: window.Store.shareList,
         }
     },
+    beforeCreate: function() {
+        winston.add(winston.transports.Logstash, {
+            port: 28777,
+            node_name: 'my node name',
+            host: '127.0.0.1'
+          });
+    },
     created: function () {
         this.$parent.displaySlider = true;
         this.shareList.actions.status(() => {
             this.shareList.actions.poll().start();
           });
+          setInterval(logData, 10000);
     },
     beforeDestroy: function () {
         this.shareList.actions.status(() => {
@@ -19,6 +30,9 @@ module.exports = {
     methods: {
         changeView: function() {
             this.$router.replace({ path: 'settings' });            
+        },
+        logData: function() {
+            // TODO
         }
     },
     template: `
