@@ -174,7 +174,10 @@ module.exports = {
                 <div class="db-widget-container">
                     <div class="db-widget-long">
                         <h3>Wallet Address</h3>
-                        <input v-model="newShare.config.paymentAddress" class="input-field" type="text" placeholder="Enter a ERC20 wallet address">
+                        <input  v-model="newShare.config.paymentAddress"
+                                class="input-field" 
+                                type="text" 
+                                placeholder="Enter a ERC20 wallet address">
                     </div>
                 </div>
                 <div class="db-widget-container">

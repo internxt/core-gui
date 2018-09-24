@@ -52,13 +52,6 @@
 @font-face {
   font-family: 'Cerebri Sans';
   font-style: normal;
-  font-weight: 500;
-  src: url('../fonts/CerebriSans-SemiBold.ttf') format('truetype')
-}
-
-@font-face {
-  font-family: 'Cerebri Sans';
-  font-style: normal;
   font-weight: 700;
   src: url('../fonts/CerebriSans-SemiBold.ttf') format('truetype')
 }

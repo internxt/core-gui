@@ -139,8 +139,8 @@ function initRenderer() {
   // });
 
   xCoreUI = new BrowserWindow({
-    width: 460,
-    height: 630,
+    width: 750,
+    height: 600,
     y: 0,
     x: 500,
     show: true,
@@ -178,7 +178,7 @@ function initRenderer() {
     menu.render();
     // main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
-    xCoreUI.webContents.openDevTools();
+    // xCoreUI.webContents.openDevTools();
     // tray.render();
   });
 }
