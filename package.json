@@ -5,9 +5,12 @@
     "coveralls": "^2.11.4",
     "electron": "^1.7.9",
     "electron-mocha": "^3.1.1",
+    "elemon": "^5.0.3",
     "fs-jetpack": "^1.2.0",
     "gulp": "^3.9.0",
+    "gulp-sass": "^4.0.1",
     "gulp-util": "^3.0.6",
+    "gulp-vueify": "0.0.3",
     "istanbul": "^0.4.5",
     "jshint": "^2.8.0",
     "proxyquire": "^1.7.3",
@@ -31,5 +34,8 @@
     "test-integration": "ELECTRON_PATH=./node_modules/.bin/electron ./node_modules/.bin/electron-mocha --renderer ./app/test/integration/**",
     "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/electron-mocha ./app/test/unit/** -- --recursive",
     "jshint": "./node_modules/.bin/jshint --config .jshintrc --exclude ./app/node_modules ./app"
+  },
+  "dependencies": {
+    "electron-reload": "^1.2.5"
   }
 }

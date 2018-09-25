@@ -1,32 +1,42 @@
-'use strict';
+"use strict";
 
-var gulp = require('gulp');
-var jetpack = require('fs-jetpack');
+var gulp = require("gulp");
+var jetpack = require("fs-jetpack");
 var projectDir = jetpack;
-var destDir = projectDir.cwd('./build');
+var destDir = projectDir.cwd("./build");
+var sass = require('gulp-sass');
 
 var paths = {
-  copyFromAppDir: [
-    './**'
-  ],
+  copyFromAppDir: ["./**"]
 };
 
-gulp.task('clean', function() {
-    return destDir.dirAsync('.', { empty: true });
+gulp.task("clean", function() {
+  return destDir.dirAsync(".", { empty: true });
 });
 
 function copyTask() {
-  return projectDir.copyAsync('app', destDir.path(), {
+  return projectDir.copyAsync("app", destDir.path(), {
     overwrite: true,
     matching: paths.copyFromAppDir
   });
 }
 
-gulp.task('copy', ['clean'], copyTask);
-gulp.task('copy-watch', copyTask);
-
-gulp.task('watch', function () {
-  gulp.watch(paths.copyFromAppDir, { cwd: 'app' }, ['copy-watch']);
+gulp.task('sass', function () {
+  return gulp.src('app/**/*.scss')
+    .pipe(sass.sync().on('error', sass.logError))
+    .pipe(gulp.dest(destDir.path()));
 });
 
-gulp.task('build', ['copy']);
+gulp.task('sass:watch', function () {
+  gulp.watch('./css/**/*.scss', ['sass']);
+});
+
+gulp.task("copy", copyTask);
+gulp.task("copy-watch", copyTask);
+
+gulp.task("watch", function() {
+  gulp.watch(paths.copyFromAppDir, { cwd: "app" }, ["copy-watch"]);
+  gulp.watch('app/**/*.scss', ["sass:watch"]);
+});
+
+gulp.task("build", ["clean", "sass","copy"]);
