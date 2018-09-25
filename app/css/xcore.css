@@ -68,7 +68,17 @@ h3 {
 
 .db-widget-long {
     width: 100%;
-    border-bottom: 2px solid #5b4ade;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #3E3D42;
+}
+
+.db-widget-long > .db-widget-long__upload {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px; 
 }
 
 .db-title {
@@ -109,12 +119,6 @@ h3 {
     color: white;
     font-weight: 300;
     letter-spacing: 0;
-}
-
-#uploadImg {
-    position: absolute;
-    left: 380px;
-    top: 200px;
 }
 
 #connectionImg {

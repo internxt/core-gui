@@ -184,7 +184,10 @@ module.exports = {
                     <div class="db-widget-long">
                         <h3>File Storage Location</h3>
                         <input style="display:none" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
-                        <label id="storagePath">Select a location to store user files</label>
+                        <div class="db-widget-long__upload">
+                            <label id="storagePath">Select a location to store user files</label>
+                            <img id="uploadImg" src="imgs/xcore/upload.png">
+                        </div>
                     </div>
                 </div>
                 <div class="db-widget-container">
@@ -208,7 +211,6 @@ module.exports = {
                 <div class="db-widget-container">
                     <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
                 </div>
-                <img id="uploadImg" src="imgs/xcore/upload.png">
                 <!-- <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png"> -->
             </section>
         </div>
