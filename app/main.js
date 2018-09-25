@@ -139,7 +139,7 @@ function initRenderer() {
   // });
 
   xCoreUI = new BrowserWindow({
-    width: 750,
+    width: 389,
     height: 600,
     y: 0,
     x: 500,
@@ -180,7 +180,7 @@ function initRenderer() {
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
     // xCoreUI.webContents.openDevTools();
     // tray.render();
-  });
+  }); 
 }
 
 app.on("ready", initRenderer);

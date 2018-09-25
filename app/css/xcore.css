@@ -7,7 +7,7 @@ body {
 }
 
 #xApp {
-    margin: 19px 26px;
+    margin: 18px 26px;
 }
 
 header {
@@ -22,7 +22,7 @@ header {
 
 h1 {
     font-size: 23px;
-    margin-top: 23px;
+    margin-top: 20px;
     font-weight: 900;
     color: #E4E4EB;
 }
@@ -35,11 +35,25 @@ h3 {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 16px;
 }
 
 .db-widget-container:first-of-type {
-    margin-top: 35px;
+    margin-top: 26px;
+}
+
+.db-widget__double, .db-widget__triple  {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.db-widget__double > .db-widget {
+    width: 169px;
+}
+
+.db-widget__triple > .db-widget {
+    width: 112px;
 }
 
 .db-widget {
@@ -69,7 +83,7 @@ h3 {
     color: #B7B6BA;
     font-size: 13px;
     letter-spacing: 0px;
-    margin-bottom: 22px;
+    margin-bottom: 16px;
 }
 
 .input-field {
