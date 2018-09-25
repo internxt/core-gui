@@ -175,7 +175,7 @@ function initRenderer() {
     menu.render();
     // main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
-    // xCoreUI.webContents.openDevTools();
+    xCoreUI.webContents.openDevTools();
     // tray.render();
   }); 
 }

@@ -5,9 +5,10 @@ var jetpack = require("fs-jetpack");
 var projectDir = jetpack;
 var destDir = projectDir.cwd("./build");
 var sass = require('gulp-sass');
+var vueify = require('gulp-vueify');
 
 var paths = {
-  copyFromAppDir: ["./**"]
+  copyFromAppDir: ["./**", "!*.vue"]
 };
 
 gulp.task("clean", function() {
@@ -31,6 +32,13 @@ gulp.task('sass:watch', function () {
   gulp.watch('./css/**/*.scss', ['sass']);
 });
 
+gulp.task('vueify', ["copy"], function () {
+  return gulp
+    .src("app/views/**/*.vue")
+    .pipe(vueify())
+    .pipe(gulp.dest(destDir.path() + '/views/'));
+});
+
 gulp.task("copy", copyTask);
 gulp.task("copy-watch", copyTask);
 
@@ -39,4 +47,4 @@ gulp.task("watch", function() {
   gulp.watch('app/**/*.scss', ["sass:watch"]);
 });
 
-gulp.task("build", ["clean", "sass","copy"]);
+gulp.task("build", ["clean", "sass", "vueify"]);
