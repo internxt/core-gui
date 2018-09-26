@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-const {connect} = require('net');
-const path = require('path');
-const { fork } = require('child_process');
-const {app, BrowserWindow, ipcMain: ipc, Tray, Menu} = require('electron');
+const { connect } = require("net");
+const path = require("path");
+const { fork } = require("child_process");
+const { app, BrowserWindow, ipcMain: ipc, Tray, Menu } = require("electron");
 //const isCommandLaunched = /(electron(\.exe|\.app)?)$/.test(app.getPath('exe'));
-const ApplicationMenu = require('./lib/menu');
-const TrayIcon = require('./lib/trayicon');
+const ApplicationMenu = require("./lib/menu");
+const TrayIcon = require("./lib/trayicon");
 //const AutoLauncher = require('./lib/autolaunch');
-const FatalExceptionDialog = require('./lib/fatal-exception-dialog');
-const {dialog} = require('electron');
-const protocol = (process.env.isTestNet === 'true') ? 'testnet' : '';
+const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
+const { dialog } = require("electron");
+const protocol = process.env.isTestNet === "true" ? "testnet" : "";
 /*
 const autoLauncher = new AutoLauncher({
   name: app.getName(),
@@ -39,8 +39,8 @@ if (isSecondAppInstance) {
   app.quit();
 }
 
-if (process.platform === 'darwin') {
-  app.dock.hide()
+if (process.platform === "darwin") {
+  app.dock.hide();
 }
 /**
  * Prevents application from exiting on close, instead hiding it
@@ -56,7 +56,7 @@ function minimizeToSystemTray(event) {
  */
 function updateSettings(ev, data) {
   userData = tray.userData = JSON.parse(data);
-/*
+  /*
   if (userData.appSettings.launchOnBoot && !isCommandLaunched) {
     autoLauncher.enable();
   } else if(!userData.appSettings.launchOnBoot && !isCommandLaunched) {
@@ -71,31 +71,33 @@ function updateSettings(ev, data) {
 function maybeStartDaemon(callback) {
   const sock = connect(45015);
 
-  sock.on('connect', () => {
+  sock.on("connect", () => {
     sock.end();
     sock.removeAllListeners();
     callback();
   });
 
-  sock.on('error', () => {
+  sock.on("error", () => {
     sock.removeAllListeners();
     initRPCServer(callback);
   });
 }
 
 function initRPCServer(callback) {
-  let RPCServer = fork(`${__dirname}/lib/rpc-server.js`, {env: {STORJ_NETWORK: protocol}});
-  process.on('exit', () => {
+  let RPCServer = fork(`${__dirname}/lib/rpc-server.js`, {
+    env: { STORJ_NETWORK: protocol }
+  });
+  process.on("exit", () => {
     RPCServer.kill();
-  })
+  });
 
-  RPCServer.on('message', (msg) => {
-    if(msg.state === 'init') {
+  RPCServer.on("message", msg => {
+    if (msg.state === "init") {
       return callback();
     } else {
       RPCServer.removeAllListeners();
       let killMsg = new FatalExceptionDialog(app, main, new Error(msg.error));
-      if(tray && tray.destroy) {
+      if (tray && tray.destroy) {
         tray.destroy();
       }
 
@@ -109,17 +111,19 @@ function getWindowPosition() {
   let trayBounds = xTray.getBounds();
 
   // Center window horizontally below the tray icon
-  let x = Math.round(trayBounds.x + (trayBounds.width / 2.7) - (windowBounds.width / 2));
+  let x = Math.round(
+    trayBounds.x + trayBounds.width / 2.7 - windowBounds.width / 2
+  );
   // Position window 4 pixels vertically below the tray icon
   let y;
-  if (process.platform === 'win32') {
-    y = Math.round(trayBounds.y/2.7 + trayBounds.height);
-  } else if (process.platform === 'darwin') {
-    y = Math.round(trayBounds.y + trayBounds.height + 4); 
+  if (process.platform === "win32") {
+    y = Math.round(trayBounds.y / 2.7 + trayBounds.height);
+  } else if (process.platform === "darwin") {
+    y = Math.round(trayBounds.y + trayBounds.height + 4);
   } else {
-    y = Math.round(trayBounds.y/2 + trayBounds.height); 
+    y = Math.round(trayBounds.y / 2 + trayBounds.height);
   }
-  return {x: x, y: y};
+  return { x: x, y: y };
 }
 
 /**
@@ -135,22 +139,24 @@ function initRenderer() {
   // });
 
   xCoreUI = new BrowserWindow({
-    width: 460,
-    height: 630,
+    width: 389,
+    height: 600,
+    y: 0,
+    x: 500,
     show: true,
     frame: false,
     skipTaskbar: true
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
-  xTray = new Tray(path.join(__dirname, 'imgs/osx/trayHighlight@2x.png'));
+  xTray = new Tray(path.join(__dirname, "imgs/osx/trayHighlight@2x.png"));
   const contextMenu = Menu.buildFromTemplate([
-    {label: 'Show X Core', click: showXCore},
-    {role: 'quit'}
-  ])
-  xTray.setToolTip('XCore')
-  xTray.setContextMenu(contextMenu)
-  function showXCore (item, window, event) {
+    { label: "Show X Core", click: showXCore },
+    { role: "quit" }
+  ]);
+  xTray.setToolTip("XCore");
+  xTray.setContextMenu(contextMenu);
+  function showXCore(item, window, event) {
     if (xCoreUI.isVisible()) {
       xCoreUI.hide();
     } else {
@@ -163,17 +169,17 @@ function initRenderer() {
 
   // main.on('close', (e) => minimizeToSystemTray(e));
   // app.on('activate', () => xCoreUI.show());
-  ipc.on('appSettingsChanged', (event, data) => updateSettings(event, data));
+  ipc.on("appSettingsChanged", (event, data) => updateSettings(event, data));
   // ipc.on('showApplicationWindow', () => xCoreUI.show());
 
   // NB: Start the daemon if not running, then render the application
   maybeStartDaemon((/* err */) => {
     menu.render();
     // main.loadURL('file://' + __dirname + '/index.html');
-    xCoreUI.loadURL('file://' + __dirname + '/xIndex.html')
+    xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
     // xCoreUI.webContents.openDevTools();
     // tray.render();
-  });
+  }); 
 }
 
-app.on('ready', initRenderer);
+app.on("ready", initRenderer);

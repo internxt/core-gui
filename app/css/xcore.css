@@ -1,11 +1,13 @@
 body {
     background: #18171f;
     color: #e4e4eb;
-    font-family: 'proxima-nova', sans-serif;
+    font-family: 'Cerebri Sans', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 #xApp {
-    margin: 19px 24px;
+    margin: 18px 26px;
 }
 
 header {
@@ -14,13 +16,15 @@ header {
 }
 
 #xIcon {
-    height: 40px;
-    width: 40px;
+    height: 32px;
+    width: 32px;
 }
 
 h1 {
-    font-size: 25px;
-    margin-top: 10px;
+    font-size: 23px;
+    margin-top: 20px;
+    font-weight: 900;
+    color: #E4E4EB;
 }
 
 h3 {
@@ -31,12 +35,30 @@ h3 {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+}
+
+.db-widget-container:first-of-type {
+    margin-top: 26px;
+}
+
+.db-widget__double, .db-widget__triple  {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.db-widget__double > .db-widget {
+    width: 169px;
+}
+
+.db-widget__triple > .db-widget {
+    width: 112px;
 }
 
 .db-widget {
-    width: 40%;
-    border-bottom: 2px solid #5b4ade;
+    width: 337px;
+    border-bottom: 1px solid #3E3D42;
 }
 
 .db-widget-small {
@@ -46,19 +68,32 @@ h3 {
 
 .db-widget-long {
     width: 100%;
-    border-bottom: 2px solid #5b4ade;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #3E3D42;
+}
+
+.db-widget-long > .db-widget-long__upload {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px; 
 }
 
 .db-title {
     color: #b7b6ba;
-    font-size: 14px;
-    margin-bottom: 5px;
+    font-size: 17px;
+    letter-spacing: 0px;
+    margin-bottom: 16px;
+    font-weight: 700;
 }
 
 .db-data {
-    color: #e4e4eb;
-    font-size: 17px;
-    margin-bottom: 10px;
+    color: #B7B6BA;
+    font-size: 13px;
+    letter-spacing: 0px;
+    margin-bottom: 16px;
 }
 
 .input-field {
@@ -75,19 +110,15 @@ h3 {
 #createNode {
     text-align: center;
     justify-content: center;
-    background-color: #5b4ade;
+    background-color: #5B4ADE;
     border: none;
-    border-radius: 5px;
-    width: 100%;
-    height: 40px;
-    font-size: 14px;
+    border-radius: 3px;
+    width: 339px;
+    height: 38px;
+    font-size: 13px;
     color: white;
-}
-
-#uploadImg {
-    position: absolute;
-    left: 380px;
-    top: 200px;
+    font-weight: 300;
+    letter-spacing: 0;
 }
 
 #connectionImg {
