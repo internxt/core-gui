@@ -139,8 +139,7 @@ function initRenderer() {
     height: 630,
     show: true,
     frame: false,
-    skipTaskbar: true,
-    alwaysOnTop: true
+    skipTaskbar: true
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);

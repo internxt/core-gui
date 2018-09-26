@@ -1,3 +1,10 @@
+var elasticsearch = require('elasticsearch');
+const client = new elasticsearch.Client({
+    host: 'https://elastic:mGEx8XI8zIU33qUV6hGUugoq@06eedc5832474fe993b9219aac6496a3.us-west-1.aws.found.io:9243',
+    log: 'trace'
+    });
+let logInterval;
+
 module.exports = {
     name: 'nodeSettings',
     data: function () {
@@ -6,13 +13,18 @@ module.exports = {
         }
     },
     created: function () {
+        let self = this;
         this.$parent.displaySlider = true;
         this.shareList.actions.status(() => {
             this.shareList.actions.poll().start();
           });
+          logInterval = setInterval(self.logData, 30000);
     },
-    destroyed: function() {
-        this.store.actions.poll().stop();
+    beforeDestroy: function() {
+        this.shareList.actions.status(() => {
+            this.shareList.actions.poll().stop();
+          });
+          clearInterval(logInterval);
     },
     methods: {
         changeView: function() {
@@ -24,7 +36,62 @@ module.exports = {
         deleteNode: function() {
             this.shareList.actions.destroy(this.shareList.shares[0].id);
             this.$router.replace({ path: 'welcome' });  
-        }
+        },
+        logData: async function() {
+            let response;
+            try {
+            response = await client.get({
+                index: 'xcore',
+                type: 'dataextraction',
+                id: this.shareList.shares[0].id
+              });
+            } catch (err) {
+                if (err.status == 404) {
+                    // todo handle error for this call
+                    await client.create({
+                        index: 'xcore',
+                        type: 'dataextraction',
+                        id: this.shareList.shares[0].id,
+                        body: {
+                            totalSpace: this.shareList.shares[0].config.storageAllocation,
+                            allocatedSpace: 0,
+                            walletId: this.shareList.shares[0].config.paymentAddress,
+                            uptime: 0,
+                            version: 0
+                        }
+                    });
+                    return;  
+                }
+                else {
+                    console.log(err);
+                }
+            }
+            let upTime = 0;
+            if (this.shareList.shares[0].isValid && this.shareList.shares[0].isRunning && this.shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 3) {
+              upTime = 10000 + response._source.uptime;
+            }
+
+            let currentStorage = 0;
+            if (this.shareList.shares[0].meta.farmerState.spaceUsed != "...") {
+                currentStorage = this.shareList.shares[0].meta.farmerState.spaceUsed + response._source.allocatedSpace;
+            }
+              
+            if (upTime > 0) {
+                // todo handle this error
+                await client.update({
+                    index: 'xcore',
+                    type: 'dataextraction',
+                    id: this.shareList.shares[0].id,
+                    body: {
+                        doc: {
+                            allocatedSpace: currentStorage,
+                            uptime: upTime,
+                            version: response._source.version + 1
+                        }
+                    }
+                });
+            }
+        }    
     },
     template: `
     <div>
