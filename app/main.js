@@ -1,5 +1,4 @@
 "use strict";
-
 const { connect } = require("net");
 const path = require("path");
 const { fork } = require("child_process");
@@ -9,8 +8,8 @@ const ApplicationMenu = require("./lib/menu");
 const TrayIcon = require("./lib/trayicon");
 //const AutoLauncher = require('./lib/autolaunch');
 const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
-const { dialog } = require("electron");
 const protocol = process.env.isTestNet === "true" ? "testnet" : "";
+    
 /*
 const autoLauncher = new AutoLauncher({
   name: app.getName(),
@@ -140,12 +139,11 @@ function initRenderer() {
 
   xCoreUI = new BrowserWindow({
     width: 389,
-    height: 605,
-    y: 0,
-    x: 500,
+    height: 600,
     show: true,
     frame: false,
-    skipTaskbar: true
+    skipTaskbar: true,
+    alwaysOnTop: true
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
@@ -182,4 +180,8 @@ function initRenderer() {
   }); 
 }
 
-app.on("ready", initRenderer);
+app.on("ready", () => {
+  initRenderer()
+  let {x, y} = getWindowPosition();
+  xCoreUI.setPosition(x, y);
+});
