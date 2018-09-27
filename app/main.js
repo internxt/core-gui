@@ -116,7 +116,7 @@ function getWindowPosition() {
   // Position window 4 pixels vertically below the tray icon
   let y;
   if (process.platform === "win32") {
-    y = Math.round(trayBounds.y / 2.7 + trayBounds.height);
+    y = Math.round(trayBounds.y / 2.63 + trayBounds.height);
   } else if (process.platform === "darwin") {
     y = Math.round(trayBounds.y + trayBounds.height + 4);
   } else {
@@ -139,7 +139,7 @@ function initRenderer() {
 
   xCoreUI = new BrowserWindow({
     width: 389,
-    height: 600,
+    height: 605,
     show: true,
     frame: false,
     skipTaskbar: true,
