@@ -1,6 +1,12 @@
 <template>
     <div>
     <h1>Node Settings</h1>
+    <transition name="appear">
+        <confirmation-modal modal-show="confirmDelete" 
+			                @confirm='deleteNode' 
+                            @cancel='closeModal'>
+        </confirmation-modal>/>
+    </transition>
     <div class="db-widget-container">
         <div class="db-widget__double">
             <div class="db-widget">
@@ -61,22 +67,30 @@
         v-bind:available="shareList.shares[0].storageAvailable">
     </disk-allocator> -->
     <div class="db-widget-container">
-        <button id="createNode" v-on:click="deleteNode()">Delete node</button>
+        <button id="createNode" @click="confirmDelete()">Delete node</button>
     </div>
 
 </div>
 </template>
 <script>
+const ConfirmationModal = require('../components/confirmationModal/ConfirmationModal');
+
 const elasticsearch = require('elasticsearch');
 const client = new elasticsearch.Client({
     host: 'https://elastic:mGEx8XI8zIU33qUV6hGUugoq@06eedc5832474fe993b9219aac6496a3.us-west-1.aws.found.io:9243',
     log: 'trace'
     });
+let logInterval; 
+
 module.exports = {
     name: 'nodeSettings',
+    components: {
+        ConfirmationModal
+    },
     data: function () {
         return {
             shareList: window.Store.shareList,
+            modalShow: false
         }
     },
     created: function () {
@@ -86,8 +100,11 @@ module.exports = {
           });
         logInterval = setInterval(self.logData, 30000);
     },
-    destroyed: function() {
-        this.store.actions.poll().stop();
+    beforeDestroy: function() {
+        this.shareList.actions.status(() => {
+            this.shareList.actions.poll().stop();
+          });
+          clearInterval(logInterval);
     },
     methods: {
         changeView: function() {
@@ -96,6 +113,12 @@ module.exports = {
         validAllocation: function() {
             return this.store.config.storageAllocation <= this.store.storageAvailable;
           },
+        confirmDelete() {
+            return modalShow = true
+        },
+        closeModal() {
+            return modalShow = false
+        },
         deleteNode: function() {
             this.shareList.actions.destroy(this.shareList.shares[0].id);
             this.$router.replace({ path: 'welcome' });  
