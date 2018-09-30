@@ -8,7 +8,7 @@ var sass = require('gulp-sass');
 var vueify = require('gulp-vueify');
 
 var paths = {
-  copyFromAppDir: ["./**", "!*.vue"]
+  copyFromAppDir: ["./**", "!app/views/**/*.vue", "!*.scss"]
 };
 
 gulp.task("clean", function() {
@@ -22,7 +22,7 @@ function copyTask() {
   });
 }
 
-gulp.task('sass', function () {
+gulp.task('sass', ["clean"], function () {
   return gulp.src('app/**/*.scss')
     .pipe(sass.sync().on('error', sass.logError))
     .pipe(gulp.dest(destDir.path()));
@@ -36,6 +36,7 @@ gulp.task('vueify', ["copy"], function () {
   return gulp
     .src("app/views/**/*.vue")
     .pipe(vueify())
+    .on('error', console.error.bind(console))
     .pipe(gulp.dest(destDir.path() + '/views/'));
 });
 
@@ -47,4 +48,4 @@ gulp.task("watch", function() {
   gulp.watch('app/**/*.scss', ["sass:watch"]);
 });
 
-gulp.task("build", ["clean", "sass", "vueify"]);
+gulp.task("build", ["sass", "vueify"]);

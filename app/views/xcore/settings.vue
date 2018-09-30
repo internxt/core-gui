@@ -1,11 +1,36 @@
+<style lang="scss" scoped>
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.appear-enter {
+  opacity: 0;
+}
+
+.appear-leave-active {
+  opacity: 0;
+}
+
+.appear-enter .modal-container,
+.appear-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+</style>
+
 <template>
     <div>
     <h1>Node Settings</h1>
     <transition name="appear">
-        <confirmation-modal modal-show="confirmDelete" 
+        <confirmation-modal v-if='modalShow'
 			                @confirm='deleteNode' 
-                            @cancel='closeModal'>
-        </confirmation-modal>/>
+                            @close='closeModal'>
+                            <h3 slot="header">Are you sure ?</h3>
     </transition>
     <div class="db-widget-container">
         <div class="db-widget__double">
@@ -114,10 +139,12 @@ module.exports = {
             return this.store.config.storageAllocation <= this.store.storageAvailable;
           },
         confirmDelete() {
-            return modalShow = true
+            this.modalShow = true;
+            return this.modalShow;
         },
         closeModal() {
-            return modalShow = false
+            this.modalShow = false;
+            return this.modalShow;
         },
         deleteNode: function() {
             this.shareList.actions.destroy(this.shareList.shares[0].id);
