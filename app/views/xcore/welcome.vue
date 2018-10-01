@@ -1,3 +1,51 @@
+<template>
+    <div>
+        <section>
+            <div class="db-widget-container">
+                <div class="db-widget-long">
+                    <h3>Wallet Address</h3>
+                    <input  v-model="newShare.config.paymentAddress"
+                            class="input-field" 
+                            type="text" 
+                            placeholder="Enter a ERC20 wallet address">
+                </div>
+            </div>
+            <div class="db-widget-container">
+                <div class="db-widget-long">
+                    <h3>File Storage Location</h3>
+                    <input style="display:none" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
+                    <div class="db-widget-long__upload">
+                        <label id="storagePath">Select a location to store user files</label>
+                        <img id="uploadImg" src="imgs/xcore/upload.png">
+                    </div>
+                </div>
+            </div>
+            <div class="db-widget-container">
+                <div class="db-widget-long">
+                    <h3>Storage Allocated</h3> 
+                    <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in MB(megabytes)">
+                </div>
+            </div>
+            <!-- <div class="db-widget-container">
+                <div class="db-widget-long">
+                    <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/info-icon.png">
+                    <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
+                </div>
+            </div> -->
+            <div class="db-widget-container">
+                <div class="db-widget-long">
+                    <h3>Hostname</h3>
+                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="127.0.0.1">
+                </div>
+            </div>
+            <div class="db-widget-container">
+                <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
+            </div>
+            <!-- <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png"> -->
+        </section>
+    </div>
+</template>
+<script>
 'use strict';
 const electron = require('electron');
 var net = require('net');
@@ -167,52 +215,6 @@ module.exports = {
                 storagePath.innerText = fileBtn.files[0].path;
             })
         }
-    },
-    template: `
-        <div>
-            <section>
-                <div class="db-widget-container">
-                    <div class="db-widget-long">
-                        <h3>Wallet Address</h3>
-                        <input  v-model="newShare.config.paymentAddress"
-                                class="input-field" 
-                                type="text" 
-                                placeholder="Enter a ERC20 wallet address">
-                    </div>
-                </div>
-                <div class="db-widget-container">
-                    <div class="db-widget-long">
-                        <h3>File Storage Location</h3>
-                        <input style="display:none" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
-                        <div class="db-widget-long__upload">
-                            <label id="storagePath">Select a location to store user files</label>
-                            <img id="uploadImg" src="imgs/xcore/upload.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="db-widget-container">
-                    <div class="db-widget-long">
-                        <h3>Storage Allocated</h3> 
-                        <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in MB(megabytes)">
-                    </div>
-                </div>
-               <!-- <div class="db-widget-container">
-                    <div class="db-widget-long">
-                        <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/info-icon.png">
-                        <input v-model.number="newShare.config.rpcPort" class="input-field" type="text" placeholder="Enter your routers port number">
-                    </div>
-                </div> -->
-                <div class="db-widget-container">
-                    <div class="db-widget-long">
-                        <h3>Hostname</h3>
-                        <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="127.0.0.1">
-                    </div>
-                </div>
-                <div class="db-widget-container">
-                    <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
-                </div>
-                <!-- <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png"> -->
-            </section>
-        </div>
-    `
+    }
 };
+</script>

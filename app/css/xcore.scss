@@ -36,11 +36,12 @@ h3 {
     flex-flow: row wrap;
     justify-content: space-between;
     margin-bottom: 16px;
-}
-
-.db-widget-container:first-of-type {
+    &:first-of-type {
     margin-top: 26px;
 }
+}
+
+
 
 .db-widget__double, .db-widget__triple  {
    display: flex;
@@ -48,12 +49,16 @@ h3 {
    justify-content: space-between;
 }
 
-.db-widget__double > .db-widget {
-    width: 169px;
+.db-widget__double {
+    .db-widget{
+        width: 169px;
+    }
 }
 
-.db-widget__triple > .db-widget {
-    width: 112px;
+.db-widget__triple {
+    .db-widget {
+        width: 112px;
+    }
 }
 
 .db-widget {
@@ -71,14 +76,13 @@ h3 {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid #3E3D42;
-}
-
-.db-widget-long > .db-widget-long__upload {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px; 
+    .db-widget-long__upload {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px; 
+    }
 }
 
 .db-title {
