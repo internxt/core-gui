@@ -26,7 +26,7 @@ var vm = new Vue({
         //Check to see if any of the shares aren't using Ethereum addresses
         if(this.shareList.shares.length === 0) {
           // civic
-          router.replace('welcome');
+          router.replace('civic');
         } else {
           router.replace('settings');
         }
