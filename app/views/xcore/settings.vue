@@ -123,7 +123,7 @@ module.exports = {
         this.shareList.actions.status(() => {
             this.shareList.actions.poll().start();
           });
-        logInterval = setInterval(self.logData, 30000);
+        logInterval = setInterval(this.logData, 3000);
     },
     beforeDestroy: function() {
         this.shareList.actions.status(() => {
