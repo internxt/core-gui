@@ -123,7 +123,7 @@ module.exports = {
         this.shareList.actions.status(() => {
             this.shareList.actions.poll().start();
           });
-        logInterval = setInterval(this.logData, 3000);
+        logInterval = setInterval(this.logData, 30000);
     },
     beforeDestroy: function() {
         this.shareList.actions.status(() => {
@@ -153,11 +153,11 @@ module.exports = {
         logData: async function() {
             let response;
             try {
-            response = await client.get({
-                index: 'xcore',
-                type: 'dataextraction',
-                id: this.shareList.shares[0].id
-              });
+                response = await client.get({
+                    index: 'xcore',
+                    type: 'dataextraction',
+                    id: this.shareList.shares[0].id
+                });
             } catch (err) {
                 if (err.status == 404) {
                     // todo handle error for this call
@@ -181,12 +181,14 @@ module.exports = {
             }
             let upTime = 0;
             if (this.shareList.shares[0].isValid && this.shareList.shares[0].isRunning && this.shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 3) {
-              upTime = 10000 + response._source.uptime;
+              upTime = 30000 + response._source.uptime;
             }
 
             let currentStorage = 0;
             if (this.shareList.shares[0].meta.farmerState.spaceUsed != "...") {
                 currentStorage = this.shareList.shares[0].meta.farmerState.spaceUsed + response._source.allocatedSpace;
+            } else {
+                currentStorage = response._source.allocatedSpace;
             }
               
             if (upTime > 0) {
