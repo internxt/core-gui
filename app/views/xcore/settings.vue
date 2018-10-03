@@ -170,7 +170,16 @@ module.exports = {
                             allocatedSpace: 0,
                             walletId: this.shareList.shares[0].config.paymentAddress,
                             uptime: 0,
-                            version: 0
+                            version: 0,
+                            rpcAddress: this.shareList.shares[0].config.rpcAddress,
+                            rpcPort: this.shareList.shares[0].config.rpcPort,
+                            contractCount: this.shareList.shares[0].meta.farmerState.contractCount,
+                            dataReceivedCount: this.shareList.shares[0].meta.farmerState.dataReceivedCount,
+                            peers: this.shareList.shares[0].meta.farmerState.totalPeers,
+                            isErrored: this.shareList.shares[0].isErrored,
+                            isRunning: this.shareList.shares[0].isRunning,
+                            isStopped: this.shareList.shares[0].isStopped,
+                            isValid: this.shareList.shares[0].isValid,
                         }
                     });
                     return;  
@@ -201,7 +210,14 @@ module.exports = {
                         doc: {
                             allocatedSpace: currentStorage,
                             uptime: upTime,
-                            version: response._source.version + 1
+                            version: response._source.version + 1,
+                            contractCount: this.shareList.shares[0].meta.farmerState.contractCount,
+                            dataReceivedCount: this.shareList.shares[0].meta.farmerState.dataReceivedCount,
+                            peers: this.shareList.shares[0].meta.farmerState.totalPeers,
+                            isErrored: this.shareList.shares[0].isErrored,
+                            isRunning: this.shareList.shares[0].isRunning,
+                            isStopped: this.shareList.shares[0].isStopped,
+                            isValid: this.shareList.shares[0].isValid,
                         }
                     }
                 });
