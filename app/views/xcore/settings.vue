@@ -194,8 +194,8 @@ module.exports = {
             }
 
             let currentStorage = 0;
-            if (this.shareList.shares[0].meta.farmerState.spaceUsed != "...") {
-                currentStorage = this.shareList.shares[0].meta.farmerState.spaceUsed + response._source.allocatedSpace;
+            if (this.shareList.shares[0].meta.farmerState.spaceUsedBytes) {
+                currentStorage = this.shareList.shares[0].meta.farmerState.spaceUsedBytes + response._source.allocatedSpace;
             } else {
                 currentStorage = response._source.allocatedSpace;
             }
