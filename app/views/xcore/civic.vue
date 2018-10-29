@@ -3,17 +3,10 @@
 <template>
     <iframe id="civicFrame" src="http://internxt.com/civic" 
         style="position: fixed;
-            top: -35px;
-            left: -20px;
-            bottom: 0px;
-            right: 0px;
-            width: 109%;
-            height: 111.1%;
-            border: none;
-            margin: 0px;
-            padding: 0px;
-            overflow: hidden;
-            z-index: 999999;">
+            top: -42px;
+            left: -26px;
+            width: 112%;
+            height: 114%;">
     </iframe>
 </template>
 <script>
