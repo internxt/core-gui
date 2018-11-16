@@ -3,7 +3,7 @@
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const untildify = require('untildify');
-const configDir = untildify('~/.config/autostart/');
+const configDir = untildify('~/.xcore/autostart/');
 const {existsSync} = require('storjshare-daemon').utils;
 const path = require('path');
 
