@@ -29,5 +29,5 @@
   "loggerVerbosity": 3,
   "loggerOutputFile": "$HOME/.xcore/logs/[nodeid].log",
   "storagePath": "$HOME/.xcore",
-  "storageAllocation": "1GB"
+  "storageAllocation": "1024"
 }
