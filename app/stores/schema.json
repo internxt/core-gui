@@ -1,67 +1,33 @@
 {
-  // Set the ERC20 address for receiving contract payments
   "paymentAddress": "",
-  // Subscribes to the given contract topics
   "opcodeSubscriptions": [
     "0f01020202",
     "0f02020202",
     "0f03020202"
   ],
-  // An array of bridges to connect and accept contracts,
-  // send exchange reports and discover network seeds.
   "bridges": [{
-    "url": "http://54.153.53.131:6382",
-    "extendedKey": "xpub6A1Q9ftCxkQ9vzd8WYZYp4zrEmcP7H58Abh1hy5ERyMES1hzrS3PvjQsHc4t2k3JX767WnPbbHGC8jWazRNnp4DnBSq2R3dz78qehk94RSK"
+    "url": "https://api.internxt.com",
+    "extendedKey": "xpub69vZdaeqerAfCThNZu6Zifz5K8XvFiPxG6UHZck5NC9ezmo48D8WmwhKYWjyxuwQVA3otsBZ8NFqfKvSGfLdY1qvTC75ZYUeYhJQdgdCgWJ"
   }],
   "seedList": [
-    "storj://localhost:4000/337472da3068fa05d415262baf4df5bada8aefdc",
-    "storj://localhost:4001/b2e1173bf733aeaacf79bf73a5a65bc5a912d923",
-    "storj://localhost:4002/b78c3ad6007e316e38a2bab0d567a617f6b98fe6",
-    "storj://localhost:4003/17fd5bf43cc8959b771ca5a83b38e9ed4bcdf0b7",
-    "storj://localhost:4004/933da501e4e18ee0881ad46bc8040d1a4863e3fa",
-    "storj://localhost:4005/495d86ed0f833a591a5f936d85d23defe776abff"
   ],
-  // Interface to bind RPC server, use 0.0.0.0 for all interfaces or if you
-  // have a public address, use that, else leave 127.0.0.1 and X Core
-  // will try to determine your address
   "rpcAddress": "127.0.0.1",
-  // Port to bind for RPC server, make sure this is forwarded if behind a
-  // NAT or firewall - otherwise X Core will try to punch out
   "rpcPort": 4000,
-  // Enables NAT traversal strategies, first UPnP, then reverse HTTP tunnel
-  // if that fails. Disable if you are public or using dynamic DNS
   "doNotTraverseNat": false,
-  // Maximum number of tunnels to provide to the network
-  // Tunnels help nodes with restrictive network configurations participate
-  "maxTunnels": 3,
-  // Maximum number of concurrent connections to allow
+  "maxTunnels": 0,
   "maxConnections": 150,
-  // If providing tunnels, the starting and ending port range to open for
-  // them
   "tunnelGatewayRange": {
     "min": 4001,
     "max": 4003
   },
-  // Number of times to retry joining the network and the wait time between
   "joinRetry": {
     "times": 3,
     "interval": 5000
   },
-  // Temporarily stop sending OFFER messages if more than this number of shard
-  // transfers are active
   "offerBackoffLimit": 4,
-  // ECDSA private key for your network identity, your Node ID is derived from
-  // this and it is used to sign and verify messages
   "networkPrivateKey": "",
-  // Determines how much detail is shown in the log:
-  // 4 - DEBUG | 3 - INFO | 2 - WARN | 1 - ERROR | 0 - SILENT
   "loggerVerbosity": 3,
-  // Path to write the log file to disk
-  // $HOME/.config/xcore/logs/[nodeid].log
   "loggerOutputFile": "$HOME/.xcore/logs/[nodeid].log",
-  // Directory path to store contracts and shards
   "storagePath": "$HOME/.xcore",
-  // Amount of space to lease to the network, as human readable string
-  // Valid units are B, KB, MB, GB, TB
-  "storageAllocation": ""
+  "storageAllocation": "1GB"
 }

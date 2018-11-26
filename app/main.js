@@ -84,7 +84,7 @@ function maybeStartDaemon(callback) {
 
 function initRPCServer(callback) {
   let RPCServer = fork(`${__dirname}/lib/rpc-server.js`, {
-    env: { STORJ_NETWORK: protocol }
+    env: { STORJ_NETWORK: 'INXT' }
   });
   process.on("exit", () => {
     RPCServer.kill();
