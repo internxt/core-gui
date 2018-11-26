@@ -4,7 +4,7 @@ const { homedir } = require('os');
 const mkdirpsync = require('./mkdirpsync');
 const path = require('path');
 const { writeFileSync, readFileSync } = require('fs');
-const logdir = path.join(homedir(), '.config/xcore/logs');
+const logdir = path.join(homedir(), '.xcore/logs');
 const storj = require('storj-lib');
 
 
