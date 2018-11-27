@@ -41,6 +41,11 @@
             <div class="db-widget-container">
                 <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
             </div>
+            <div class="db-widget-container" v-if="errors.length">
+                <p class="error-message" v-for="error in errors" :key="error">
+                    {{error}}
+                </p>
+            </div>
             <!-- <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png"> -->
         </section>
     </div>
@@ -54,6 +59,7 @@ module.exports = {
     name: 'welcome',
     data: function () {
         return {
+            errors: [],
             displaySlider: false,
             newShare: window.Store.newShare,
             shareList: window.Store.shareList,
@@ -194,14 +200,36 @@ module.exports = {
             return this.newShare.config.rpcAddress && this.newShare.config.rpcAddress.length !== 0;
         },
         saveToDisk: function() {
-            let configPath = this.newShare.actions.createShareConfig();
-            if(configPath) {
-              this.shareList.actions.import(configPath, (err) => {
-                if(!err) {
-                  return this.$router.push({ path: '/settings' });
-                }
-              });
+
+            this.errors = [];
+            /**
+             * Check if storage allocation is only written in numbers
+             */
+            if (!this.newShare.config.storageAllocation || isNaN(this.newShare.config.storageAllocation)) {
+                this.errors.push('Storage allocation can be only numeric');
             }
+
+            /**
+             * Includes localhost, and all valid IP adresses 
+             */
+            const regex = new RegExp(/^localhost$|^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)
+            if(!regex.test(this.newShare.config.rpcAddress)) {
+                this.errors.push('Invalid host name');
+            }
+
+            console.log(...this.errors)
+
+            if (!this.errors.length) {
+                let configPath = this.newShare.actions.createShareConfig();
+                if(configPath) {
+                  this.shareList.actions.import(configPath, (err) => {
+                    if(!err) {
+                      return this.$router.push({ path: '/settings' });
+                    }
+                  });
+                }
+            }
+
         },
         bindUploadIcon: function() {
             var self = this;
