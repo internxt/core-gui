@@ -7,7 +7,7 @@
                     <input  v-model="newShare.config.paymentAddress"
                             class="input-field" 
                             type="text" 
-                            placeholder="Enter a ERC20 wallet address">
+                            placeholder="Enter an ERC20 wallet address">
                 </div>
             </div>
             <div class="db-widget-container">
@@ -23,7 +23,7 @@
             <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Storage Allocated</h3> 
-                    <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in MB(megabytes)">
+                    <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in megabytes">
                 </div>
             </div>
             <!-- <div class="db-widget-container">
@@ -35,7 +35,7 @@
             <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Hostname</h3>
-                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="127.0.0.1">
+                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="Enter your IP here">
                 </div>
             </div>
             <div class="db-widget-container">
