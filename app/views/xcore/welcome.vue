@@ -25,12 +25,11 @@
                     <h3>Storage Allocated</h3> 
                     <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in megabytes">
                 </div>
-            </div>
-            <div class="db-widget-container" v-if="errorsStorageAllocation.length">
-                <p class="error-message" v-for="error in errorsStorageAllocation" :key="error">
+                                <p v-if="errorsStorageAllocation.length" class="error-message" v-for="error in errorsStorageAllocation" :key="error">
                     {{error}}
                 </p>
             </div>
+
             <!-- <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/info-icon.png">
@@ -39,15 +38,14 @@
             </div> -->
             <div class="db-widget-container">
                 <div class="db-widget-long">
-                    <h3>Hostname</h3>
+                    <h3>IP address</h3>
                     <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="Enter your IP here">
                 </div>
-            </div>
-            <div class="db-widget-container" v-if="errorsHostname.length">
-                <p class="error-message" v-for="error in errorsHostname" :key="error">
+                           <p v-if="errorsHostname.length" class="error-message" v-for="error in errorsHostname" :key="error">
                     {{error}}
                 </p>
             </div>
+   
             <div class="db-widget-container">
                 <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
             </div>
@@ -213,7 +211,7 @@ module.exports = {
              * Check if storage allocation is only written in numbers
              */
             if (!this.newShare.config.storageAllocation || isNaN(this.newShare.config.storageAllocation)) {
-                this.errorsStorageAllocation.push('Storage allocation can be only numeric');
+                this.errorsStorageAllocation.push('Storage allocation can only be numeric');
             }
 
             /**
@@ -221,7 +219,7 @@ module.exports = {
              */
             const regex = new RegExp(/^localhost$|^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)
             if(!regex.test(this.newShare.config.rpcAddress)) {
-                this.errorsHostname.push('Invalid host name');
+                this.errorsHostname.push('Please enter a valid IP address');
             }
 
             if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
