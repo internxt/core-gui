@@ -100,13 +100,6 @@
 <script>
 const ConfirmationModal = require('../components/confirmationModal/ConfirmationModal');
 
-const elasticsearch = require('elasticsearch');
-const client = new elasticsearch.Client({
-    host: 'https://elastic:mGEx8XI8zIU33qUV6hGUugoq@06eedc5832474fe993b9219aac6496a3.us-west-1.aws.found.io:9243',
-    log: 'trace'
-    });
-let logInterval; 
-
 module.exports = {
     name: 'nodeSettings',
     components: {
@@ -123,13 +116,11 @@ module.exports = {
         this.shareList.actions.status(() => {
             this.shareList.actions.poll().start();
           });
-        logInterval = setInterval(this.logData, 30000);
     },
     beforeDestroy: function() {
         this.shareList.actions.status(() => {
             this.shareList.actions.poll().stop();
           });
-          clearInterval(logInterval);
     },
     methods: {
         changeView: function() {
