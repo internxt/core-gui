@@ -39,7 +39,7 @@
             <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>IP address</h3>
-                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="Enter your IP here">
+                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="Enter your IP address">
                 </div>
                            <p v-if="errorsHostname.length" class="error-message" v-for="error in errorsHostname" :key="error">
                     {{error}}
