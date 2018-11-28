@@ -26,6 +26,11 @@
                     <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in megabytes">
                 </div>
             </div>
+            <div class="db-widget-container" v-if="errorsStorageAllocation.length">
+                <p class="error-message" v-for="error in errorsStorageAllocation" :key="error">
+                    {{error}}
+                </p>
+            </div>
             <!-- <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Port Number</h3> <img id="portSetup" @click="openPortSetup" src="imgs/xcore/info-icon.png">
@@ -38,13 +43,13 @@
                     <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="Enter your IP here">
                 </div>
             </div>
-            <div class="db-widget-container">
-                <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
-            </div>
-            <div class="db-widget-container" v-if="errors.length">
-                <p class="error-message" v-for="error in errors" :key="error">
+            <div class="db-widget-container" v-if="errorsHostname.length">
+                <p class="error-message" v-for="error in errorsHostname" :key="error">
                     {{error}}
                 </p>
+            </div>
+            <div class="db-widget-container">
+                <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
             </div>
             <!-- <img id="connectionImg" @click="chooseRandomPort" src="imgs/xcore/connection.png"> -->
         </section>
@@ -59,7 +64,8 @@ module.exports = {
     name: 'welcome',
     data: function () {
         return {
-            errors: [],
+            errorsStorageAllocation: [],
+            errorsHostname: [],
             displaySlider: false,
             newShare: window.Store.newShare,
             shareList: window.Store.shareList,
@@ -201,12 +207,13 @@ module.exports = {
         },
         saveToDisk: function() {
 
-            this.errors = [];
+            this.errorsStorageAllocation = [];
+            this.errorsHostname = [];
             /**
              * Check if storage allocation is only written in numbers
              */
             if (!this.newShare.config.storageAllocation || isNaN(this.newShare.config.storageAllocation)) {
-                this.errors.push('Storage allocation can be only numeric');
+                this.errorsStorageAllocation.push('Storage allocation can be only numeric');
             }
 
             /**
@@ -214,12 +221,10 @@ module.exports = {
              */
             const regex = new RegExp(/^localhost$|^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/)
             if(!regex.test(this.newShare.config.rpcAddress)) {
-                this.errors.push('Invalid host name');
+                this.errorsHostname.push('Invalid host name');
             }
 
-            console.log(...this.errors)
-
-            if (!this.errors.length) {
+            if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
                 let configPath = this.newShare.actions.createShareConfig();
                 if(configPath) {
                   this.shareList.actions.import(configPath, (err) => {
