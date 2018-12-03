@@ -204,7 +204,7 @@ module.exports = {
             return this.newShare.config.rpcAddress && this.newShare.config.rpcAddress.length !== 0;
         },
         saveToDisk: function() {
-
+            const maxStorageAllocation = 8 * 1000 * 1000; // 8 Terabytes 
             this.errorsStorageAllocation = [];
             this.errorsHostname = [];
             /**
@@ -212,6 +212,10 @@ module.exports = {
              */
             if (!this.newShare.config.storageAllocation || isNaN(this.newShare.config.storageAllocation)) {
                 this.errorsStorageAllocation.push('Storage allocation can only be numeric');
+            }
+
+            if(this.newShare.config.storageAllocation > maxStorageAllocation) {
+                this.errorsStorageAllocation.push('Storage allocation can be 8Tb maximum');
             }
 
             /**
