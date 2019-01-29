@@ -70,19 +70,21 @@
     </div>
 
     <div class="db-widget-container">
-        <div class="db-widget__triple">
+        <div class="db-widget__double">
             <div class="db-widget">
                 <div class="db-title">Port</div>
                 <div class="db-data">{{shareList.shares[0].config.rpcPort}}</div>
             </div>
+            <!--
             <div class="db-widget">
                 <div class="db-title">Peer</div>
                 <div class="db-data">{{shareList.shares[0].meta.farmerState.totalPeers}}</div>
             </div>
+            -->
             <div class="db-widget">
                 <div class="db-title">Disk Space</div>
             <!-- {{share.meta.farmerState.spaceUsed}} ({{share.meta.farmerState.percentUsed}}%) -->
-                <div class="db-data">{{(shareList.shares[0].meta.farmerState.spaceUsed) ? shareList.shares[0].meta.farmerState.spaceUsed : '0'}} of {{shareList.shares[0].config.storageAllocation}}</div>
+                <div class="db-data">{{(shareList.shares[0].meta.farmerState.spaceUsed && shareList.shares[0].meta.farmerState.spaceUsed != '...') ? shareList.shares[0].meta.farmerState.spaceUsed : '0'}} of {{shareList.shares[0].config.storageAllocation}}</div>
                 <!-- <div class="db-data-small"> to be implemented INXT per month</div> -->
             </div>
         </div>
