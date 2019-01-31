@@ -9,23 +9,46 @@
                             type="text" 
                             placeholder="Enter an ERC20 wallet address">
                 </div>
+                <p v-if="errorsWalletAddress.length"
+                class="error-message"
+                v-for="error in errorsWalletAddress" :key="error">
+                    {{error}}
+                </p>
             </div>
             <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>File Storage Location</h3>
-                    <input style="display:none" id="fileStorage" v-on:change="handleFileInput" class="input-field" type="file" placeholder="Select a location to store user files" webkitdirectory directory multiple/>
+                    <input style="display:none"
+                        id="fileStorage"
+                        v-on:change="handleFileInput"
+                        class="input-field" type="file"
+                        placeholder="Select a location to store user files"
+                        webkitdirectory directory multiple/>
                     <div class="db-widget-long__upload">
                         <label id="storagePath">Select a location to store user files</label>
                         <img id="uploadImg" src="imgs/xcore/upload.png">
                     </div>
                 </div>
+                <p v-if="errorsPath.length"
+                class="error-message"
+                v-for="error in errorsPath" :key="error">
+                    {{error}}
+                </p>
             </div>
             <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>Storage Allocated</h3> 
-                    <input v-model="newShare.config.storageAllocation" v-bind:available="newShare.storageAvailable" class="input-field" type="text" placeholder="Enter amount of storage in megabytes">
+                    <input
+                        v-model="newShare.config.storageAllocation"
+                        v-bind:available="newShare.storageAvailable"
+                        class="input-field"
+                        type="text"
+                        placeholder="Enter amount of storage in megabytes">
                 </div>
-                                <p v-if="errorsStorageAllocation.length" class="error-message" v-for="error in errorsStorageAllocation" :key="error">
+                <p
+                    v-if="errorsStorageAllocation.length"
+                    class="error-message"
+                    v-for="error in errorsStorageAllocation" :key="error">
                     {{error}}
                 </p>
             </div>
@@ -39,9 +62,13 @@
             <div class="db-widget-container">
                 <div class="db-widget-long">
                     <h3>IP address</h3>
-                    <input v-model="newShare.config.rpcAddress" class="input-field" type="text" placeholder="Enter your IP address">
+                    <input
+                        v-model="newShare.config.rpcAddress"
+                        class="input-field" type="text"
+                        placeholder="Enter your IP address">
                 </div>
-                           <p v-if="errorsHostname.length" class="error-message" v-for="error in errorsHostname" :key="error">
+                <p v-if="errorsHostname.length"
+                    class="error-message" v-for="error in errorsHostname" :key="error">
                     {{error}}
                 </p>
             </div>
@@ -62,6 +89,8 @@ module.exports = {
     name: 'welcome',
     data: function () {
         return {
+            errorsWalletAddress: [],
+            errorsPath: [],
             errorsStorageAllocation: [],
             errorsHostname: [],
             displaySlider: false,
@@ -204,17 +233,47 @@ module.exports = {
             return this.newShare.config.rpcAddress && this.newShare.config.rpcAddress.length !== 0;
         },
         saveToDisk: function() {
-            const maxStorageAllocation = 8 * 1000 * 1000; // 8 Terabytes 
+            const maxStorageAllocation = 8 * 1024 * 1024; // 8 Terabytes 
             this.errorsStorageAllocation = [];
             this.errorsHostname = [];
+            this.errorsWalletAddress = [];
+            this.errorsPath = [];
+
+            /**
+             * Check if ERP20 Wallet Address is valid.
+             */
+
+            const regex_ERP20 = new RegExp(/^0x[0-9A-Za-z]{40}$/g);
+
+            if (!regex_ERP20.test(this.newShare.config.paymentAddress)) {
+                this.errorsWalletAddress.push('Invalid wallet address format');
+            } else if (!this.checkEthereumAddress(this.newShare.config.paymentAddress)) {
+                this.errorsWalletAddress.push('Invalid wallet address (storj check)');
+            }
+
+            /**
+             * Check path is not null
+             * 
+             */
+
+            let storagePath = document.getElementById('fileStorage');
+
+            if (!storagePath.value) {
+                this.errorsPath.push('Choose a directory');
+            }
+
+
             /**
              * Check if storage allocation is only written in numbers
              */
-            if (!this.newShare.config.storageAllocation || isNaN(this.newShare.config.storageAllocation)) {
+
+            let allocationMatch = /^([0-9]+)([Tt]|[Mm]|[Gg]|[Kk])?([Bb])?$/g.exec(this.newShare.config.storageAllocation.toString());
+
+            if (!allocationMatch) {
                 this.errorsStorageAllocation.push('Storage allocation can only be numeric');
             }
 
-            if(this.newShare.config.storageAllocation > maxStorageAllocation) {
+            if(allocationMatch != null && allocationMatch[1] > maxStorageAllocation) {
                 this.errorsStorageAllocation.push('Storage allocation can be 8Tb maximum');
             }
 
@@ -243,6 +302,11 @@ module.exports = {
             var imgBtn = document.getElementById('uploadImg');
             var fileBtn = document.getElementById('fileStorage');
             var storagePath = document.getElementById('storagePath');
+
+            storagePath.addEventListener('click', function(e) {
+                document.getElementById('fileStorage').click();
+            });
+
             imgBtn.addEventListener('click', function(e) {
                 document.getElementById('fileStorage').click();
             });

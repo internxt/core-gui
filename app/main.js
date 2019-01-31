@@ -113,10 +113,11 @@ function getWindowPosition() {
   let x = Math.round(
     trayBounds.x + trayBounds.width / 2.7 - windowBounds.width / 2
   );
+
   // Position window 4 pixels vertically below the tray icon
   let y;
   if (process.platform === "win32") {
-    y = Math.round(trayBounds.y / 2.63 + trayBounds.height);
+    y = trayBounds.y - windowBounds.height;
   } else if (process.platform === "darwin") {
     y = Math.round(trayBounds.y + trayBounds.height + 4);
   } else {
