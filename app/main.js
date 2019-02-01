@@ -140,7 +140,7 @@ function initRenderer() {
 
   xCoreUI = new BrowserWindow({
     width: 389,
-    height: 605,
+    height: 630,
     show: true,
     frame: false,
     skipTaskbar: true,
