@@ -19,13 +19,14 @@ UserData.on('settingsUpdated', (updatedSettings) => {
 });
 
 window.daemonSocket = dnode.connect(45015, (rpc) => {
+  
   // NB: Add global reference to the daemon RPC
   window.daemonRpc = rpc;
+
   // Set up any required view-model store instances
   window.Store = {
     shareList: new (require('./stores/share_list'))(rpc),
     newShare: new (require('./stores/share'))()
-    //editShare: new (require('./stores/share'))()
   }
   window.app = new window.Vue(require('./xApp'));
 

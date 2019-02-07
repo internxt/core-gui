@@ -21,6 +21,7 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
 </style>
 
 <template>
@@ -75,24 +76,13 @@
                 <div class="db-title">Port</div>
                 <div class="db-data">{{shareList.shares[0].config.rpcPort}}</div>
             </div>
-            <!--
-            <div class="db-widget">
-                <div class="db-title">Peer</div>
-                <div class="db-data">{{shareList.shares[0].meta.farmerState.totalPeers}}</div>
-            </div>
-            -->
+
             <div class="db-widget">
                 <div class="db-title">Disk Space</div>
-            <!-- {{share.meta.farmerState.spaceUsed}} ({{share.meta.farmerState.percentUsed}}%) -->
                 <div class="db-data">{{(shareList.shares[0].meta.farmerState.spaceUsed && shareList.shares[0].meta.farmerState.spaceUsed != '...') ? shareList.shares[0].meta.farmerState.spaceUsed : '0'}} of {{shareList.shares[0].config.storageAllocation}}</div>
-                <!-- <div class="db-data-small"> to be implemented INXT per month</div> -->
             </div>
         </div>
     </div>
-    <!--<disk-allocator
-        v-model="shareList.shares[0].config.storageAllocation"
-        v-bind:available="shareList.shares[0].storageAvailable">
-    </disk-allocator> -->
     <div class="db-widget-container">
         <button id="createNode" @click="confirmDelete()">Delete node</button>
     </div>

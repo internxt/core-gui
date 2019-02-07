@@ -9,14 +9,7 @@ const TrayIcon = require("./lib/trayicon");
 //const AutoLauncher = require('./lib/autolaunch');
 const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
 const protocol = process.env.isTestNet === "true" ? "testnet" : "";
-    
-/*
-const autoLauncher = new AutoLauncher({
-  name: app.getName(),
-  path: app.getPath('exe'),
-  isHidden: false
-});
-*/
+
 let main;
 let xCoreUI;
 let tray;
@@ -24,7 +17,7 @@ let xTray;
 let menu;
 let userData;
 
-const isSecondAppInstance = app.makeSingleInstance(function() {
+const isSecondAppInstance = app.makeSingleInstance(function () {
   if (main) {
     if (main.isMinimized()) {
       main.restore();
@@ -153,8 +146,11 @@ function initRenderer() {
     { label: "Show X Core", click: showXCore },
     { role: "quit" }
   ]);
+
   xTray.setToolTip("XCore");
+
   xTray.setContextMenu(contextMenu);
+
   function showXCore(item, window, event) {
     if (xCoreUI.isVisible()) {
       xCoreUI.hide();
@@ -178,11 +174,11 @@ function initRenderer() {
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
     // xCoreUI.webContents.openDevTools();
     // tray.render();
-  }); 
+  });
 }
 
 app.on("ready", () => {
   initRenderer()
-  let {x, y} = getWindowPosition();
+  let { x, y } = getWindowPosition();
   xCoreUI.setPosition(x, y);
 });

@@ -48,23 +48,3 @@ module.exports = {
     }
   ]
 };
-/*
-{
-  path: '/about',
-  component: require('./views/about'),
-  name: 'about'
-},
-{
-  path: '/updater',
-  component: require('./views/updater'),
-  name: 'updater'
-},
-*/
-
-/*,
-{
-  path: '/terms',
-  component: require('./views/terms'),
-  name: 'terms'
-}
-*/

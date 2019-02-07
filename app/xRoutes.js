@@ -11,10 +11,6 @@ module.exports = {
     {
       path: '/settings',
       component: require('./views/xcore/settings')
-    },
-    {
-      path: '/login',
-      component: require('./views/xcore/login')
     }
   ]
 };
