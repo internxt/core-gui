@@ -13,7 +13,7 @@ var vm = new Vue({
     'welcome': require('./views/xcore/welcome'),
     'settings': require('./views/xcore/settings'),
     'dashboard': require('./views/xcore/dashboard'),
-    'civic': require('./views/xcore/civic')
+    'login': require('./views/xcore/login')
   },
   methods: {
     changeView: function() {
@@ -25,8 +25,8 @@ var vm = new Vue({
       this.shareList.actions.status(() => {
         //Check to see if any of the shares aren't using Ethereum addresses
         if(this.shareList.shares.length === 0) {
-          // civic
-          router.replace('civic');
+          // Login (former Civic)
+          router.replace('login');
         } else {
           router.replace('settings');
         }

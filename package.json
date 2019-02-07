@@ -7,6 +7,7 @@
     "chai": "^3.4.1",
     "coveralls": "^2.11.4",
     "electron": "^1.7.9",
+    "electron-builder": "^20.38.5",
     "electron-mocha": "^3.1.1",
     "elemon": "^5.0.3",
     "fs-jetpack": "^1.2.0",

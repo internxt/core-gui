@@ -4,8 +4,8 @@
   "publisher": "Internxt Universal Technologies SLU",
   "identifier": "com.xcore.farmer",
   "description": "X Core",
-  "version": "0.0.1",
-  "author": "Storj <alex@storj.io> <rforan@storj.io>",
+  "version": "1.0.0",
+  "author": "Internxt <hello@internxt.com>",
   "main": "main.js",
   "dependencies": {
     "applescript": "^1.0.0",

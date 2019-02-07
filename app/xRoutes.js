@@ -13,8 +13,8 @@ module.exports = {
       component: require('./views/xcore/settings')
     },
     {
-      path: '/civic',
-      component: require('./views/xcore/civic')
+      path: '/login',
+      component: require('./views/xcore/login')
     }
   ]
 };
