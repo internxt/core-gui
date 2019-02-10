@@ -50,12 +50,12 @@
 
       <div class="db-widget-container">
         <div class="db-widget-long">
-          <h3>IP address</h3>
+          <h3>IP Address</h3>
           <input
             v-model="newShare.config.rpcAddress"
             class="input-field"
             type="text"
-            placeholder="Enter your IP address"
+            placeholder="Enter your IP Address"
           >
         </div>
         <p class="error-message" v-for="error in errorsHostname" :key="error">{{error}}</p>
