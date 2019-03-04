@@ -279,16 +279,6 @@ module.exports = {
         );
       }
 
-      /**
-       * Includes localhost, and all valid IP adresses
-       */
-      const regex = new RegExp(
-        /^localhost$|^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/
-      );
-      if (!regex.test(this.newShare.config.rpcAddress)) {
-        this.errorsHostname.push("Please enter a valid IP address");
-      }
-
       if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
         let configPath = this.newShare.actions.createShareConfig();
         if (configPath) {
