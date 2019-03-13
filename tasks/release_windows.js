@@ -161,5 +161,5 @@ module.exports = function () {
     .then(renameApp)
     .then(createInstaller)
     .then(signInstaller)
-    .then(cleanClutter);
+    .then(cleanClutter).catch(err => { console.log(err); });
 };

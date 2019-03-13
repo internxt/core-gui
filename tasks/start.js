@@ -8,6 +8,12 @@ var childProcess = require('child_process');
 var utils = require('./utils');
 var gulpPath = pathUtil.resolve('./node_modules/.bin/gulp');
 
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+  // application specific logging, throwing an error, or other logic here
+});
+
+
 if (process.platform === 'win32') {
   gulpPath += '.cmd';
 }
@@ -52,4 +58,4 @@ var runApp = function () {
 
 runBuild().then(function () {
   runApp();
-});
+}).catch(err => { console.log(err); });

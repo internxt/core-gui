@@ -145,5 +145,5 @@ module.exports = function () {
     .then(finalize)
     .then(renameApp)
     .then(packToDmgFile)
-    .then(cleanClutter);
+    .then(cleanClutter).catch(err => { console.log(err); });
 };

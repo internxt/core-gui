@@ -26,6 +26,8 @@
 !define regkey "Software\${productName}"
 !define uninstkey "Software\Microsoft\Windows\CurrentVersion\Uninstall\${productName}"
 
+!define envvars "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+
 !define uninstaller "uninstall.exe"
 
 SetCompressor /SOLID lzma
@@ -171,6 +173,9 @@ Section "Install"
     WriteRegStr HKLM "${uninstkey}" "DisplayIcon" '"$INSTDIR\icon.ico"'
     WriteRegStr HKLM "${uninstkey}" "DisplayVersion" "${version}"
     WriteRegStr HKLM "${uninstkey}" "UninstallString" '"$INSTDIR\${uninstaller}"'
+
+    WriteRegStr HKLM "${envvars}" "STORJ_NETWORK" "INXT"
+    WriteRegStr HKLM "${envvars}" "STORJ_BRIDGE" "https://api.internxt.com"
 
     ; Remove all application files copied by previous installation
     RMDir /r "$INSTDIR"
