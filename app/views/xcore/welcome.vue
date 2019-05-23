@@ -215,9 +215,7 @@ module.exports = {
       electron.shell.openExternal("https://internxt.com/portsetup");
     },
     validAllocation: function() {
-      return (
-        this.newShare.config.storageAllocation <= this.newShare.storageAvailable
-      );
+      return (this.newShare.config.storageAllocation <= this.newShare.storageAvailable);
     },
     validAddress: function() {
       return (
@@ -240,9 +238,7 @@ module.exports = {
 
       if (!regex_ERP20.test(this.newShare.config.paymentAddress)) {
         this.errorsWalletAddress.push("Invalid wallet address format");
-      } else if (
-        !this.checkEthereumAddress(this.newShare.config.paymentAddress)
-      ) {
+      } else if (!this.checkEthereumAddress(this.newShare.config.paymentAddress)) {
         this.errorsWalletAddress.push("Invalid wallet address (storj check)");
       }
 
@@ -265,18 +261,11 @@ module.exports = {
       );
 
       if (!allocationMatch) {
-        this.errorsStorageAllocation.push(
-          "Storage allocation can only be numeric"
-        );
+        this.errorsStorageAllocation.push("Storage allocation can only be numeric");
       }
 
-      if (
-        allocationMatch != null &&
-        allocationMatch[1] > maxStorageAllocation
-      ) {
-        this.errorsStorageAllocation.push(
-          "Storage allocation can be 8Tb maximum"
-        );
+      if (allocationMatch != null && false /* && allocationMatch[1] > maxStorageAllocation */) {
+        this.errorsStorageAllocation.push("Storage allocation can be 8Tb maximum");
       }
 
       if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
