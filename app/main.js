@@ -143,7 +143,7 @@ function initRenderer() {
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
   xTray = new Tray(path.join(__dirname, "imgs/osx/trayHighlight@2x.png"));
   const contextMenu = Menu.buildFromTemplate([
-    { label: "Show X Core", click: showXCore },
+    { label: "Show/Hide X Core", click: showXCore },
     { role: "quit" }
   ]);
 
