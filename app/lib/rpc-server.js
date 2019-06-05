@@ -2,7 +2,7 @@
 
 'use strict';
 
-const storjshare = require('storjshare-daemon');
+const storjshare = require('xcore-daemon');
 const dnode = require('dnode');
 let api = new storjshare.RPC();
 
@@ -12,5 +12,5 @@ dnode(api.methods).listen(45015, () => {
 
 process.on('uncaughtException', (err) => {
   let error = Object.assign({}, err)
-  process.send({error: err.stack}); //'A Fatal Exception has occured in the storjshare-daemon RPC server'
+  process.send({error: err.stack}); //'A Fatal Exception has occured in the xcore-daemon RPC server'
 });

@@ -36,7 +36,7 @@ module.exports = {
       return Math.floor(Math.random() * (this.MAXPORTNUM - this.MINPORTNUM)) + this.MINPORTNUM;
     },
     portIsAvailable: function(port, callback) {
-      const utils = require('storjshare-daemon').utils;
+      const utils = require('xcore-daemon').utils;
       return utils.portIsAvailable(port, callback);
     },
     checkPort: function() {

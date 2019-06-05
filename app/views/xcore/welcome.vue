@@ -126,7 +126,7 @@ module.exports = {
   },
   methods: {
     checkEthereumAddress: function(address) {
-      const utils = require("storjshare-daemon").utils;
+      const utils = require("xcore-daemon").utils;
       return utils.isValidEthereumAddress(address);
     },
     handleFileInput: function(event) {
@@ -192,7 +192,7 @@ module.exports = {
       );
     },
     portIsAvailable: function(port, callback) {
-      const utils = require("storjshare-daemon").utils;
+      const utils = require("xcore-daemon").utils;
       return utils.portIsAvailable(port, callback);
     },
     checkPort: function() {

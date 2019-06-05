@@ -2,7 +2,7 @@
 
 const about = require('../../package');
 const storj = require('storj-lib');
-const daemonPackage = require('storjshare-daemon/package');
+const daemonPackage = require('xcore-daemon/package');
 const {ipcRenderer: ipc} = require('electron');
 
 module.exports = {

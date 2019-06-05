@@ -2,7 +2,7 @@
 const { homedir } = require('os');
 const VueRouter = require('vue-router');
 const router = new VueRouter(require('./xRoutes'));
-const utils = require('storjshare-daemon').utils;
+const utils = require('xcore-daemon').utils;
 
 var vm = new Vue({
 	router,

@@ -12,7 +12,7 @@ module.exports = {
   },
   methods: {
     checkEthereumAddress: function(address) {
-      const utils = require('storjshare-daemon').utils;
+      const utils = require('xcore-daemon').utils;
       return utils.isValidEthereumAddress(address);
     },
     setEthAddressAndQuit: function() {
