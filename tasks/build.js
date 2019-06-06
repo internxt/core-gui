@@ -12,11 +12,11 @@ var paths = {
 };
 
 gulp.task("clean", function() {
-  return destDir.dirAsync(".", { empty: true });
+  return destDir.dir(".", { empty: true });
 });
 
 function copyTask() {
-  return projectDir.copyAsync("app", destDir.path(), {
+  return projectDir.copy("app", destDir.path(), {
     overwrite: true,
     matching: paths.copyFromAppDir
   });

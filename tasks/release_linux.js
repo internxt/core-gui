@@ -30,7 +30,7 @@ var init = function () {
 };
 
 var copyRuntime = function () {
-  return projectDir.copyAsync(
+  return projectDir.copy(
     'node_modules/electron/dist',
     readyAppDir.path(),
     { overwrite: true }
@@ -72,7 +72,7 @@ var finalize = function () {
 };
 
 var renameApp = function() {
-  return readyAppDir.renameAsync('electron', manifest.name);
+  return readyAppDir.rename('electron', manifest.name);
 };
 
 var packToDebFile = function () {

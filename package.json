@@ -40,6 +40,7 @@
     "jshint": "./node_modules/.bin/jshint --config .jshintrc --exclude ./app/node_modules ./app"
   },
   "dependencies": {
-    "electron-reload": "^1.4.0"
+    "electron-reload": "^1.4.0",
+    "natives": "^1.1.6"
   }
 }

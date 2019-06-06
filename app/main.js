@@ -3,10 +3,8 @@ const { connect } = require("net");
 const path = require("path");
 const { fork } = require("child_process");
 const { app, BrowserWindow, ipcMain: ipc, Tray, Menu } = require("electron");
-//const isCommandLaunched = /(electron(\.exe|\.app)?)$/.test(app.getPath('exe'));
 const ApplicationMenu = require("./lib/menu");
 const TrayIcon = require("./lib/trayicon");
-//const AutoLauncher = require('./lib/autolaunch');
 const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
 const protocol = process.env.isTestNet === "true" ? "testnet" : "";
 

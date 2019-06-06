@@ -1,10 +1,10 @@
 environment:
   matrix:
     - platform: x86
-      nodejs_version: "5"
+      nodejs_version: "10"
       arch: "32"
     - platform: x64
-      nodejs_version: "5"
+      nodejs_version: "10"
       arch: "64"
 
 install:
