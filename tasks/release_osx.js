@@ -22,7 +22,7 @@ var init = function () {
 };
 
 var copyRuntime = function () {
-  return projectDir.copyAsync('node_modules/electron/dist/Electron.app',
+  return projectDir.copy('node_modules/electron/dist/Electron.app',
                               finalAppDir.path());
 };
 
@@ -134,7 +134,7 @@ var packToDmgFile = function () {
 };
 
 var cleanClutter = function () {
-  return tmpDir.removeAsync('.');
+  return tmpDir.remove('.');
 };
 
 module.exports = function () {
