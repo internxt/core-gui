@@ -15,6 +15,21 @@ let xTray;
 let menu;
 let userData;
 
+if (app.requestSingleInstanceLock()) {
+  if (main) {
+    if (main.isMinimized()) {
+      main.restore();
+    }
+    main.show();
+  }
+}
+
+app.on('second-instance', (event, argv, cwd) => {
+  console.log("Second instance")
+  app.quit();
+})
+
+/*
 const isSecondAppInstance = app.makeSingleInstance(function () {
   if (main) {
     if (main.isMinimized()) {
@@ -28,6 +43,7 @@ const isSecondAppInstance = app.makeSingleInstance(function () {
 if (isSecondAppInstance) {
   app.quit();
 }
+*/
 
 if (process.platform === "darwin") {
   app.dock.hide();
@@ -135,7 +151,7 @@ function initRenderer() {
     show: true,
     frame: false,
     skipTaskbar: true,
-    alwaysOnTop: true
+    alwaysOnTop: false
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
@@ -168,9 +184,10 @@ function initRenderer() {
   // NB: Start the daemon if not running, then render the application
   maybeStartDaemon((/* err */) => {
     menu.render();
-    // main.loadURL('file://' + __dirname + '/index.html');
+     //main.loadURL('file://' + __dirname + '/index.html');
+     console.log(xCoreUI)
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
-    // xCoreUI.webContents.openDevTools();
+    //xCoreUI.webContents.openDevTools();
     // tray.render();
   });
 }

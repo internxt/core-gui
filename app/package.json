@@ -9,7 +9,7 @@
   "main": "main.js",
   "dependencies": {
     "applescript": "^1.0.0",
-    "async": "^3.0.1",
+    "async": "^2.6.3",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.21",
     "bytes": "^3.1.0",
@@ -21,7 +21,6 @@
     "request": "^2.83.0",
     "semver": "^6.1.1",
     "storj-lib": "github:internxt/core",
-    "xcore-daemon": "github:internxt/xcore-daemon",
     "strip-json-comments": "^3.0.1",
     "untildify": "^4.0.0",
     "vue": "^2.6.10",
@@ -29,7 +28,8 @@
     "vueify": "^9.4.1",
     "winreg": "^1.2.4",
     "winston": "^3.2.1",
-    "winston-logstash": "^0.4.0"
+    "winston-logstash": "^0.4.0",
+    "xcore-daemon": "github:internxt/xcore-daemon"
   },
   "license": "AGPL-3.0",
   "repository": "https://github.com/internxt/X-Core"
