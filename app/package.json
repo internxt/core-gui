@@ -19,6 +19,7 @@
     "merge": "^1.2.0",
     "pretty-ms": "^5.0.0",
     "request": "^2.83.0",
+    "restify-clients": "^2.6.6",
     "semver": "^6.1.1",
     "storj-lib": "github:internxt/core",
     "strip-json-comments": "^3.0.1",

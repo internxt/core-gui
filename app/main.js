@@ -146,6 +146,9 @@ function initRenderer() {
   // });
 
   xCoreUI = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
     width: 389,
     height: 630,
     show: true,
@@ -185,7 +188,6 @@ function initRenderer() {
   maybeStartDaemon((/* err */) => {
     menu.render();
      //main.loadURL('file://' + __dirname + '/index.html');
-     console.log(xCoreUI)
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
     //xCoreUI.webContents.openDevTools();
     // tray.render();
