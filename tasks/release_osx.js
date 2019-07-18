@@ -80,18 +80,7 @@ var finalize = function () {
 };
 
 var renameApp = function() {
-  // Rename helpers
-  [' Helper EH', ' Helper NP', ' Helper'].forEach(function (helper_suffix) {
-      finalAppDir.rename(
-        'Contents/Frameworks/Electron' + helper_suffix +
-          '.app/Contents/MacOS/Electron' + helper_suffix,
-        manifest.productName + helper_suffix
-      );
-      finalAppDir.rename(
-        'Contents/Frameworks/Electron' + helper_suffix + '.app',
-        manifest.productName + helper_suffix + '.app'
-      );
-  });
+
   // Rename application
   finalAppDir.rename('Contents/MacOS/Electron', manifest.productName);
   return Q();
