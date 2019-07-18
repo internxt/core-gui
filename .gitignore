@@ -11,3 +11,4 @@ typings/
 coverage
 *.swp
 dist/
+release-builds/

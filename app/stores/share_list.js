@@ -6,7 +6,6 @@ const {homedir} = require('os');
 const prettyms = require('pretty-ms');
 const shell = require('electron').shell;
 const storjshare = require('xcore-daemon');
-const storj = require('storj-lib');
 const configMigrate = require('../lib/config-migrate');
 const async = require('async');
 
