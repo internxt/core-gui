@@ -10,6 +10,14 @@ body {
   margin: 18px 26px;
 }
 
+#xVersion {
+  position: absolute;
+  font-size: 12px;
+  color: #403f4e;
+  top: 10px;
+  right: 20px;
+}
+
 header {
   display: flex;
   justify-content: space-between;
