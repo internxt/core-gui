@@ -91,6 +91,7 @@
 </template>
 <script>
 const ConfirmationModal = require('../components/confirmationModal/ConfirmationModal');
+const rimraf = require('rimraf')
 
 module.exports = {
     name: 'nodeSettings',
@@ -130,8 +131,13 @@ module.exports = {
             return this.modalShow;
         },
         deleteNode: function() {
-            this.shareList.actions.destroy(this.shareList.shares[0].id);
-            this.$router.replace({ path: 'welcome' });  
+            var storagePath = this.shareList.shares[0].config.storagePath;
+
+            rimraf(storagePath, () => {
+                this.shareList.actions.destroy(this.shareList.shares[0].id);
+                this.$router.replace({ path: 'welcome' });  
+                this.closeModal();
+            });
         },
         logData: async function() {
             let response;

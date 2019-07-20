@@ -20,6 +20,7 @@
     "pretty-ms": "^5.0.0",
     "request": "^2.83.0",
     "restify-clients": "^2.6.6",
+    "rimraf": "^2.6.3",
     "semver": "^6.1.1",
     "storj-lib": "github:internxt/core",
     "strip-json-comments": "^3.0.1",
