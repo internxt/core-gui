@@ -66,6 +66,12 @@
     "nsis": {
       "oneClick": false,
       "perMachine": false
+    },
+    "mac": {
+      "icon": "resources/osx/icon.icns",
+      "target": ["dmg"]
+    },
+    "dmg": {
     }
   }
 }
