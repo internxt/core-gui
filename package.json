@@ -15,6 +15,7 @@
     "fs-jetpack": "^2.2.2",
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
+    "gulp-sass-variables": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-vueify": "0.0.3",
     "istanbul": "^0.4.5",
@@ -33,7 +34,8 @@
     "postinstall": "node ./tasks/app_npm_install && electron-builder install-app-deps",
     "app-install": "node ./tasks/app_npm_install",
     "build": "./node_modules/.bin/gulp build",
-    "release": "./node_modules/.bin/gulp release",
+    "release": "./node_modules/.bin/gulp build && electron-builder",
+    "formerRelease": "./node_modules/.bin/gulp release",
     "start": "node ./tasks/start",
     "test": "npm run test-unit && npm run test-integration",
     "test-unit": "ELECTRON_PATH=./node_modules/.bin/electron ./node_modules/.bin/electron-mocha ./app/test/unit/**",
@@ -46,10 +48,24 @@
     "natives": "^1.1.6"
   },
   "build": {
+    "appId": "com.farmer.xcore",
+    "productName": "X Core",
+    "directories": {
+      "app": "build",
+      "output": "dist"
+    },
     "linux": {
       "category": "Network",
       "icon": "resources/launch.png",
       "target": "deb"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "resources/windows/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false
     }
   }
 }
