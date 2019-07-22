@@ -139,18 +139,13 @@ function getWindowPosition() {
  */
 function initRenderer() {
   menu = new ApplicationMenu();
-  // main = new BrowserWindow({
-  //   width: 1448,
-  //   height: 600,
-  //   show: false // NB: Always hidden, wait for renderer to signal show
-  // });
 
   xCoreUI = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true
     },
     width: 389,
-    height: 630,
+    height: 660,
     show: true,
     frame: false,
     skipTaskbar: true,
@@ -167,6 +162,14 @@ function initRenderer() {
   xTray.setToolTip("XCore");
 
   xTray.setContextMenu(contextMenu);
+
+  xTray.on('double-click', () => {
+    showXCore();
+  })
+
+  xTray.on('click', () => {
+    showXCore();
+  })
 
   function showXCore(item, window, event) {
     if (xCoreUI.isVisible()) {

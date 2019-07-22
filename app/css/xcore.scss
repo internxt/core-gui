@@ -1,9 +1,12 @@
 body {
   background: #18171f;
   color: #e4e4eb;
-  font-family: "Cerebri Sans", sans-serif;
   margin: 0;
   padding: 0;
+}
+
+body, input {
+  font-family: "Cerebri Sans", Arial, sans-serif;
 }
 
 #xApp {
@@ -15,7 +18,7 @@ body {
   font-size: 12px;
   color: #403f4e;
   top: 10px;
-  right: 20px;
+  right: 25px;
 }
 
 header {
@@ -33,10 +36,19 @@ h1 {
   margin-top: 20px;
   font-weight: 900;
   color: #e4e4eb;
+  margin-bottom: 0px;
 }
 
 h3 {
-  width: 337px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.subtitle {
+  color: #7f7f86;
+  margin: 0px;
+  font-size: 13px;
+  padding-bottom: 30px;
 }
 
 .db-widget-container {
@@ -44,19 +56,20 @@ h3 {
   flex-flow: row wrap;
   justify-content: space-between;
   margin-bottom: 16px;
+
   &:first-of-type {
     margin-top: 26px;
   }
+
   .error-message {
-      font-size: 13px;
-      margin: 5px 0;
-      color: red;
-      width: 100%;
+    font-size: 13px;
+    margin: 5px 0;
+    color: red;
+    width: 100%;
   }
 }
 
-.db-widget__double,
-.db-widget__triple {
+.db-widget__double, .db-widget__triple {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -75,7 +88,7 @@ h3 {
 }
 
 .db-widget {
-  width: 337px;
+  width: 100%;
   border-bottom: 1px solid #3e3d42;
 }
 
@@ -88,13 +101,14 @@ h3 {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #3e3d42;
+  border-bottom: 1px solid #5b4ade;
+  padding-bottom: 12px;
+  
   .db-widget-long__upload {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
   }
 }
 
@@ -124,18 +138,20 @@ h3 {
   outline: none;
 }
 
-#createNode, button {
+#createNode,
+button {
   text-align: center;
   justify-content: center;
   background-color: #5b4ade;
   border: none;
   border-radius: 3px;
-  width: 339px;
+  width: 100%;
   height: 38px;
   font-size: 13px;
   color: white;
   font-weight: 300;
   letter-spacing: 0;
+  margin-top: 25px;
 }
 
 #connectionImg {

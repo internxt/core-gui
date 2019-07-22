@@ -1,6 +1,10 @@
 <template>
   <div>
     <section>
+      <div>
+        <h1>Welcome to X Core</h1>
+        <p class="subtitle">Enter your data below to set-up your node</p>
+      </div>
       <div class="db-widget-container">
         <div class="db-widget-long">
           <h3>Wallet Address</h3>
@@ -9,7 +13,7 @@
             class="input-field"
             type="text"
             placeholder="Enter an ERC20 wallet address"
-          >
+          />
         </div>
         <p class="error-message" v-for="error in errorsWalletAddress" :key="error">{{error}}</p>
       </div>
@@ -26,10 +30,10 @@
             webkitdirectory
             directory
             multiple
-          >
+          />
           <div class="db-widget-long__upload">
             <label id="storagePath">Select a location to store user files</label>
-            <img id="uploadImg" src="imgs/xcore/upload.png">
+            <img id="uploadImg" src="imgs/xcore/upload.png" />
           </div>
         </div>
         <p class="error-message" v-for="error in errorsPath" :key="error">{{error}}</p>
@@ -43,7 +47,7 @@
             class="input-field"
             type="text"
             placeholder="Enter amount of storage in megabytes"
-          >
+          />
         </div>
         <p class="error-message" v-for="error in errorsStorageAllocation" :key="error">{{error}}</p>
       </div>
@@ -56,7 +60,7 @@
             class="input-field"
             type="text"
             placeholder="Enter your IP Address"
-          >
+          />
         </div>
         <p class="error-message" v-for="error in errorsHostname" :key="error">{{error}}</p>
       </div>
@@ -215,7 +219,9 @@ module.exports = {
       electron.shell.openExternal("https://internxt.com/portsetup");
     },
     validAllocation: function() {
-      return (this.newShare.config.storageAllocation <= this.newShare.storageAvailable);
+      return (
+        this.newShare.config.storageAllocation <= this.newShare.storageAvailable
+      );
     },
     validAddress: function() {
       return (
@@ -238,7 +244,9 @@ module.exports = {
 
       if (!regex_ERP20.test(this.newShare.config.paymentAddress)) {
         this.errorsWalletAddress.push("Invalid wallet address format");
-      } else if (!this.checkEthereumAddress(this.newShare.config.paymentAddress)) {
+      } else if (
+        !this.checkEthereumAddress(this.newShare.config.paymentAddress)
+      ) {
         this.errorsWalletAddress.push("Invalid wallet address (storj check)");
       }
 
@@ -261,11 +269,18 @@ module.exports = {
       );
 
       if (!allocationMatch) {
-        this.errorsStorageAllocation.push("Storage allocation can only be numeric");
+        this.errorsStorageAllocation.push(
+          "Storage allocation can only be numeric"
+        );
       }
 
-      if (allocationMatch != null && false /* && allocationMatch[1] > maxStorageAllocation */) {
-        this.errorsStorageAllocation.push("Storage allocation can be 8Tb maximum");
+      if (
+        allocationMatch != null &&
+        false /* && allocationMatch[1] > maxStorageAllocation */
+      ) {
+        this.errorsStorageAllocation.push(
+          "Storage allocation can be 8Tb maximum"
+        );
       }
 
       if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
