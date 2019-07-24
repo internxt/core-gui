@@ -18,6 +18,7 @@
     "electron-updater": "^4.1.2",
     "jquery": "^1.12.4",
     "merge": "^1.2.0",
+    "node-fetch": "^2.6.0",
     "pretty-ms": "^5.0.0",
     "request": "^2.83.0",
     "restify-clients": "^2.6.6",
