@@ -36,6 +36,7 @@
     "app-install": "node ./tasks/app_npm_install",
     "build": "./node_modules/.bin/gulp build && npm run installdeps",
     "release": "./node_modules/.bin/gulp build && electron-builder",
+    "publish": "./node_modules/.bin/electron-builder --publish always",
     "formerRelease": "./node_modules/.bin/gulp release",
     "start": "node ./tasks/start",
     "test": "npm run test-unit && npm run test-integration",
@@ -51,22 +52,17 @@
   "build": {
     "appId": "com.farmer.xcore",
     "productName": "X Core",
-
-
     "directories": {
       "app": "build",
       "output": "dist"
     },
-
     "publish": {
-      "provider": "github",
+      "provider": "github"
     },
-
     "linux": {
       "category": "Network",
       "target": "deb"
     },
-
     "win": {
       "target": "nsis",
       "icon": "resources/windows/icon.ico"
@@ -75,11 +71,9 @@
       "oneClick": false,
       "perMachine": false
     },
-
     "mac": {
       "icon": "resources/osx/icon.icns"
     },
-    "dmg": {
-    }
+    "dmg": {}
   }
 }

@@ -8,6 +8,8 @@ const TrayIcon = require("./lib/trayicon");
 const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
 const protocol = process.env.isTestNet === "true" ? "testnet" : "";
 
+const { autoUpdater } = require('electron-updater');
+
 let main;
 let xCoreUI;
 let tray;
@@ -28,22 +30,6 @@ app.on('second-instance', (event, argv, cwd) => {
   console.log("Second instance")
   app.quit();
 })
-
-/*
-const isSecondAppInstance = app.makeSingleInstance(function () {
-  if (main) {
-    if (main.isMinimized()) {
-      main.restore();
-    }
-    main.show();
-  }
-  return true;
-});
-
-if (isSecondAppInstance) {
-  app.quit();
-}
-*/
 
 if (process.platform === "darwin") {
   app.dock.hide();
@@ -201,4 +187,10 @@ app.on("ready", () => {
   initRenderer()
   let { x, y } = getWindowPosition();
   xCoreUI.setPosition(x, y);
+
+  autoUpdater.checkForUpdates().then(result => {
+    console.log("Result checkForUpdates: ", result);
+  }).catch(err => {
+    console.log("Check for updates error: ", err)
+  })
 });
