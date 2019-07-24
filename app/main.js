@@ -189,25 +189,33 @@ app.on("ready", () => {
   const { dialog } = require('electron');
   const { autoUpdater } = require('electron-updater');
 
+  const isWindows = process.platform === 'win32';
+
   setInterval(() => {
     autoUpdater.checkForUpdates();
-  }, 60000);
+  }, 600000);
 
+  if (isWindows) {
+    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+      const dialogOpts = {
+        type: 'info',
+        buttons: ['Install update', 'Remind me in 1 hour'],
+        title: 'New update available',
+        message: process.platform === 'win32' ? 'Win' : 'Other'
+      };
 
-  autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-    const dialogOpts = {
-      type: 'info',
-      buttons: ['Install update', 'Remind me in 1 hour'],
-      title: 'New update available',
-      message: process.platform === 'win32' ? 'Win' : 'Other'
-    }
-
-    dialog.showMessageBox(dialogOpts, (response) => {
-      if (response === 0) { autoUpdater.quitAndInstall(); }
+      dialog.showMessageBox(dialogOpts, (response) => {
+        if (response === 0) { autoUpdater.quitAndInstall(); }
+      });
     });
+  }
+
+  autoUpdater.onUpdateAvailable(info => {
+    console.log('There is an update available', info);
   });
 
   autoUpdater.checkForUpdates();
+
 
   /*
   const { autoUpdater } = require('electron-updater');
