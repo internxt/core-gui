@@ -8,8 +8,6 @@ const TrayIcon = require("./lib/trayicon");
 const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
 const protocol = process.env.isTestNet === "true" ? "testnet" : "";
 
-const { autoUpdater } = require('electron-updater');
-
 let main;
 let xCoreUI;
 let tray;
@@ -176,7 +174,7 @@ function initRenderer() {
   // NB: Start the daemon if not running, then render the application
   maybeStartDaemon((/* err */) => {
     menu.render();
-     //main.loadURL('file://' + __dirname + '/index.html');
+    //main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
     //xCoreUI.webContents.openDevTools();
     // tray.render();
@@ -188,9 +186,37 @@ app.on("ready", () => {
   let { x, y } = getWindowPosition();
   xCoreUI.setPosition(x, y);
 
-  autoUpdater.checkForUpdates().then(result => {
-    console.log("Result checkForUpdates: ", result);
-  }).catch(err => {
-    console.log("Check for updates error: ", err)
-  })
+  const { dialog } = require('electron');
+  const { autoUpdater } = require('electron-updater');
+
+  setInterval(() => {
+    autoUpdater.checkForUpdates();
+  }, 60000);
+
+
+  autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    const dialogOpts = {
+      type: 'info',
+      buttons: ['Install update', 'Remind me in 1 hour'],
+      title: 'New update available',
+      message: process.platform === 'win32' ? 'Win' : 'Other'
+    }
+
+    dialog.showMessageBox(dialogOpts, (response) => {
+      if (response === 0) { autoUpdater.quitAndInstall(); }
+    });
+  });
+
+  autoUpdater.checkForUpdates();
+
+  /*
+  const { autoUpdater } = require('electron-updater');
+
+  autoUpdater.checkForUpdates();
+
+  autoUpdater.signals.updateDownloaded(info => {
+    console.log('Update downloaded:', info);
+  });
+  */
+
 });

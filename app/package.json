@@ -4,7 +4,7 @@
   "publisher": "Internxt SL",
   "identifier": "com.xcore.farmer",
   "description": "X Core",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "author": "Internxt <hello@internxt.com>",
   "main": "main.js",
   "dependencies": {

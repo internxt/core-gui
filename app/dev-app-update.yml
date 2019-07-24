@@ -1,0 +1,4 @@
+owner: internxt
+repo: X-Core
+provider: github
+updaterCacheDirName: xcore-updater
