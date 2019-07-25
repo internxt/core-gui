@@ -88,7 +88,6 @@ const ConfirmationModal = require("../components/confirmationModal/ConfirmationM
 const UpdateModal = require("../components/updateModal/UpdateModal");
 const rimraf = require("rimraf");
 const Updater = require("./../../lib/updater");
-const { shell } = require('electron');
 
 module.exports = {
   name: "nodeSettings",
@@ -135,7 +134,7 @@ module.exports = {
       return this.store.config.storageAllocation <= this.store.storageAvailable;
     },
     confirmUpdate() {
-        shell.openExternal(this.updateUrl);
+        window.open(this.updateUrl, 'Download update', 'frame=true');
     },
     cancelUpdate() {
         this.updateShow = false;
