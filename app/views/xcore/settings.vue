@@ -21,12 +21,16 @@
           <!-- need to wait in order to be displayed properly -->
           <div
             class="db-data"
+            v-if="!shareList.shares[0].isValid || (shareList.shares[0].isValid && !shareList.shares[0].isRunning) || (!shareList.shares[0].meta.farmerState.bridgesConnectionStatus && shareList.shares[0].meta.farmerState.bridgesConnectionStatus !== 0)"
+          >Disconnected</div>
+          <div
+            class="db-data"
             v-if="!shareList.shares[0].isValid || (shareList.shares[0].isValid && !shareList.shares[0].isRunning) || shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 0"
           >Disconnected</div>
           <div
             class="db-data"
             v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 1"
-          >Connecting</div>
+          >Connecting...</div>
           <div
             class="db-data"
             v-if="shareList.shares[0].isValid && shareList.shares[0].isRunning && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 2"

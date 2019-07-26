@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const {homedir} = require('os');
+const { homedir } = require('os');
 const prettyms = require('pretty-ms');
 const storjshare = require('xcore-daemon');
 const storj = require('storj-lib');
@@ -28,12 +28,9 @@ class Share {
       let storPath;
       this.config.networkPrivateKey = storj.KeyPair().getPrivateKey();
       let nodeID = storj.KeyPair(this.config.networkPrivateKey).getNodeID();
-      let sharePath = path.join(
-        homedir(),
-        '.xcore/shares'
-      );
+      let sharePath = path.join(homedir(), '.xcore/shares');
 
-      if(this.config.storagePath === undefined || this.config.storagePath === '') {
+      if (this.config.storagePath === undefined || this.config.storagePath === '') {
         storPath = path.join(sharePath, '/', nodeID);
       } else {
         storPath = path.join(this.config.storagePath, '/');
@@ -42,28 +39,21 @@ class Share {
       this.config.storagePath = storPath;
 
       if (this.config.storageAllocation &&
-          !this.config.storageAllocation.toString().match(
-            /[0-9]+([Tt]|[Mm]|[Gg]|[Kk])?[Bb]/g
-          )) {
-          this.config.storageAllocation = this.config.storageAllocation.toString() + 'MB';
+        !this.config.storageAllocation.toString().match(
+          /[0-9]+([Tt]|[Mm]|[Gg]|[Kk])?[Bb]/g
+        )) {
+        this.config.storageAllocation = this.config.storageAllocation.toString() + 'MB';
       }
 
-      let logPath = path.join(
-        homedir(),
-        '.xcore/logs'
-      );
-
-      let configPath = path.join(
-        homedir(),
-        '.xcore/configs'
-      );
+      let logPath = path.join(homedir(), '.xcore/logs');
+      let configPath = path.join(homedir(), '.xcore/configs');
 
       try {
         mkdirPSync(sharePath);
         mkdirPSync(logPath);
         mkdirPSync(configPath);
-      } catch(err) {
-        if(err.code !== 'EEXIST') {
+      } catch (err) {
+        if (err.code !== 'EEXIST') {
           this.errors.push(err);
         }
       }
@@ -76,8 +66,8 @@ class Share {
       let rawConfigIndex = 0;
 
       // Restores comments
-      for (let i = 0; i < defaultConfigArray.length - 1; i++, rawConfigIndex++){
-        if(defaultConfigArray[i].trim().startsWith("//")){
+      for (let i = 0; i < defaultConfigArray.length - 1; i++ , rawConfigIndex++) {
+        if (defaultConfigArray[i].trim().startsWith("//")) {
           configArray.splice(rawConfigIndex, 0, defaultConfigArray[i]);
         }
       }
@@ -92,11 +82,11 @@ class Share {
       } catch (err) {
         this.errors.push(err);
       } finally {
-        if(configFileDescriptor) {
+        if (configFileDescriptor) {
           fs.closeSync(configFileDescriptor);
         }
 
-        if(returnedPath) {
+        if (returnedPath) {
           this.config = {};
         }
 
@@ -115,8 +105,8 @@ class Share {
 
     this.actions.getFreeDiskSpace = (path, callback) => {
       storjshare.utils.getFreeSpace(path, (err, free) => {
-        if(err) {
-          errors.push(err);
+        if (err) {
+          this.errors.push(err);
           return callback(err);
         }
         this.storageAvailable = free;
@@ -129,15 +119,15 @@ class Share {
 
   _validator() {
     return {
-      set: function(obj, prop, val) {
+      set: function (obj, prop, val) {
         let isValid = true;
         let propVal;
 
-        if(typeof obj[prop] === 'undefined') {
+        if (typeof obj[prop] === 'undefined') {
           isValid = false;
         }
 
-        switch(prop) {
+        switch (prop) {
           case 'rpcPort':
             propVal = Number(String(val).replace(/\d+/g, '$&'));
             break;
@@ -146,7 +136,7 @@ class Share {
             break;
         }
 
-        if(isValid) {
+        if (isValid) {
           obj[prop] = propVal;
         }
 
