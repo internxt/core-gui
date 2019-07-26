@@ -140,8 +140,8 @@ function initRenderer() {
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
   xTray = new Tray(path.join(__dirname, 'imgs/osx/trayHighlight@2x.png'));
-  const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show/Hide X Core', click: showXCore },
+  const contextMenu = () => Menu.buildFromTemplate([
+    { label: (xCoreUI.isVisible() ? 'Hide' : 'Show') + ' X Core', click: showXCore },
     {
       label: 'View logs',
       click: () => {
@@ -154,14 +154,18 @@ function initRenderer() {
 
   xTray.setToolTip('XCore');
 
-  xTray.setContextMenu(contextMenu);
+  xTray.setContextMenu(contextMenu());
 
   xTray.on('double-click', () => {
     showXCore();
   });
 
   xTray.on('click', () => {
-    showXCore();
+    if (xCoreUI.isVisible() && !xCoreUI.isFocused()) {
+      xCoreUI.focus();
+    } else {
+      showXCore();
+    }
   });
 
   function showXCore(item, window, event) {
@@ -173,6 +177,7 @@ function initRenderer() {
       xCoreUI.show();
       xCoreUI.focus();
     }
+    xTray.setContextMenu(contextMenu());
   }
 
   // main.on('close', (e) => minimizeToSystemTray(e));
