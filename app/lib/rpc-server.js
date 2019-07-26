@@ -7,10 +7,10 @@ const dnode = require('dnode');
 let api = new storjshare.RPC();
 
 dnode(api.methods).listen(45015, () => {
-  process.send({state: 'init'});
+  process.send({ state: 'init' });
 });
 
 process.on('uncaughtException', (err) => {
-  let error = Object.assign({}, err)
-  process.send({error: err.stack}); //'A Fatal Exception has occured in the xcore-daemon RPC server'
+  console.log('RCP Server error: ', err);
+  process.send({ error: err.stack }); //'A Fatal Exception has occured in the xcore-daemon RPC server'
 });

@@ -13,7 +13,7 @@ const storj = require('storj-lib');
  * @function
  * @param {string} filePath
  */
-exports.isLegacyConfig = function(filePath) {
+exports.isLegacyConfig = function (filePath) {
   let config = null;
 
   try {
@@ -31,7 +31,7 @@ exports.isLegacyConfig = function(filePath) {
  * @param {string} filePath
  * @returns {string[]}
  */
-exports.convertLegacyConfig = function(filePath) {
+exports.convertLegacyConfig = function (filePath) {
   const dir = path.dirname(filePath);
   const config = JSON.parse(readFileSync(filePath).toString());
 

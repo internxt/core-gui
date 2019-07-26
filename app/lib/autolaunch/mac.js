@@ -19,7 +19,7 @@ function toAppleJSON(opts) {
   return `{name:"${props.name}",path:"${props.path}",hidden:${props.hidden}}`;
 }
 
-module.exports.enable = function(opts) {
+module.exports.enable = function (opts) {
   const props = toAppleJSON(opts);
   const command = `${tellTo} make login item at end with properties ${props}`;
 
@@ -34,7 +34,7 @@ module.exports.enable = function(opts) {
   });
 };
 
-module.exports.disable = function(opts) {
+module.exports.disable = function (opts) {
   const command = `${tellTo} delete login item "${opts.appName}"`;
 
   return new Promise((resolve, reject) => {
@@ -48,10 +48,10 @@ module.exports.disable = function(opts) {
   });
 };
 
-module.exports.isEnabled = function(opts) {
+module.exports.isEnabled = function (opts) {
   const command = `${tellTo} get the name of every login item`;
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     applescript.execString(command, (err, loginItems) => {
       if (err || !loginItems) {
         return reject(err);

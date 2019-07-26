@@ -39,13 +39,13 @@ function create_installer(options) {
 ;
 
 module.exports = function () {
-  console.log("Creating package...")
+  console.log('Creating package...');
   return create_package().then(() => {
-    console.log("Package created. Creating installer...")
+    console.log('Package created. Creating installer...');
     create_installer(options).then(() => {
-      console.log("Installer finished");
+      console.log('Installer finished');
     }).catch(err => {
-      console.log("Error", err);
+      console.log('Error', err);
     });
-  })
-}
+  });
+};

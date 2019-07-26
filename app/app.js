@@ -9,9 +9,9 @@ module.exports = {
   el: "#app",
   data: window.Store.shareList,
   components: {
-    updater: require("./views/updater"),
-    about: require("./views/about"),
-    terms: require("./views/terms")
+    updater: require('./views/updater'),
+    about: require('./views/about'),
+    terms: require('./views/terms')
   },
   created: function() {
     this.actions.load(err => {
@@ -25,11 +25,11 @@ module.exports = {
         });
 
         if (this.shares.length === 0) {
-          router.replace("share-wizard");
+          router.replace('share-wizard');
         } else if (usingBitcoinAddress) {
-          router.replace("migration");
+          router.replace('migration');
         } else {
-          router.replace("overview");
+          router.replace('overview');
         }
       });
     });

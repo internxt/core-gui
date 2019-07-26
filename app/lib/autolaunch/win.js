@@ -6,7 +6,7 @@ const registry = new WinReg({
   key: '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
 });
 
-module.exports.enable = function(opts) {
+module.exports.enable = function (opts) {
   return new Promise((resolve, reject) => {
     registry.set(opts.appName, WinReg.REG_SZ, `"${opts.appPath}"`,
       (err, resp) => {
@@ -20,7 +20,7 @@ module.exports.enable = function(opts) {
   });
 };
 
-module.exports.disable = function(opts) {
+module.exports.disable = function (opts) {
   return new Promise((resolve, reject) => {
     registry.remove(opts.appName, (err, resp) => {
       if (err) {
@@ -32,9 +32,9 @@ module.exports.disable = function(opts) {
   });
 };
 
-module.exports.isEnabled = function(opts) {
+module.exports.isEnabled = function (opts) {
   return new Promise((resolve, reject) => {
-    registry.get(opts.appName, function(err, resp) {
+    registry.get(opts.appName, function (err, resp) {
       if (err) {
         return reject(err);
       }

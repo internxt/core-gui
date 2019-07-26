@@ -1,6 +1,6 @@
 'use strict';
 
-const {dialog} = require('electron');
+const { dialog } = require('electron');
 
 class FatalExceptionDialog {
 
@@ -37,7 +37,7 @@ class FatalExceptionDialog {
    * handles closing and restarting of the application
    */
   _handleClose(resp, isRestartChecked) {
-    if(isRestartChecked) {
+    if (isRestartChecked) {
       this.app.relaunch();
     }
 

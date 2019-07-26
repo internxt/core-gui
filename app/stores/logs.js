@@ -1,9 +1,9 @@
 'use strict';
-const FS = require('fs');
-const Path = require('path');
+const fs = require('fs');
+const path = require('path');
 const Transform = require('stream').Transform;
 
-class Logs extends Transform{
+class Logs extends Transform {
   constructor(opts, share) {
     this.super(opts);
 

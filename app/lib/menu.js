@@ -1,6 +1,6 @@
 'use strict';
 
-const {app, Menu, ipcMain: ipc, BrowserWindow} = require('electron');
+const { app, Menu, ipcMain: ipc, BrowserWindow } = require('electron');
 
 class ApplicationMenu {
 
@@ -61,39 +61,39 @@ class ApplicationMenu {
         {
           label: 'Undo',
           accelerator: 'CmdOrCtrl+Z',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.undo();
           }
-        },{
+        }, {
           label: 'Redo',
           accelerator: 'CmdOrCtrl+Y',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.redo();
           }
-        },{
+        }, {
           type: 'separator'
-        },{
+        }, {
           label: 'Cut',
           accelerator: 'CmdOrCtrl+X',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.cut();
           }
-        },{
+        }, {
           label: 'Copy',
           accelerator: 'CmdOrCtrl+C',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.copy();
           }
-        },{
+        }, {
           label: 'Paste',
           accelerator: 'CmdOrCtrl+V',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.paste();
           }
-        },{
+        }, {
           label: 'Select All',
           accelerator: 'CmdOrCtrl+A',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.selectAll();
           }
         }
@@ -106,7 +106,7 @@ class ApplicationMenu {
         {
           label: 'Developer Tools',
           accelerator: 'Shift+CmdOrCtrl+J',
-          click: function() {
+          click: function () {
             self.getWindow().toggleDevTools();
           }
         }
@@ -124,14 +124,14 @@ class ApplicationMenu {
         // },
         {
           label: 'About X Core',
-          click: function() {
+          click: function () {
             self.getWindow().webContents.send('showAboutDialog');
           }
         }
       ]
     };
 
-    return [file, edit, view, help];
+    return [file, help];
   }
 
 }

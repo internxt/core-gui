@@ -4,10 +4,10 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const untildify = require('untildify');
 const configDir = untildify('~/.xcore/autostart/');
-const {existsSync} = require('xcore-daemon').utils;
+const { existsSync } = require('xcore-daemon').utils;
 const path = require('path');
 
-module.exports.enable = function(opts) {
+module.exports.enable = function (opts) {
   const file = path.join(configDir, opts.appName + '.desktop');
   const data = [
     '[Desktop Entry]',
@@ -32,7 +32,7 @@ module.exports.enable = function(opts) {
   });
 };
 
-module.exports.disable = function(opts) {
+module.exports.disable = function (opts) {
   const file = path.join(configDir, opts.appName + '.desktop');
 
   return new Promise((resolve) => {
@@ -43,7 +43,7 @@ module.exports.disable = function(opts) {
   });
 };
 
-module.exports.isEnabled = function(opts) {
+module.exports.isEnabled = function (opts) {
   const file = path.join(configDir, opts.appName + '.desktop');
 
   return new Promise((resolve) => resolve(existsSync(file)));

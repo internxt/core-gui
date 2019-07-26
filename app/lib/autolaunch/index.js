@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assert');
-const {app} = require('electron');
+const { app } = require('electron');
 const win = require('./win');
 const mac = require('./mac');
 const lin = require('./lin');
@@ -21,9 +21,9 @@ class AutoLaunch {
         optsObj.path :
         app.getPath('exe')
     };
-    this.api = (/^win/.test(process.platform))    ? win :
-               (/^darwin/.test(process.platform)) ? mac :
-               (/^linux/.test(process.platform))  ? lin : null;
+    this.api = (/^win/.test(process.platform)) ? win :
+      (/^darwin/.test(process.platform)) ? mac :
+        (/^linux/.test(process.platform)) ? lin : null;
   }
 
   enable() {

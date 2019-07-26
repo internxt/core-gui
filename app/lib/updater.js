@@ -56,7 +56,7 @@ class Updater extends EventEmitter {
 
   _checkGithubUpdates() {
     return new Promise((resolve, reject) => {
-      fetch(`https://api.github.com/repos/internxt/x-core/releases/latest`)
+      fetch('https://api.github.com/repos/internxt/x-core/releases/latest')
         .then(res => res.json())
         .then(res => { resolve(this._validateResponse(res)); })
         .catch(err => { reject(err); });

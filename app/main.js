@@ -1,11 +1,11 @@
-"use strict";
-const { connect } = require("net");
-const path = require("path");
-const { fork } = require("child_process");
-const { app, BrowserWindow, ipcMain: ipc, Tray, Menu } = require("electron");
-const ApplicationMenu = require("./lib/menu");
-const TrayIcon = require("./lib/trayicon");
-const FatalExceptionDialog = require("./lib/fatal-exception-dialog");
+'use strict';
+const { connect } = require('net');
+const path = require('path');
+const { fork } = require('child_process');
+const { app, BrowserWindow, ipcMain: ipc, Tray, Menu } = require('electron');
+const ApplicationMenu = require('./lib/menu');
+const TrayIcon = require('./lib/trayicon');
+const FatalExceptionDialog = require('./lib/fatal-exception-dialog');
 const protocol = process.env.isTestNet === 'true' ? 'testnet' : '';
 
 let main;
@@ -25,11 +25,11 @@ if (app.requestSingleInstanceLock()) {
 }
 
 app.on('second-instance', (event, argv, cwd) => {
-  console.log("Second instance")
+  console.log('Second instance');
   app.quit();
-})
+});
 
-if (process.platform === "darwin") {
+if (process.platform === 'darwin') {
   app.dock.hide();
 }
 /**
@@ -61,13 +61,13 @@ function updateSettings(ev, data) {
 function maybeStartDaemon(callback) {
   const sock = connect(45015);
 
-  sock.on("connect", () => {
+  sock.on('connect', () => {
     sock.end();
     sock.removeAllListeners();
     callback();
   });
 
-  sock.on("error", () => {
+  sock.on('error', () => {
     sock.removeAllListeners();
     initRPCServer(callback);
   });
@@ -77,12 +77,13 @@ function initRPCServer(callback) {
   let RPCServer = fork(`${__dirname}/lib/rpc-server.js`, {
     env: { STORJ_NETWORK: 'INXT' }
   });
-  process.on("exit", () => {
+
+  process.on('exit', () => {
     RPCServer.kill();
   });
 
-  RPCServer.on("message", msg => {
-    if (msg.state === "init") {
+  RPCServer.on('message', msg => {
+    if (msg.state === 'init') {
       return callback();
     } else {
       RPCServer.removeAllListeners();
@@ -137,23 +138,24 @@ function initRenderer() {
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);
-  xTray = new Tray(path.join(__dirname, "imgs/osx/trayHighlight@2x.png"));
+  xTray = new Tray(path.join(__dirname, 'imgs/osx/trayHighlight@2x.png'));
   const contextMenu = Menu.buildFromTemplate([
-    { label: "Show/Hide X Core", click: showXCore },
-    { role: "quit" }
+    { label: 'Show/Hide X Core', click: showXCore },
+    { label: 'View log' },
+    { role: 'quit' }
   ]);
 
-  xTray.setToolTip("XCore");
+  xTray.setToolTip('XCore');
 
   xTray.setContextMenu(contextMenu);
 
   xTray.on('double-click', () => {
     showXCore();
-  })
+  });
 
   xTray.on('click', () => {
     showXCore();
-  })
+  });
 
   function showXCore(item, window, event) {
     if (xCoreUI.isVisible()) {
@@ -174,7 +176,6 @@ function initRenderer() {
   // NB: Start the daemon if not running, then render the application
   maybeStartDaemon((/* err */) => {
     menu.render();
-    //main.loadURL('file://' + __dirname + '/index.html');
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
     //xCoreUI.webContents.openDevTools();
     // tray.render();

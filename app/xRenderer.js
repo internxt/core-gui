@@ -1,8 +1,8 @@
 'use strict';
 
 const dnode = require('dnode');
-const {ipcRenderer: ipc} = require('electron');
-const {EventEmitter} = require('events');
+const { ipcRenderer: ipc } = require('electron');
+const { EventEmitter } = require('events');
 const UserData = require('./lib/userdata');
 const VueRouter = require('vue-router');
 const BootstrapVue = require('bootstrap-vue');
@@ -11,7 +11,7 @@ window.UserData = UserData.toObject();
 window.Vue = require('./node_modules/vue/dist/vue.common.js');
 window.ViewEvents = new EventEmitter(); // NB: For view-to-view communication
 window.Vue.use(VueRouter);
-window.Vue.use(BootstrapVue)
+window.Vue.use(BootstrapVue);
 
 // NB: When settings change, notify the main process
 UserData.on('settingsUpdated', (updatedSettings) => {
@@ -19,7 +19,7 @@ UserData.on('settingsUpdated', (updatedSettings) => {
 });
 
 window.daemonSocket = dnode.connect(45015, (rpc) => {
-  
+
   // NB: Add global reference to the daemon RPC
   window.daemonRpc = rpc;
 

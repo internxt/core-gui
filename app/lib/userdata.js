@@ -1,7 +1,7 @@
 'use strict';
 
 const merge = require('merge');
-const {EventEmitter} = require('events');
+const { EventEmitter } = require('events');
 
 class UserData extends EventEmitter {
 

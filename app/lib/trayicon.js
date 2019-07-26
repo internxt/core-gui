@@ -1,6 +1,6 @@
 'use strict';
 
-const {Menu, Tray} = require('electron');
+const { Menu, Tray } = require('electron');
 const PLATFORM = require('./platform');
 
 class TrayIcon {
@@ -56,7 +56,7 @@ class TrayIcon {
           });
           break;
         default:
-          // NOOP
+        // NOOP
       }
 
       this.trayIcon.setToolTip('X Core');
