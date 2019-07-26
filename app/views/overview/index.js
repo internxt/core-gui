@@ -1,3 +1,4 @@
+'use strict';
 const isTestnet = process.env.isTestNet === 'true';
 
 module.exports = {

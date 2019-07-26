@@ -1,12 +1,14 @@
 'use strict';
+
 const { connect } = require('net');
 const path = require('path');
 const { fork } = require('child_process');
-const { app, BrowserWindow, ipcMain: ipc, Tray, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain: ipc, Tray, Menu, shell } = require('electron');
 const ApplicationMenu = require('./lib/menu');
 const TrayIcon = require('./lib/trayicon');
 const FatalExceptionDialog = require('./lib/fatal-exception-dialog');
 const protocol = process.env.isTestNet === 'true' ? 'testnet' : '';
+const os = require('os');
 
 let main;
 let xCoreUI;
@@ -91,7 +93,6 @@ function initRPCServer(callback) {
       if (tray && tray.destroy) {
         tray.destroy();
       }
-
       killMsg.render();
     }
   });
@@ -141,7 +142,13 @@ function initRenderer() {
   xTray = new Tray(path.join(__dirname, 'imgs/osx/trayHighlight@2x.png'));
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show/Hide X Core', click: showXCore },
-    { label: 'View log' },
+    {
+      label: 'View logs',
+      click: () => {
+        var logPath = path.join(os.homedir(), '.xcore/logs');
+        shell.openItem(logPath);
+      }
+    },
     { role: 'quit' }
   ]);
 

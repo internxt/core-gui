@@ -11,6 +11,6 @@ dnode(api.methods).listen(45015, () => {
 });
 
 process.on('uncaughtException', (err) => {
-  console.log('RCP Server error: ', err);
+  console.log('RPC Server error: ', err);
   process.send({ error: err.stack }); //'A Fatal Exception has occured in the xcore-daemon RPC server'
 });

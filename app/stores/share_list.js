@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const {homedir} = require('os');
+const { homedir } = require('os');
 const prettyms = require('pretty-ms');
 const shell = require('electron').shell;
 const storjshare = require('xcore-daemon');
@@ -27,7 +27,7 @@ class ShareList {
     this._getShareById = (id) => {
       let share = false;
       this.shares.forEach((elem) => {
-        if(elem.id === id) {
+        if (elem.id === id) {
           share = elem;
         }
       });
@@ -39,7 +39,7 @@ class ShareList {
       let share = [];
       this.shares.forEach((elem) => {
         ids.forEach((id) => {
-          if(elem.id === id) {
+          if (elem.id === id) {
             share.push(elem);
           }
         });
@@ -56,7 +56,7 @@ class ShareList {
 
     this.actions.status = (callback) => {
       this.rpc.status((err, shares) => {
-        if(err) {
+        if (err) {
           this.errors.push(err);
         }
 
@@ -68,11 +68,12 @@ class ShareList {
     this.actions.load = (callback) => {
       let returnedErr = null;
 
-      this.rpc.load(SNAPSHOT_PATH, (err)=> {
+      this.rpc.load(SNAPSHOT_PATH, (err) => {
+        console.log('LOADING NODE');
         let snapFileDescriptor;
-        if(err) {
+        if (err) {
           try {
-            if(err.message.includes('ENOENT')) { //TODO: change to return err.code === 'ENOENT'upstream in daemon
+            if (err.message.includes('ENOENT')) { //TODO: change to return err.code === 'ENOENT'upstream in daemon
               mkdirPSync(BASE_PATH);
               snapFileDescriptor = fs.openSync(SNAPSHOT_PATH, 'w');
               fs.writeFileSync(snapFileDescriptor, '[]');
@@ -80,7 +81,7 @@ class ShareList {
             } else {
               returnedErr = err;
             }
-          } catch(failedToCreateSnapErr) {
+          } catch (failedToCreateSnapErr) {
             this.errors.push(failedToCreateSnapErr);
             returnedErr = failedToCreateSnapErr;
           }
@@ -96,7 +97,7 @@ class ShareList {
         start: (interval) => {
           this.pollInterval = interval || this.pollInterval;
           timer = setInterval(() => {
-            this.actions.status(() => {});
+            this.actions.status(() => { });
           }, this.pollInterval);
         },
         stop: () => {
@@ -120,9 +121,7 @@ class ShareList {
       share.isValid = false;
 
       let configPath = share.path;
-      let configBuffer = Buffer.from(
-        JSON.stringify(share.config, null, 2)
-      );
+      let configBuffer = Buffer.from(JSON.stringify(share.config, null, 2));
 
       try {
         storjshare.utils.validate(share.config);
@@ -155,7 +154,6 @@ class ShareList {
         } else {
           this.actions.save();
         }
-
         return callback(err);
       };
 
@@ -180,7 +178,7 @@ class ShareList {
       async.each(configPath, (c, next) => {
         try {
           this.rpc.start(c, handleStart);
-        } catch(err) {
+        } catch (err) {
           this.errors.push(err);
           return next(err);
         }
@@ -193,9 +191,9 @@ class ShareList {
      */
     this.actions.start = (id) => {
       let list = [];
-      if(typeof id === 'string') {
+      if (typeof id === 'string') {
         list.push(id);
-      } else if(Array.isArray(id)) {
+      } else if (Array.isArray(id)) {
         list = id;
       }
 
@@ -216,9 +214,9 @@ class ShareList {
      */
     this.actions.stop = (id) => {
       let list = [];
-      if(typeof id === 'string') {
+      if (typeof id === 'string') {
         list.push(id);
-      } else if(Array.isArray(id)) {
+      } else if (Array.isArray(id)) {
         list = id;
       }
 
@@ -239,9 +237,9 @@ class ShareList {
      */
     this.actions.destroy = (id) => {
       let list = [];
-      if(typeof id === 'string') {
+      if (typeof id === 'string') {
         list.push(id);
-      } else if(Array.isArray(id)) {
+      } else if (Array.isArray(id)) {
         list = id;
       }
 
@@ -268,7 +266,7 @@ class ShareList {
         loggerOutputFolder = path.dirname(loggerOutputFolder);
       }
 
-      if(share && share.config && loggerOutputFolder) {
+      if (share && share.config && loggerOutputFolder) {
         console.log(loggerOutputFolder);
         shell.showItemInFolder(loggerOutputFolder);
       } else {
@@ -278,7 +276,7 @@ class ShareList {
 
     this.actions.edit = (id) => {
       let share = this._getShareById(id);
-      if(share && share.path) {
+      if (share && share.path) {
         shell.openItem(path.normalize(share.path));
       } else {
         this.errors.push(new Error('Share path is configured incorrectly'));
@@ -291,13 +289,13 @@ class ShareList {
   }
 }
 
-  /**
-   * Takes a single share status object and returns a view model's version of
-   * the share status - this method is automatically applied in the status
-   * polling results.
-   * @private
-   * @param {Object} shareStatus
-   */
+/**
+ * Takes a single share status object and returns a view model's version of
+ * the share status - this method is automatically applied in the status
+ * polling results.
+ * @private
+ * @param {Object} shareStatus
+ */
 function _mapStatus(share) {
   share.isValid = true;
   share.isErrored = share.state === 2;
