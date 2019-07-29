@@ -189,7 +189,6 @@ function initRenderer() {
   maybeStartDaemon((/* err */) => {
     menu.render();
     xCoreUI.loadURL("file://" + __dirname + "/xIndex.html");
-    //xCoreUI.webContents.openDevTools();
     // tray.render();
   });
 }
@@ -198,4 +197,8 @@ app.on('ready', () => {
   initRenderer();
   let { x, y } = getWindowPosition();
   xCoreUI.setPosition(x, y);
+  if (process.env.NODE_ENV !== 'production') {
+    require('vue-devtools').install();
+    xCoreUI.webContents.openDevTools();
+  }
 });

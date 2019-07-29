@@ -69,7 +69,6 @@ class ShareList {
       let returnedErr = null;
 
       this.rpc.load(SNAPSHOT_PATH, (err) => {
-        console.log('LOADING NODE');
         let snapFileDescriptor;
         if (err) {
           try {

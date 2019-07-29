@@ -11,6 +11,7 @@
           <input
             v-model="newShare.config.paymentAddress"
             class="input-field"
+            maxlength="42"
             type="text"
             placeholder="Enter an ERC20 wallet address"
           />
@@ -72,12 +73,12 @@
   </div>
 </template>
 <script>
-'use strict';
-const electron = require('electron');
-var net = require('net');
+"use strict";
+const electron = require("electron");
+var net = require("net");
 
 module.exports = {
-  name: 'welcome',
+  name: "welcome",
   data: function() {
     return {
       errorsWalletAddress: [],
@@ -94,7 +95,7 @@ module.exports = {
       },
       invalidPort: {
         port: -1,
-        message: ''
+        message: ""
       }
     };
   },
@@ -103,8 +104,8 @@ module.exports = {
   },
   created: function() {
     //Set tunnel options to 0 to prepare for removal of tunneling
-    this.$set(this.newShare.config, 'maxTunnels', 0);
-    this.$set(this.newShare.config, 'tunnelGatewayRange', {
+    this.$set(this.newShare.config, "maxTunnels", 0);
+    this.$set(this.newShare.config, "tunnelGatewayRange", {
       min: 0,
       max: 0
     });
@@ -112,17 +113,17 @@ module.exports = {
     if (window.Store.shareList.shares.length > 0) {
       this.$set(
         this.newShare.config,
-        'paymentAddress',
+        "paymentAddress",
         window.Store.shareList.shares[0].config.paymentAddress
       );
     }
     if (!this.newShare.storageAvailable) {
-      this.newShare.errors.push(new Error('Invalid directory selected'));
+      this.newShare.errors.push(new Error("Invalid directory selected"));
     }
     // selecting random port
     let self = this;
     this.getFreePort(function(err, port) {
-      self.$set(self.newShare.config, 'rpcPort', port);
+      self.$set(self.newShare.config, "rpcPort", port);
     });
   },
   mounted: function() {
@@ -130,35 +131,35 @@ module.exports = {
   },
   methods: {
     checkEthereumAddress: function(address) {
-      const utils = require('xcore-daemon').utils;
+      const utils = require("xcore-daemon").utils;
       return utils.isValidEthereumAddress(address);
     },
     handleFileInput: function(event) {
       this.$set(
         this.newShare.config,
-        'storagePath',
+        "storagePath",
         event.target.files[0].path
       );
       this.newShare.actions.getFreeDiskSpace(
         this.newShare.config.storagePath,
         () => {}
       );
-      document.getElementById('storagePath').style.color = 'white';
-      document.getElementById('storagePath').style.fontSize = '13.3333px';
+      document.getElementById("storagePath").style.color = "white";
+      document.getElementById("storagePath").style.fontSize = "13.3333px";
     },
     pathIsValid: function() {
       for (let i = 0; i < this.shareList.shares.length; i++) {
         let share = this.shareList.shares[i];
         if (share.config.storagePath === this.newShare.config.storagePath) {
-          this.buttonText = 'Location In Use';
+          this.buttonText = "Location In Use";
           return false;
         }
       }
       if (!path.isAbsolute(this.newShare.config.storagePath)) {
-        this.buttonText = 'Invalid Location';
+        this.buttonText = "Invalid Location";
         return false;
       }
-      this.buttonText = 'Select Location';
+      this.buttonText = "Select Location";
       return true;
     },
     getFreePort: function(fn) {
@@ -182,7 +183,7 @@ module.exports = {
           calledFn = true;
 
           if (!port) {
-            fn(new Error('Unable to get the server\'s given port'));
+            fn(new Error("Unable to get the server's given port"));
           } else {
             fn(null, port);
           }
@@ -196,34 +197,54 @@ module.exports = {
       );
     },
     portIsAvailable: function(port, callback) {
-      const utils = require('xcore-daemon').utils;
+      const utils = require("xcore-daemon").utils;
       return utils.portIsAvailable(port, callback);
     },
-    checkPort: function() {
-      // this.continueButtonText = 'Checking...'; // TODO izmeniti ovo i ispod
-      // this.uiState.isChecking = true;
-      let self = this;
-      this.portIsAvailable(this.newShare.config.rpcPort, function(err, result) {
-        if (err || !result) {
-          self.invalidPort.port = self.newShare.config.rpcPort;
-          self.invalidPort.message =
-            err || `Port ${self.invalidPort.port} appears to be in use`;
-          self.uiState.isChecking = false;
-          self.continueButtonText = "Next";
-        } else {
-          self.uiState.isChecking = false;
-        }
+    portIsAvailablePromise: function(port) {
+      return new Promise(resolve => {
+        this.portIsAvailable(port, (err, isPortAvailable) => {
+          resolve({ msg: err, isPortAvailable });
+        });
       });
     },
     openPortSetup: function() {
-      electron.shell.openExternal('https://internxt.com/portsetup');
+      electron.shell.openExternal("https://internxt.com/portsetup");
     },
     validAllocation: function() {
       return (
         this.newShare.config.storageAllocation <= this.newShare.storageAvailable
       );
     },
-    validAddress: function() {
+    validAddress: async function() {
+      let regexpDomainPort = /^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])(:([0-9]+))?$/;
+      let matches = this.newShare.config.rpcAddress.match(regexpDomainPort);
+
+      if (!matches) {
+        this.errorsHostname.push("Enter a valid hostname or IP Address");
+        return false;
+      }
+
+      let extractedPort = parseInt(matches[5]);
+      let extractedDomain = matches[3];
+
+      if (extractedPort) {
+        this.newShare.config.rpcPort = extractedPort;
+
+        let portAvailability = await this.portIsAvailablePromise(extractedPort);
+
+        if (portAvailability.msg) {
+          this.errorsHostname.push(portAvailability.msg);
+          return false;
+        }
+
+        if (!portAvailability.isPortAvailable) {
+          this.errorsHostname.push("The entered port is already being used");
+          return false;
+        }
+      }
+
+      this.newShare.config.rpcAddress = extractedDomain;
+
       return (
         this.newShare.config.rpcAddress &&
         this.newShare.config.rpcAddress.length !== 0
@@ -239,23 +260,23 @@ module.exports = {
       /**
        * Check if ERP20 Wallet Address is valid.
        */
-      const regex_ERP20 = new RegExp(/^0x[0-9A-Za-z]{40}$/g);
+      const regexErp20 = new RegExp(/^0x[0-9A-Za-z]{40}$/g);
 
-      if (!regex_ERP20.test(this.newShare.config.paymentAddress)) {
-        this.errorsWalletAddress.push('Invalid wallet address format');
+      if (!regexErp20.test(this.newShare.config.paymentAddress)) {
+        this.errorsWalletAddress.push("Invalid wallet address format");
       } else if (
         !this.checkEthereumAddress(this.newShare.config.paymentAddress)
       ) {
-        this.errorsWalletAddress.push('Invalid wallet address');
+        this.errorsWalletAddress.push("Invalid wallet address");
       }
 
       /**
        * Check path is not null
        */
-      let storagePath = document.getElementById('fileStorage');
+      let storagePath = document.getElementById("fileStorage");
 
       if (!storagePath.value) {
-        this.errorsPath.push('Choose a directory');
+        this.errorsPath.push("Choose a directory");
       }
 
       /**
@@ -267,7 +288,7 @@ module.exports = {
 
       if (!allocationMatch) {
         this.errorsStorageAllocation.push(
-          'Storage allocation can only be numeric'
+          "Storage allocation can only be numeric"
         );
       }
 
@@ -276,16 +297,22 @@ module.exports = {
         false /* && allocationMatch[1] > maxStorageAllocation */
       ) {
         this.errorsStorageAllocation.push(
-          'Storage allocation can be 8Tb maximum'
+          "Storage allocation can be 8Tb maximum"
         );
       }
+
+      /**
+       * Check rcpAddress
+       */
+
+      this.validAddress();
 
       if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
         let configPath = this.newShare.actions.createShareConfig();
         if (configPath) {
           this.shareList.actions.import(configPath, err => {
             if (!err) {
-              return this.$router.push({ path: '/settings' });
+              return this.$router.push({ path: "/settings" });
             }
           });
         }
@@ -293,18 +320,18 @@ module.exports = {
     },
     bindUploadIcon: function() {
       var self = this;
-      var imgBtn = document.getElementById('uploadImg');
-      var fileBtn = document.getElementById('fileStorage');
-      var storagePath = document.getElementById('storagePath');
+      var imgBtn = document.getElementById("uploadImg");
+      var fileBtn = document.getElementById("fileStorage");
+      var storagePath = document.getElementById("storagePath");
 
-      storagePath.addEventListener('click', function(e) {
-        document.getElementById('fileStorage').click();
+      storagePath.addEventListener("click", function(e) {
+        document.getElementById("fileStorage").click();
       });
 
-      imgBtn.addEventListener('click', function(e) {
-        document.getElementById('fileStorage').click();
+      imgBtn.addEventListener("click", function(e) {
+        document.getElementById("fileStorage").click();
       });
-      fileBtn.addEventListener('change', function(e) {
+      fileBtn.addEventListener("change", function(e) {
         storagePath.innerText = fileBtn.files[0].path;
       });
     }
