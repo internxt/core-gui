@@ -80,7 +80,7 @@
 
           <div class="modal-body">
             <slot name="body">
-              This will delete your node. Are you sure? 
+              This will delete your node's folder and all its files. Are you sure?
             </slot>
           </div>
 

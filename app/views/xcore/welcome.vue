@@ -250,7 +250,7 @@ module.exports = {
         this.newShare.config.rpcAddress.length !== 0
       );
     },
-    saveToDisk: function() {
+    saveToDisk: async function() {
       const maxStorageAllocation = 8 * 1024 * 1024; // 8 Terabytes
       this.errorsStorageAllocation = [];
       this.errorsHostname = [];
@@ -305,7 +305,7 @@ module.exports = {
        * Check rcpAddress
        */
 
-      this.validAddress();
+      await this.validAddress();
 
       if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
         let configPath = this.newShare.actions.createShareConfig();
