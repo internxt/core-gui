@@ -55,7 +55,7 @@
 
       <div class="db-widget-container">
         <div class="db-widget-long">
-          <h3>IP Address</h3>
+          <h3>IP Address and Port</h3>
           <input
             v-model="newShare.config.rpcAddress"
             class="input-field"
@@ -216,7 +216,7 @@ module.exports = {
       );
     },
     validAddress: async function() {
-      let regexpDomainPort = /^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])(:([0-9]+))?$/;
+      let regexpDomainPort = /^((([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9]))(:([0-9]+))?$/;
       let matches = this.newShare.config.rpcAddress.match(regexpDomainPort);
 
       if (!matches) {
@@ -224,8 +224,8 @@ module.exports = {
         return false;
       }
 
-      let extractedPort = parseInt(matches[5]);
-      let extractedDomain = matches[3];
+      let extractedPort = parseInt(matches[6]);
+      let extractedDomain = matches[1];
 
       if (extractedPort) {
         this.newShare.config.rpcPort = extractedPort;
@@ -245,10 +245,53 @@ module.exports = {
 
       this.newShare.config.rpcAddress = extractedDomain;
 
+      if (!this.isPublicIpAddress(extractedDomain)) {
+        this.errorsHostname.push("IP Address must be public and reachable");
+        return false;
+      }
+
       return (
         this.newShare.config.rpcAddress &&
         this.newShare.config.rpcAddress.length !== 0
       );
+    },
+    isPublicIpAddress: function(ipAddress) {
+      let check1 = /^(10)\.(.*)\.(.*)\.(.*)$/.test(ipAddress);
+      let check2 = /^(172)\.(1[6-9]|2[0-9]|3[0-1])\.(.*)\.(.*)$/.test(
+        ipAddress
+      );
+      let check3 = /^(192)\.(168)\.(.*)\.(.*)$/.test(ipAddress);
+      let check4 = /(localhost|127\.0\.0\.1)/.test(ipAddress);
+      return !(check1 || check2 || check3 || check4);
+    },
+    isAddressReachable: function(address, port) {
+      this.errorsHostname.push('Checking reachability...');
+      return new Promise((resolve, reject) => {
+        const server = net.createServer(socket => {
+          socket.write("reachable");
+        });
+
+        server.once("error", function(err) {
+          server.close();
+          reject(err.code);
+        });
+
+        server.once("listening", function() {
+          const client = new net.Socket();
+          client.on("data", data => {
+            resolve(data == "reachable");
+            client.destroy();
+            server.close();
+          });
+          client.connect(port, address);
+          client.on("error", err => {
+            server.close();
+            reject(err);
+          });
+        });
+
+        server.listen(port);
+      });
     },
     saveToDisk: async function() {
       const maxStorageAllocation = 8 * 1024 * 1024; // 8 Terabytes
@@ -305,18 +348,40 @@ module.exports = {
        * Check rcpAddress
        */
 
-      await this.validAddress();
-
-      if (!this.errorsHostname.length && !this.errorsStorageAllocation.length) {
-        let configPath = this.newShare.actions.createShareConfig();
-        if (configPath) {
-          this.shareList.actions.import(configPath, err => {
-            if (!err) {
-              return this.$router.push({ path: "/settings" });
-            }
-          });
-        }
+      if (!(await this.validAddress())) {
+        return;
       }
+
+      const isReachable = this.isAddressReachable(
+        this.newShare.config.rpcAddress,
+        this.newShare.config.rpcPort
+      );
+
+      const finalCheck = () => {
+        if (
+          !this.errorsHostname.length &&
+          !this.errorsStorageAllocation.length
+        ) {
+          let configPath = this.newShare.actions.createShareConfig();
+          if (configPath) {
+            this.shareList.actions.import(configPath, err => {
+              if (!err) {
+                return this.$router.push({ path: "/settings" });
+              }
+            });
+          }
+        }
+      };
+
+      isReachable
+        .then(res => {
+          this.errorsHostname = [];
+          finalCheck();
+        })
+        .catch(err => {
+          this.errorsHostname = [];
+          this.errorsHostname.push('Error checking port ' + this.newShare.config.rpcPort + ': ' + err.message);
+        });
     },
     bindUploadIcon: function() {
       var self = this;
