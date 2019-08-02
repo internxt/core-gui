@@ -67,7 +67,11 @@
       </div>
 
       <div class="db-widget-container">
-        <button id="createNode" v-on:click="saveToDisk()">Create your node</button>
+        <button
+          id="createNode"
+          v-on:click="saveToDisk()"
+          v-bind:disabled="uiState.isChecking"
+        >{{uiState.isChecking ? 'Please wait...' : 'Create your node'}}</button>
       </div>
     </section>
   </div>
@@ -265,7 +269,7 @@ module.exports = {
       return !(check1 || check2 || check3 || check4);
     },
     isAddressReachable: function(address, port) {
-      this.errorsHostname.push('Checking reachability...');
+      this.errorsHostname.push("Checking reachability...");
       return new Promise((resolve, reject) => {
         const server = net.createServer(socket => {
           socket.write("reachable");
@@ -294,6 +298,7 @@ module.exports = {
       });
     },
     saveToDisk: async function() {
+      this.uiState.isChecking = true;
       const maxStorageAllocation = 8 * 1024 * 1024; // 8 Terabytes
       this.errorsStorageAllocation = [];
       this.errorsHostname = [];
@@ -349,6 +354,7 @@ module.exports = {
        */
 
       if (!(await this.validAddress())) {
+                  this.uiState.isChecking = false;
         return;
       }
 
@@ -370,6 +376,8 @@ module.exports = {
               }
             });
           }
+        } else {
+          this.uiState.isChecking = false;
         }
       };
 
@@ -379,8 +387,14 @@ module.exports = {
           finalCheck();
         })
         .catch(err => {
+          this.uiState.isChecking = false;
           this.errorsHostname = [];
-          this.errorsHostname.push('Error checking port ' + this.newShare.config.rpcPort + ': ' + err.message);
+          this.errorsHostname.push(
+            "Error checking port " +
+              this.newShare.config.rpcPort +
+              ": " +
+              err.message
+          );
         });
     },
     bindUploadIcon: function() {
