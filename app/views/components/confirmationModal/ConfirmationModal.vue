@@ -90,7 +90,7 @@
                 Close
               </button>
               <button class="modal-default-button btn-primary" @click="onConfirm">
-                OK
+                Confirm
               </button>
             </slot>
           </div>
