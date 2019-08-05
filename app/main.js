@@ -197,8 +197,4 @@ app.on('ready', () => {
   initRenderer();
   let { x, y } = getWindowPosition();
   xCoreUI.setPosition(x, y);
-  if (process.env.NODE_ENV !== 'production') {
-    require('vue-devtools').install();
-    xCoreUI.webContents.openDevTools();
-  }
 });

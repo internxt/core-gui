@@ -12,3 +12,5 @@ coverage
 *.swp
 dist/
 release-builds/
+
+.env

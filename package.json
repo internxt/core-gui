@@ -10,6 +10,7 @@
     "electron-builder": "^21.2.0",
     "electron-installer-windows": "^2.0.0",
     "electron-mocha": "^8.1.1",
+    "electron-notarize": "^0.1.1",
     "electron-packager": "^14.0.4",
     "elemon": "^5.0.3",
     "fs-jetpack": "^2.2.2",
@@ -23,7 +24,6 @@
     "proxyquire": "^2.1.0",
     "q": "^1.4.1",
     "sinon": "^7.3.2",
-    "vue-devtools": "^5.1.0",
     "yargs": "^13.2.4"
   },
   "optionalDependencies": {
@@ -36,7 +36,7 @@
     "installdeps": "electron-builder install-app-deps",
     "app-install": "node ./tasks/app_npm_install",
     "build": "./node_modules/.bin/gulp build && npm run installdeps",
-    "release": "./node_modules/.bin/gulp build && electron-builder",
+    "release": "NODE_ENV=production npm run build && electron-builder",
     "publish": "./node_modules/.bin/electron-builder --publish always",
     "formerRelease": "./node_modules/.bin/gulp release",
     "start": "node ./tasks/start",
@@ -47,6 +47,7 @@
     "jshint": "./node_modules/.bin/jshint --config .jshintrc --exclude ./app/node_modules ./app"
   },
   "dependencies": {
+    "dotenv": "^8.0.0",
     "electron-reload": "^1.4.0",
     "natives": "^1.1.6"
   },
@@ -73,8 +74,15 @@
       "perMachine": false
     },
     "mac": {
-      "icon": "resources/osx/icon.icns"
+      "icon": "resources/osx/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "./resources/osx/Info.plist",
+      "entitlementsInherit": "./resources/osx/Info.plist"
     },
-    "dmg": {}
+    "dmg": {
+      "sign": false
+    },
+    "afterSign": "resources/osx/notarize.js"
   }
 }
