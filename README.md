@@ -1,8 +1,8 @@
 X Core
 ================
 
-[X Core](http://internxt.io) is a cross-platform desktop application enabling users to earn money
-by sharing their extra hard drive space on the [Internxt](http://internxt.io) network.
+[X Core](http://internxt.com/core) is a cross-platform desktop application enabling users to earn money
+by sharing their extra hard drive space on the [Internxt](http://internxt.com) network.
 
 If you wish to build from source, follow the instructions below.
 
@@ -67,7 +67,6 @@ License
 -------
 ```
 X Core - Cross-platform desktop application fop sharing user's extra hard drive space.
-Copyright (c) 2017 Internxt.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
