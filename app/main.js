@@ -135,7 +135,7 @@ function initRenderer() {
     show: true,
     frame: false,
     skipTaskbar: true,
-    alwaysOnTop: false
+    alwaysOnTop: true
   });
 
   // tray = new TrayIcon(app, main, path.join(__dirname, 'imgs'), userData);

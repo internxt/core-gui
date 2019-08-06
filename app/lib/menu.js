@@ -100,6 +100,23 @@ class ApplicationMenu {
       ]
     };
 
+    let editMacOS = {
+      label: 'Edit',
+      submenu: [
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'pasteandmatchstyle' },
+        { role: 'delete' },
+        { role: 'selectall' }
+      ]
+    };
+
+
+
     let view = {
       label: 'View',
       submenu: [
@@ -131,7 +148,9 @@ class ApplicationMenu {
       ]
     };
 
-    return [file, help];
+    let editMenu = process.platform === 'darwin' ? editMacOS : edit;
+
+    return [file, editMenu, view, help];
   }
 
 }
