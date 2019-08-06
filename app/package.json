@@ -19,6 +19,7 @@
     "jquery": "^3.4.1",
     "merge": "^1.2.0",
     "node-fetch": "^2.6.0",
+    "portscanner": "^2.2.0",
     "pretty-ms": "^5.0.0",
     "request": "^2.83.0",
     "restify-clients": "^2.6.6",

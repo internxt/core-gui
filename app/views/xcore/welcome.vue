@@ -80,6 +80,7 @@
 "use strict";
 const electron = require("electron");
 var net = require("net");
+const portscanner = require("portscanner");
 
 module.exports = {
   name: "welcome",
@@ -269,7 +270,7 @@ module.exports = {
       return !(check1 || check2 || check3 || check4);
     },
     isAddressReachable: function(address, port) {
-      this.errorsHostname.push("Checking reachability...");
+      this.errorsHostname.push("Checking reachability for port " + port);
       return new Promise((resolve, reject) => {
         const server = net.createServer(socket => {
           socket.write("reachable");
@@ -281,17 +282,21 @@ module.exports = {
         });
 
         server.once("listening", function() {
-          const client = new net.Socket();
-          client.on("data", data => {
-            resolve(data == "reachable");
-            client.destroy();
-            server.close();
-          });
-          client.connect(port, address);
-          client.on("error", err => {
-            server.close();
-            reject(err);
-          });
+          setTimeout(() => {
+            portscanner.checkPortStatus(port, address, (err, status) => {
+              if (err) {
+                reject(err);
+              } else {
+                if (status === "open") {
+                  server.close();
+                  resolve();
+                } else {
+                  server.close();
+                  reject(new Error("Port is unreachable"));
+                }
+              }
+            });
+          }, 500);
         });
 
         server.listen(port);
@@ -354,7 +359,7 @@ module.exports = {
        */
 
       if (!(await this.validAddress())) {
-                  this.uiState.isChecking = false;
+        this.uiState.isChecking = false;
         return;
       }
 
