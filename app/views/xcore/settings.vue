@@ -176,6 +176,8 @@ module.exports = {
         }).catch(err => {
           this.isReachable = false;
           console.log('Reachability failed:', err);
+          this.shareList.actions.poll().stop();
+          this.shareList.actions.poll().start();
         });
       }
     }, 5 * 60 * 1000);
