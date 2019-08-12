@@ -31,7 +31,7 @@
             </span>
           </div>
           <!-- need to wait in order to be displayed properly -->
-          <div class="db-data" v-if="!isReachable">Unreachable</div>
+          <div class="db-data" v-if="!isReachable || (shareList.shares[0].meta.farmerState.portStatus.connectionStatus !== 0 && shareList.shares[0].meta.farmerState.bridgesConnectionStatus === 3)">Unreachable</div>
           <div
             class="db-data"
             v-else-if="!shareList.shares[0] || !shareList.shares[0].isValid || (shareList.shares[0].isValid && !shareList.shares[0].isRunning) || (!shareList.shares[0].meta.farmerState.bridgesConnectionStatus && shareList.shares[0].meta.farmerState.bridgesConnectionStatus !== 0)"
@@ -169,18 +169,23 @@ module.exports = {
       let currentDate = new Date();
 
       let diff = (currentDate.getTime() - lastActivityDate.getTime()) / 1000;
-      if (diff > 4 * 60 * 1000) {
+      if (diff > 4 * 60 || !this.isReachable || this.shareList.shares[0].meta.farmerState.portStatus.connectionStatus !== 0) {
+        console.log('Checking reachability...');
       this.lastTimeReachabilityChecked = new Date();
         this.checkReachability().then(() => {
+          console.log('Reachable!');
           this.isReachable = true;
         }).catch(err => {
           this.isReachable = false;
           console.log('Reachability failed:', err);
+          console.log('Restarting node...');
           this.shareList.actions.poll().stop();
           this.shareList.actions.poll().start();
         });
+      } else {
+        console.log('No need to check');
       }
-    }, 5 * 60 * 1000);
+    }, 60 * 1000);
   },
   beforeDestroy: function() {
     this.shareList.actions.status(() => {
