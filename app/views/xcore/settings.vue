@@ -129,6 +129,7 @@ const UpdateModal = require("../components/updateModal/UpdateModal");
 const rimraf = require("rimraf");
 const Updater = require("./../../lib/updater");
 const request = require('request');
+const remote = require('electron').remote;
 
 module.exports = {
   name: "nodeSettings",
@@ -179,8 +180,7 @@ module.exports = {
           this.isReachable = false;
           console.log('Reachability failed:', err);
           console.log('Restarting node...');
-          this.shareList.actions.poll().stop();
-          this.shareList.actions.poll().start();
+          this.restartApp();
         });
       } else {
         console.log('No need to check');
@@ -238,6 +238,10 @@ module.exports = {
           reject(err);
         });
       });
+    },
+    restartApp: function() {
+      remote.app.relaunch();
+      remote.app.exit(0);
     },
     logData: async function() {
       let response;
