@@ -1,3 +1,5 @@
+[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/internxt/X-Core.js/releases/)
+
 X Core
 ================
 
