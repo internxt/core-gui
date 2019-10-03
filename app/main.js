@@ -131,7 +131,7 @@ function initRenderer() {
       nodeIntegration: true
     },
     width: 389,
-    height: 660,
+    height: 575,
     show: true,
     frame: false,
     skipTaskbar: true,

@@ -101,7 +101,8 @@ module.exports = {
       invalidPort: {
         port: -1,
         message: ""
-      }
+      },
+      ignorePortCheck: false
     };
   },
   beforeCreated: function() {
@@ -130,6 +131,13 @@ module.exports = {
     this.getFreePort(function(err, port) {
       self.$set(self.newShare.config, "rpcPort", port);
     });
+    fetch('https://api.ipify.org?format=json').then(res => res.json()).then(res => {
+      if (res && res.ip) {
+        this.$set(self.newShare.config, "rpcAddress", res.ip)
+      }
+    }).catch(err => {
+      console.log('Error getting public ip', err)
+    })
   },
   mounted: function() {
     this.bindUploadIcon();
@@ -363,7 +371,7 @@ module.exports = {
         return;
       }
 
-      const isReachable = this.isAddressReachable(
+      const isReachable = this.ignorePortCheck || this.isAddressReachable(
         this.newShare.config.rpcAddress,
         this.newShare.config.rpcPort
       );
@@ -398,8 +406,9 @@ module.exports = {
             "Error checking port " +
               this.newShare.config.rpcPort +
               ": " +
-              err.message
+              err.message + ". Press Create you node button again to continue at your own risk"
           );
+          this.ignorePortCheck = true
         });
     },
     bindUploadIcon: function() {

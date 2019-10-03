@@ -13,6 +13,18 @@ body, input {
   margin: 18px 26px;
 }
 
+::-webkit-scrollbar {     
+  background-color: #18171f;
+  width: .5em;
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+  background:  #100f14;
+  border-radius: 10px;
+}
+
+
 #xVersion {
   position: absolute;
   font-size: 12px;
