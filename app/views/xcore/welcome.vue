@@ -4,14 +4,16 @@
       <div>
         <h1>Welcome to X Core</h1>
         <p class="subtitle">Enter your data below to set-up your node</p>
-        <transition>
+        <transition name="appear">
           <generic-modal
           v-if="portCheckModalShow"
-          message="Your IP can't be reached. Please open your router's port and try again. Alterantively, you can continue by skipping the port check at your own risk."
           cancel-text="Try again"
           confirm-text="Skip check"
           @close="closePortCheckModal"
-          @confirm="confirmSkipCheck"></generic-modal>
+          @confirm="confirmSkipCheck">
+            <h3 slot="header">Port Check</h3>
+            <p slot="body">Your IP can't be reached. Please open your router's port and try again. Alterantively, you can continue by skipping the port check at your own risk.</p>
+          </generic-modal>
         </transition>
       </div>
       <div class="db-widget-container">
