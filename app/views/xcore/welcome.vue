@@ -4,6 +4,15 @@
       <div>
         <h1>Welcome to X Core</h1>
         <p class="subtitle">Enter your data below to set-up your node</p>
+        <transition>
+          <generic-modal
+          v-if="portCheckModalShow"
+          message="Your IP can't be reached. Please open your router's port and try again. Alterantively, you can continue by skipping the port check at your own risk."
+          cancel-text="Try again"
+          confirm-text="Skip check"
+          @close="closePortCheckModal"
+          @confirm="confirmSkipCheck"></generic-modal>
+        </transition>
       </div>
       <div class="db-widget-container">
         <div class="db-widget-long">
@@ -82,8 +91,13 @@ const electron = require("electron");
 var net = require("net");
 const portscanner = require("portscanner");
 
+const GenericModal = require('../components/genericModal/GenericModal')
+
 module.exports = {
   name: "welcome",
+  components: {
+    GenericModal
+  },
   data: function() {
     return {
       errorsWalletAddress: [],
@@ -102,7 +116,8 @@ module.exports = {
         port: -1,
         message: ""
       },
-      ignorePortCheck: false
+      ignorePortCheck: false,
+      portCheckModalShow: false
     };
   },
   beforeCreated: function() {
@@ -371,7 +386,7 @@ module.exports = {
         return;
       }
 
-      const isReachable = this.ignorePortCheck || this.isAddressReachable(
+      const isReachable = this.isAddressReachable(
         this.newShare.config.rpcAddress,
         this.newShare.config.rpcPort
       );
@@ -402,13 +417,23 @@ module.exports = {
         .catch(err => {
           this.uiState.isChecking = false;
           this.errorsHostname = [];
-          this.errorsHostname.push(
-            "Error checking port " +
-              this.newShare.config.rpcPort +
-              ": " +
-              err.message + ". Press Create you node button again to continue at your own risk"
-          );
-          this.ignorePortCheck = true
+          if (this.ignorePortCheck) {
+            finalCheck();
+          } else {
+            this.errorsHostname.push(
+              "Error checking port " +
+                this.newShare.config.rpcPort +
+                ": " +
+                err.message
+            );
+
+            if (!this.errorsWalletAddress.length &&
+            !this.errorsPath.length &&
+            this.errorsHostname.length &&
+            !this.errorsStorageAllocation.length) {
+              this.portCheckModalShow = true
+            }
+          }
         });
     },
     bindUploadIcon: function() {
@@ -427,6 +452,14 @@ module.exports = {
       fileBtn.addEventListener("change", function(e) {
         storagePath.innerText = fileBtn.files[0].path;
       });
+    },
+    closePortCheckModal() {
+      this.portCheckModalShow = false
+    },
+    confirmSkipCheck() {
+      this.portCheckModalShow = false
+      this.ignorePortCheck = true
+      this.saveToDisk()
     }
   }
 };
