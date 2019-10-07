@@ -131,7 +131,7 @@ function initRenderer() {
       nodeIntegration: true
     },
     width: 389,
-    height: 575,
+    height: 660,
     show: true,
     frame: false,
     skipTaskbar: true,
@@ -147,6 +147,12 @@ function initRenderer() {
       click: () => {
         var logPath = path.join(os.homedir(), '.xcore/logs');
         shell.openItem(logPath);
+      }
+    },
+    {
+      label: 'Help and Tips',
+      click: () => {
+        shell.openExternal('https://internxt.com/core/setup-and-tips');
       }
     },
     { role: 'quit' }

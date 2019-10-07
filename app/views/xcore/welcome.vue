@@ -402,6 +402,7 @@ module.exports = {
           if (configPath) {
             this.shareList.actions.import(configPath, err => {
               if (!err) {
+                this.uiState.isChecking = false;
                 return this.$router.push({ path: "/settings" });
               }
             });
