@@ -16,7 +16,7 @@
     "dnode": "^1.2.2",
     "elasticsearch": "^16.4.0",
     "electron-updater": "^4.1.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "merge": "^1.2.0",
     "node-fetch": "^2.6.0",
     "portscanner": "^2.2.0",
