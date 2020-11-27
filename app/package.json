@@ -25,7 +25,7 @@
     "restify-clients": "^2.6.6",
     "rimraf": "^2.7.1",
     "semver": "^6.1.1",
-    "storj-lib": "github:internxt/core",
+    "storj-lib": "github:internxt/core#v8.7.3-beta",
     "strip-json-comments": "^3.0.1",
     "untildify": "^4.0.0",
     "vue": "^2.6.10",
@@ -34,7 +34,7 @@
     "winreg": "^1.2.4",
     "winston": "^3.2.1",
     "winston-logstash": "^0.4.0",
-    "xcore-daemon": "github:internxt/xcore-daemon"
+    "xcore-daemon": "github:internxt/core-daemon"
   },
   "license": "AGPL-3.0",
   "repository": "https://github.com/internxt/X-Core"
