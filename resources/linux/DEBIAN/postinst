@@ -1,5 +1,0 @@
-#!/bin/sh
-
-###
-# Any post-install logic on debian based systems goes here
-###
